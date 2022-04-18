@@ -23,9 +23,6 @@ jobs:
         with:
           version: v3.8.1
 
-      - name: Add dependency chart repos
-        run: helm repo add devops-ia https://devops-ia.github.io/helm-charts
-
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.4.0
         env:
