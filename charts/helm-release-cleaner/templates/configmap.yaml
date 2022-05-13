@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "helm-release-cleaner.name" . }}
+  labels:
+{{ include "helm-release-cleaner.labels" . | indent 4 }}
+data:
+  helm-release-cleaner.sh: |
+    #!/bin/bash
+    NAMESPACES={{ .Values.namespacesClear }}
+    
+    for ns in "${NAMESPACES[@]}"; do
+        for release in $(helm ls -n $ns -q); do
+{{- if .Values.releasesExcludeConfig.enabled }}
+            if [ $release == "{{ first .Values.releasesExcludeConfig.releases }}" ]; then
+                echo "Release: $release Namespace: $ns Delete: no"
+{{ range .Values.releasesExcludeConfig.releases }}
+            elif [ $release == "{{ index . }}" ]; then
+                echo "Release: $release Namespace: $ns Delete: no"
+{{ end }}
+            else
+                echo "Release: $release Namespace: $ns Delete: yes"
+                helm uninstall $release -n $ns
+            fi
+{{ else }}
+            echo "Release: $release Namespace: $ns Delete: yes"
+            helm uninstall $release -n $ns
+{{ end }}
+        done
+    done

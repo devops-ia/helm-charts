@@ -1,0 +1,32 @@
+replicaCount: 1
+
+schedule: "0 17 * * *"
+
+image:
+  repository: amartingarcia/helm-release-cleaner
+  tag: latest
+  pullPolicy: Always
+
+imagePullSecrets: []
+#  - name: ""
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: []
+tolerations: []
+affinity: []
+
+# Namespaces
+# ("default" "monitoring" "etc")
+namespacesClear: ("default")
+
+releasesExcludeConfig:
+  enabled: false
+#  releases:
+#  - release-1

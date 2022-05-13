@@ -1,0 +1,16 @@
+# Chart info
+apiVersion: v2
+description: A Helm chart for Helm Charts release cleaner
+name: helm-release-cleaner
+type: application
+maintainers:
+  - name: amartingarcia
+    email: adrianmg231189@gmail.com
+version: 1.0.0
+appVersion: 1.0.0
+sources:
+  - https://devops-ia.github.io/helm-charts
+home: https://devops-ia.github.io/helm-charts
+keywords:
+  - operator
+  - helm-release-cleaner
