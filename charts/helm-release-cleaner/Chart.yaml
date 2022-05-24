@@ -1,6 +1,7 @@
 # Chart info
 apiVersion: v2
-description: A Helm chart for Helm Charts release cleaner
+description: |
+  A Helm chart for Helm Charts to clean up the releases installed in the declared namespaces
 name: helm-release-cleaner
 type: application
 maintainers:
