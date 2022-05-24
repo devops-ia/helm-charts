@@ -12,5 +12,4 @@ sources:
   - https://devops-ia.github.io/helm-charts
 home: https://devops-ia.github.io/helm-charts
 keywords:
-  - operator
   - helm-release-cleaner

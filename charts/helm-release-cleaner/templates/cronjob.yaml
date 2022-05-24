@@ -9,7 +9,7 @@ spec:
   schedule: "{{ .Values.schedule }}"
   concurrencyPolicy: Replace
   failedJobsHistoryLimit: 2
-  successfulJobsHistoryLimit: 2
+  successfulJobsHistoryLimit: 10
   jobTemplate:
     spec:
       template:
