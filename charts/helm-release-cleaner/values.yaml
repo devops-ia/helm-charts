@@ -16,7 +16,7 @@ schedule: "5 * * * *"
 
 ## Image of replika deployment
 image:
-  repository: amartingarcia/helm-release-cleaner
+  repository: devopsiaci/helm-release-cleaner
   tag: latest
   pullPolicy: IfNotPresent
 
