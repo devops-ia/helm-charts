@@ -3,6 +3,25 @@ entries:
   helm-release-cleaner:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2022-05-27T09:29:29.672740741Z"
+    description: A Helm chart for Helm Charts to clean up the releases installed in
+      the declared namespaces
+    digest: 7268f7fea83c7df3f2ee6350df6b069357d3da057f80d45ab39d8147ad002f93
+    home: https://devops-ia.github.io/helm-charts
+    keywords:
+    - helm-release-cleaner
+    maintainers:
+    - email: adrianmg231189@gmail.com
+      name: amartingarcia
+    name: helm-release-cleaner
+    sources:
+    - https://devops-ia.github.io/helm-charts
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/helm-release-cleaner-1.1.1/helm-release-cleaner-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2022-05-24T19:25:39.900540846Z"
     description: A Helm chart for Helm Charts to clean up the releases installed in
       the declared namespaces
@@ -58,4 +77,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/replika-1.0.0/replika-1.0.0.tgz
     version: 1.0.0
-generated: "2022-05-24T19:25:39.900553846Z"
+generated: "2022-05-27T09:29:29.672771441Z"
