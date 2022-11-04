@@ -1,0 +1,14 @@
+{{ if (.Values.quotas.create)}}
+{{ range .Values.quotas.config }}
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: {{ .namespace }}
+  namespace: {{ .namespace }}
+spec:
+  hard:
+{{ toYaml .spec | indent 4 }}
+
+{{ end }}
+{{ end }}
