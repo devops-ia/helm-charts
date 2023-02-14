@@ -25,6 +25,21 @@ args:
   - --leader-elect
   - --zap-log-level=debug
 
+## Liveness and Readiness Probes
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8081
+  initialDelaySeconds: 15
+  periodSeconds: 20
+
+readinessProbe:
+  httpGet:
+    path: /readyz
+    port: 8081
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
 ## Annotations to add to the operator pod
 podAnnotations: {}
 

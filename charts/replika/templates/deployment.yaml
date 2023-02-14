@@ -67,19 +67,15 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
+          {{- with .Values.livenessProbe }}
           livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8081
-            initialDelaySeconds: 15
-            periodSeconds: 20
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
           readinessProbe:
-            httpGet:
-              path: /readyz
-              port: 8081
-            initialDelaySeconds: 5
-            periodSeconds: 10
-          {{- if .Values.securityContext }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.readinessProbe }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           {{- end }}
@@ -103,4 +99,3 @@ spec:
       serviceAccountName: {{ include "replika.serviceAccountName" . }}
       {{- end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds | default 10 }}
-
