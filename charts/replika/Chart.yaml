@@ -7,7 +7,7 @@ maintainers:
 name: replika
 sources:
   - https://github.com/prosimcorp/replika
-version: 1.0.0
+version: 1.0.1
 appVersion: "0.2.4"
 home: https://github.com/prosimcorp/replika
 keywords:
