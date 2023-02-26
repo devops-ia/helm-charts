@@ -1,98 +1,44 @@
 # replika
 
-A Kubernetes operator to replicate a resource across namespaces
+A Kubernetes operator to replicate resources across namespaces
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| ialejandro | <hello@ialejandro.rocks> | <https://ialejandro.rocks> |
 
 ## Prerequisites
 
 * Helm 3+
 
-## Install Chart
+## Add repository
 
 ```console
-# Add repository
-$ helm repo add devops-ia https://devops-ia.github.io/helm-charts
+helm repo add devops-ia https://devops-ia.github.io/helm-charts
+helm repo update
+```
 
-# Helm
-$ helm install replika devops-ia/replika
+## Install Helm chart
+
+```console
+helm install [RELEASE_NAME] devops-ia/replika
 ```
 
 This install all the Kubernetes components associated with the chart and creates the release.
 
 _See [helm install](https://helm.sh/docs/helm/helm_install/) for command documentation._
 
-## Uninstall Chart
+## Uninstall Helm chart
 
 ```console
 # Helm
-$ helm uninstall [RELEASE_NAME] devops-ia/replika
+helm uninstall [RELEASE_NAME]
 ```
 
 This removes all the Kubernetes components associated with the chart and deletes the release.
 
 _See [helm uninstall](https://helm.sh/docs/helm/helm_uninstall/) for command documentation._
-
-CRDs created by this chart are not removed by default and should be manually cleaned up:
-
-```console
-kubectl delete crd replikas.replika.prosimcorp.com
-```
-
-## Configuration
-
-See [Customizing the chart before installing](https://helm.sh/docs/intro/using_helm/#customizing-the-chart-before-installing). To see all configurable options with comments:
-
-```console
-helm show values replika/chart
-```
-
-## Values
-
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| affinity | object | `{}` |  |
-| args[0] | string | `"--health-probe-bind-address=:8081"` |  |
-| args[1] | string | `"--metrics-bind-address=127.0.0.1:8080"` |  |
-| args[2] | string | `"--leader-elect"` |  |
-| args[3] | string | `"--zap-log-level=debug"` |  |
-| autoscaling.enabled | bool | `false` |  |
-| customResourceDefinitions | list | `[]` |  |
-| fullnameOverride | string | `""` |  |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.repository | string | `"prosimcorp/replika"` |  |
-| image.tag | string | `"v0.2.4"` |  |
-| kubeRbacProxy.args[0] | string | `"--secure-listen-address=0.0.0.0:8443"` |  |
-| kubeRbacProxy.args[1] | string | `"--upstream=http://127.0.0.1:8080/"` |  |
-| kubeRbacProxy.args[2] | string | `"--logtostderr=true"` |  |
-| kubeRbacProxy.args[3] | string | `"--v=0"` |  |
-| kubeRbacProxy.image.pullPolicy | string | `"IfNotPresent"` |  |
-| kubeRbacProxy.image.repository | string | `"gcr.io/kubebuilder/kube-rbac-proxy"` |  |
-| kubeRbacProxy.image.tag | string | `"v0.8.0"` |  |
-| kubeRbacProxy.ports[0].port | int | `8443` |  |
-| kubeRbacProxy.ports[0].portName | string | `"https"` |  |
-| kubeRbacProxy.ports[0].protocol | string | `"TCP"` |  |
-| kubeRbacProxy.resources | object | `{}` |  |
-| kubeRbacProxy.securityContext | object | `{}` |  |
-| kubeRbacProxy.service.enabled | bool | `false` |  |
-| livenessProbe.httpGet.path | string | `"/healthz"` |  |
-| livenessProbe.httpGet.port | int | `8081` |  |
-| livenessProbe.initialDelaySeconds | int | `15` |  |
-| livenessProbe.periodSeconds | int | `20` |  |
-| nameOverride | string | `""` |  |
-| nodeSelector | object | `{}` |  |
-| podAnnotations | object | `{}` |  |
-| readinessProbe.httpGet.path | string | `"/readyz"` |  |
-| readinessProbe.httpGet.port | int | `8081` |  |
-| readinessProbe.initialDelaySeconds | int | `5` |  |
-| readinessProbe.periodSeconds | int | `10` |  |
-| replicaCount | int | `1` |  |
-| replikaSources | object | `{}` |  |
-| resources | object | `{}` |  |
-| securityContext.allowPrivilegeEscalation | bool | `false` |  |
-| securityContext.runAsNonRoot | bool | `true` |  |
-| serviceAccount.annotations | object | `{}` |  |
-| serviceAccount.create | bool | `true` |  |
-| serviceAccount.name | string | `""` |  |
-| tolerations | list | `[]` |  |
 
 ## Examples
 
@@ -137,3 +83,36 @@ replikaSources:
           matchAll: false
       synchronization: "10s"
 ```
+
+## Configuration
+
+See [Customizing the chart before installing](https://helm.sh/docs/intro/using_helm/#customizing-the-chart-before-installing). To see all configurable options with comments:
+
+```console
+helm show values devops-ia/replika
+```
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| affinity | object | `{}` | Affinity for pod assignment |
+| args | list | `["--health-probe-bind-address=:8081","--metrics-bind-address=127.0.0.1:8080","--leader-elect","--zap-log-level=debug"]` | Replika arguments |
+| autoscaling | object | `{"enabled":false}` | Autoscaling with CPU or memory utilization percentage |
+| customResourceDefinitions | list | `[]` | List of CRDs can replicate with replika operator |
+| fullnameOverride | string | `""` | String to fully override replika.fullname template |
+| image | object | `{"pullPolicy":"IfNotPresent","repository":"prosimcorp/replika","tag":""}` | Image registry |
+| imagePullSecrets | list | `[]` | Global Docker registry secret names as an array |
+| kubeRbacProxy | object | `{"args":["--secure-listen-address=0.0.0.0:8443","--upstream=http://127.0.0.1:8080/","--logtostderr=true","--v=0"],"image":{"pullPolicy":"IfNotPresent","repository":"gcr.io/kubebuilder/kube-rbac-proxy","tag":"v0.8.0"},"ports":[{"port":8443,"portName":"https","protocol":"TCP"}],"resources":{},"securityContext":{},"service":{"enabled":false}}` | kube-rbac-proxy container |
+| livenessProbe | object | `{"httpGet":{"path":"/healthz","port":8081},"initialDelaySeconds":15,"periodSeconds":20}` | Liveness probe |
+| nameOverride | string | `""` | String to partially override replika.fullname template (will maintain the release name) |
+| nodeSelector | object | `{}` | Node labels for pod assignment |
+| podAnnotations | object | `{}` | Annotations to add to the operator pod |
+| readinessProbe | object | `{"httpGet":{"path":"/readyz","port":8081},"initialDelaySeconds":5,"periodSeconds":10}` | Readiness Probes |
+| replicaCount | int | `1` | Provide desired replicas |
+| replikaSources | object | `{}` | Configuration of replika sources |
+| resources | object | `{}` | The resources limits and requests |
+| securityContext | object | `{"allowPrivilegeEscalation":false,"runAsNonRoot":true}` | Defines privilege and access control settings for a Pod or Container |
+| serviceAccount | object | `{"annotations":{},"create":true,"name":""}` | Enable creation of ServiceAccount |
+| testConnection | bool | `false` | Enable livenessProbe and readinessProbe |
+| tolerations | list | `[]` | Tolerations for pod assignment |

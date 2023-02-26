@@ -2,30 +2,33 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-## Provide a name in place of replika
-nameOverride: ""
-
-## Provide a name to substitute for the full names of resources
-fullnameOverride: ""
-
-## Provide desired replicas
-replicaCount: 1
-
-## Image of replika deployment
+# -- Image registry
 image:
   repository: prosimcorp/replika
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.2.4"
+  tag: ""
 
-## Replika arguments
+# -- Global Docker registry secret names as an array
+imagePullSecrets: []
+
+# -- String to partially override replika.fullname template (will maintain the release name)
+nameOverride: ""
+
+# -- String to fully override replika.fullname template
+fullnameOverride: ""
+
+# -- Provide desired replicas
+replicaCount: 1
+
+# -- Replika arguments
 args:
   - --health-probe-bind-address=:8081
   - --metrics-bind-address=127.0.0.1:8080
   - --leader-elect
   - --zap-log-level=debug
 
-## Liveness and Readiness Probes
+# -- Liveness probe
 livenessProbe:
   httpGet:
     path: /healthz
@@ -33,6 +36,7 @@ livenessProbe:
   initialDelaySeconds: 15
   periodSeconds: 20
 
+# -- Readiness Probes
 readinessProbe:
   httpGet:
     path: /readyz
@@ -40,10 +44,13 @@ readinessProbe:
   initialDelaySeconds: 5
   periodSeconds: 10
 
-## Annotations to add to the operator pod
+# -- Enable livenessProbe and readinessProbe
+testConnection: false
+
+# -- Annotations to add to the operator pod
 podAnnotations: {}
 
-## Resource limits & requests
+# -- The resources limits and requests
 resources: {}
 # limits:
 #   cpu: 500m
@@ -52,12 +59,39 @@ resources: {}
 #   cpu: 10m
 #   memory: 64Mi
 
-## Container-specific security context configuration
+# -- Defines privilege and access control settings for a Pod or Container
 securityContext:
   allowPrivilegeEscalation: false
   runAsNonRoot: true
 
-## kube-rback-proxy container
+# -- Enable creation of ServiceAccount
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Autoscaling with CPU or memory utilization percentage
+autoscaling:
+  enabled: false
+  # minReplicas: 1
+  # maxReplicas: 100
+  # targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# -- Node labels for pod assignment
+nodeSelector: {}
+
+# -- Tolerations for pod assignment
+tolerations: []
+
+# -- Affinity for pod assignment
+affinity: {}
+
+# -- kube-rbac-proxy container
 kubeRbacProxy:
   ## Image of kube-rback-proxy deployment
   image:
@@ -65,13 +99,14 @@ kubeRbacProxy:
     pullPolicy: IfNotPresent
     tag: v0.8.0
 
+  ## Arguments
   args:
     - --secure-listen-address=0.0.0.0:8443
     - --upstream=http://127.0.0.1:8080/
     - --logtostderr=true
     - --v=0
 
-  # Expose ports from kube-rbac-proxy container
+  ## Expose ports from kube-rbac-proxy container
   ports:
     - port: 8443
       portName: https
@@ -91,79 +126,48 @@ kubeRbacProxy:
     # protocol: TCP
     # targetPort: https
 
-  ## Resource limits & requests
+  ## The resources limits and requests
   resources: {}
-  # limits:
-  #   cpu: 500m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 10m
-  #   memory: 64Mi
+    # limits:
+    #   cpu: 500m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 10m
+    #   memory: 64Mi
 
-## Service account for replika to use
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
-
-autoscaling:
-  enabled: false
-# minReplicas: 1
-# maxReplicas: 100
-# targetCPUUtilizationPercentage: 80
-# targetMemoryUtilizationPercentage: 80
-
-## Assign custom affinity rules
-affinity: {}
-
-## Define which Nodes the Pods are scheduled on
-nodeSelector: {}
-# project: common
-
-## Pod's tolerations
-tolerations: []
-# - key: project
-#   operator: Equal
-#   value: "common"
-#   effect: NoSchedule
-
-## List of CRDs can replicate with replika operator
+# -- List of CRDs can replicate with replika operator
 customResourceDefinitions: []
-# - apiGroups:
-#     - traefik.containo.us
-#   resources:
-#     - middlewares
+  # - apiGroups:
+  #     - traefik.containo.us
+  #   resources:
+  #     - middlewares
 
-## Configuration of replika sources
+# -- Configuration of replika sources
 replikaSources: {}
-# # Global synchronization time
-# synchronizationTime: "20s"
-#
-# # List of sources
-# sources:
-#   - name: sample-configmap
-#     group: ""
-#     version: v1
-#     kind: ConfigMap
-#     namespace: source-namespace
-#     target:
-#       namespaces:
-#         replicateIn:
-#         - destination-namespace
-#         matchAll: false
-#     synchronization: "10s"
-#   - name: sample-traefik-middleware
-#     group: "traefik.containo.us"
-#     version: v1alpha1
-#     kind: Middleware
-#     namespace: source-namespace
-#     target:
-#       namespaces:
-#         matchAll: true
-#         excludeFrom:
-#           - default
-#     synchronization: "60s"
+  # Global synchronization time
+  # synchronizationTime: "20s"
+  #
+  # List of sources
+  # sources:
+  #   - name: sample-configmap
+  #     group: ""
+  #     version: v1
+  #     kind: ConfigMap
+  #     namespace: source-namespace
+  #     target:
+  #       namespaces:
+  #         replicateIn:
+  #         - destination-namespace
+  #         matchAll: false
+  #     synchronization: "10s"
+  #   - name: sample-traefik-middleware
+  #     group: "traefik.containo.us"
+  #     version: v1alpha1
+  #     kind: Middleware
+  #     namespace: source-namespace
+  #     target:
+  #       namespaces:
+  #         matchAll: true
+  #         excludeFrom:
+  #           - default
+  #     synchronization: "60s"
