@@ -1,0 +1,4 @@
+{{ $.Chart.Name }} has been installed. Check its status by running:
+  kubectl -n {{ $.Release.Namespace }} get po -l "app.kubernetes.io/instance={{ $.Release.Name }}"
+
+Job create at {{ $.Values.schedule | quote }} cron and update {{ include "ecr-registry-custom.fullname" $. }}-registry secret
