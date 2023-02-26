@@ -11,6 +11,25 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/default-resources-1.0.0/default-resources-1.0.0.tgz
     version: 1.0.0
+  ecr-registry:
+  - apiVersion: v2
+    appVersion: 1.25.6
+    created: "2023-02-26T16:20:32.777870262Z"
+    description: CronJob to update Amazon Elastic Container Registry
+    digest: d8f46a6cc0d6ecf984b3fb3d011384160a7b7ad43f89207be39838df5c18134e
+    home: https://github.com/prosimcorp/replika
+    keywords:
+    - ecr
+    - token
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: ecr-registry
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/ecr-registry-1.0.0/ecr-registry-1.0.0.tgz
+    version: 1.0.0
   helm-release-cleaner:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -127,4 +146,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/replika-1.0.0/replika-1.0.0.tgz
     version: 1.0.0
-generated: "2023-02-26T16:10:52.407838912Z"
+generated: "2023-02-26T16:20:32.777885262Z"
