@@ -10,10 +10,10 @@ image:
   # Full available tags: https://hub.docker.com/repository/docker/devopsiaci/ecr-token/tags
   tag: ""
 
-# -- String to partially override mongodb.fullname template (will maintain the release name)
+# -- String to partially override ecr-token.fullname template (will maintain the release name)
 nameOverride: ""
 
-# -- String to fully override mongodb.fullname template
+# -- String to fully override ecr-token.fullname template
 fullnameOverride: ""
 
 # -- Amazon Elastic Container Registry endpoint.
@@ -77,7 +77,7 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-# -- The resources limits and requested
+# -- The resources limits and requests
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little

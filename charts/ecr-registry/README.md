@@ -6,7 +6,7 @@ CronJob to update Amazon Elastic Container Registry
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Iván Alejandro Marugán | <hello@ialejandro.rocks> | <https://ialejandro.rocks> |
+| ialejandro | <hello@ialejandro.rocks> | <https://ialejandro.rocks> |
 
 ## Prerequisites
 
@@ -93,16 +93,17 @@ helm show values devops-ia/ecr-token
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity for pod assignment |
 | concurrencyPolicy | string | `"Forbid"` | It specifies how to treat concurrent executions of a job that is created by this CronJob |
+| elasticContainerRegistry | string | `"account.dkr.ecr.region.amazonaws.com"` | Amazon Elastic Container Registry endpoint. Format: `account.dkr.ecr.region.amazonaws.com` |
 | env | object | `{}` | Environment variables to configure application |
 | envFromSecrets | object | `{}` | Secrets from variables |
 | failedJobsHistoryLimit | int | `1` | These fields specify how many failed jobs should be kept |
-| fullnameOverride | string | `""` | String to fully override mongodb.fullname template |
+| fullnameOverride | string | `""` | String to fully override ecr-token.fullname template |
 | image | object | `{"pullPolicy":"IfNotPresent","repository":"devopsiaci/ecr-token","tag":""}` | Image registry |
 | imagePullSecrets | list | `[]` | Global Docker registry secret names as an array |
-| nameOverride | string | `""` | String to partially override mongodb.fullname template (will maintain the release name) |
+| nameOverride | string | `""` | String to partially override ecr-token.fullname template (will maintain the release name) |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podSecurityContext | object | `{}` | To specify security settings for a Pod |
-| resources | object | `{}` | The resources limits and requested |
+| resources | object | `{}` | The resources limits and requests |
 | restartPolicy | string | `"OnFailure"` | Only refers to restarts of the containers by the kubelet on the same node |
 | schedule | string | `"0 */6 * * *"` | The value of that field follows the Cron syntax |
 | secrets | object | `{}` | Secrets values to create credencials and reference by envFromSecrets |
