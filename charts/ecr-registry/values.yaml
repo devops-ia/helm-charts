@@ -16,6 +16,10 @@ nameOverride: ""
 # -- String to fully override mongodb.fullname template
 fullnameOverride: ""
 
+# -- Amazon Elastic Container Registry endpoint.
+# Format: `account.dkr.ecr.region.amazonaws.com`
+elasticContainerRegistry: "account.dkr.ecr.region.amazonaws.com"
+
 # -- Global Docker registry secret names as an array
 imagePullSecrets: []
 
