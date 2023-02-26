@@ -2,7 +2,7 @@ apiVersion: v2
 description: CronJob to update Amazon Elastic Container Registry
 type: application
 maintainers:
-  - name: Iván Alejandro Marugán
+  - name: ialejandro
     email: hello@ialejandro.rocks
     url: https://ialejandro.rocks
 name: ecr-registry
