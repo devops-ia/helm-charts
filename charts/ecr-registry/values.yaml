@@ -1,0 +1,96 @@
+# Default values for ecr-registry-custom.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# -- Image registry
+image:
+  repository: devopsiaci/ecr-token
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  # Full available tags: https://hub.docker.com/repository/docker/devopsiaci/ecr-token/tags
+  tag: ""
+
+# -- String to partially override mongodb.fullname template (will maintain the release name)
+nameOverride: ""
+
+# -- String to fully override mongodb.fullname template
+fullnameOverride: ""
+
+# -- Global Docker registry secret names as an array
+imagePullSecrets: []
+
+# -- The value of that field follows the Cron syntax
+schedule: "0 */6 * * *"
+
+# -- It specifies how to treat concurrent executions of a job that is created by this CronJob
+concurrencyPolicy: "Forbid"
+
+# -- These fields specify how many completed jobs should be kept
+successfulJobsHistoryLimit: 1
+
+# -- These fields specify how many failed jobs should be kept
+failedJobsHistoryLimit: 1
+
+# -- Only refers to restarts of the containers by the kubelet on the same node
+restartPolicy: OnFailure
+
+# -- Environment variables to configure application
+env: {}
+  # Plain vars
+  # foo: bar
+  # my_env: my_value
+
+# -- Secrets from variables
+envFromSecrets: {}
+  # Cipher vars
+  # my_env:
+  #  name: release-name-credentials
+  #  key: secret_key
+
+# -- Secrets values to create credencials and reference by envFromSecrets
+secrets: {}
+
+# -- Enable creation of ServiceAccount
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- To specify security settings for a Pod
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# -- Defines privilege and access control settings for a Pod or Container.
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# -- The resources limits and requested
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# -- Node labels for pod assignment
+nodeSelector: {}
+
+# -- Tolerations for pod assignment
+tolerations: []
+
+# -- Affinity for pod assignment
+affinity: {}
