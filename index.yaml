@@ -90,6 +90,26 @@ entries:
   replika:
   - apiVersion: v2
     appVersion: v0.3.0
+    created: "2023-03-14T16:16:51.016353763Z"
+    description: A Kubernetes operator to replicate resources across namespaces
+    digest: 323f46c2ae40ba8caf30069f184defa973808d28a73b83f71a47b993a84795c7
+    home: https://github.com/prosimcorp/replika
+    keywords:
+    - operator
+    - replika
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: replika
+    sources:
+    - https://github.com/prosimcorp/replika
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/replika-1.0.3/replika-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
+    appVersion: v0.3.0
     created: "2023-02-26T16:10:52.407820612Z"
     description: A Kubernetes operator to replicate resources across namespaces
     digest: 1e1c66a4281fb16fa4bc0812707594af5a70d4768db2993ed008860dfbb6e2c3
@@ -146,4 +166,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/replika-1.0.0/replika-1.0.0.tgz
     version: 1.0.0
-generated: "2023-02-26T16:20:32.777885262Z"
+generated: "2023-03-14T16:16:51.016373963Z"
