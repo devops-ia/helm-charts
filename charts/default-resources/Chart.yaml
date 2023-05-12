@@ -3,6 +3,10 @@ apiVersion: v2
 name: default-resources
 description: A Helm chart for Default Resources
 
+maintainers:
+  - name: amartingarcia
+    email: adrianmg231189@gmail.com
+
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
