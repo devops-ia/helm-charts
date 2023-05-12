@@ -1,10 +1,22 @@
 {{ if .Values.namespaces.create }}
-{{ range .Values.namespaces.name }}
+{{ range .Values.namespaces.config }}
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: {{ . }}
+  name: {{ .name }}
+  labels:
+{{- if .labels }}
+  {{- with .labels }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}
+{{- if .annotations }}
+  annotations:
+  {{- with .annotations }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}
 
 {{ end }}
 {{ end }}
