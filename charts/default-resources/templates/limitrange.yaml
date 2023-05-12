@@ -6,8 +6,8 @@ kind: LimitRange
 metadata:
   name: {{ .name }}
   namespace: {{ .namespace }}
-  labels:
 {{- if .labels }}
+  labels:
   {{- with .labels }}
     {{- toYaml . | nindent 4 }}
   {{- end }}

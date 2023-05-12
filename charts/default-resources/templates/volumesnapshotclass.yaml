@@ -19,9 +19,11 @@ metadata:
 {{- end }}
 driver: {{ .driver }}
 deletionPolicy: {{ .deletionPolicy }}
+{{- if .parameters }}
 parameters:
 {{- with .parameters }}
   {{- toYaml . | nindent 2 }}
+{{- end }}
 {{- end }}
 
 {{ end }}
