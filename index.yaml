@@ -3,6 +3,19 @@ entries:
   default-resources:
   - apiVersion: v2
     appVersion: 1.1.0
+    created: "2023-05-12T13:25:31.897825904Z"
+    description: A Helm chart for Default Resources
+    digest: 80c75bf8f8d43843e988f9aa43de6e31bbcdd9f6516465b4483d2c9b51970a3b
+    maintainers:
+    - email: adrianmg231189@gmail.com
+      name: amartingarcia
+    name: default-resources
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/default-resources-1.1.1/default-resources-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
+    appVersion: 1.1.0
     created: "2023-05-12T13:15:03.785365341Z"
     description: A Helm chart for Default Resources
     digest: 372958a818e1088db8a5793d40bdaa3a562a24ded6a8246385dd7bcee577e77c
@@ -179,4 +192,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/replika-1.0.0/replika-1.0.0.tgz
     version: 1.0.0
-generated: "2023-05-12T13:15:03.785387142Z"
+generated: "2023-05-12T13:25:31.897952706Z"
