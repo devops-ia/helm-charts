@@ -91,7 +91,7 @@ limitRange:
       namespace: my-namespace
       labels: {}
       annotations: {}
-      spec: 
+      spec:
         - type: "Pod"
           max:
             cpu: "2"
@@ -99,7 +99,6 @@ limitRange:
           min:
             cpu: "200m"
             memory: "6Mi"
-        
         - type: "Container"
           max:
             cpu: "2"
