@@ -1,8 +1,8 @@
-{{ if .Values.secrets.create }}
-{{ range $secrets := .Values.secrets.config }}
+{{ if .Values.networkPolicies.create }}
+{{ range .Values.networkPolicies.config }}
 ---
-apiVersion: v1
-kind: Secret
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
 metadata:
   name: {{ .name }}
   namespace: {{ .namespace }}
@@ -18,11 +18,8 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 {{- end }}
-type: {{ .type }}
-data:
-{{- range $key, $value := $secrets.data }}
-  {{ $value.name }}: {{ $value.value | b64enc | quote }}
-{{- end }}
+spec:
+{{ toYaml .spec | indent 2 }}
 
 {{ end }}
 {{ end }}

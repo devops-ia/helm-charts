@@ -1,13 +1,13 @@
-{{ if .Values.secrets.create }}
-{{ range $secrets := .Values.secrets.config }}
+{{ if .Values.limitRange.create }}
+{{ range .Values.limitRange.config }}
 ---
 apiVersion: v1
-kind: Secret
+kind: LimitRange
 metadata:
   name: {{ .name }}
   namespace: {{ .namespace }}
-{{- if .labels }}
   labels:
+{{- if .labels }}
   {{- with .labels }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
@@ -18,11 +18,9 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 {{- end }}
-type: {{ .type }}
-data:
-{{- range $key, $value := $secrets.data }}
-  {{ $value.name }}: {{ $value.value | b64enc | quote }}
-{{- end }}
+spec:
+  limits:
+{{ toYaml .spec | indent 4 }}
 
 {{ end }}
 {{ end }}

@@ -4,8 +4,20 @@
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-  name: {{ .namespace }}
+  name: {{ .name }}
   namespace: {{ .namespace }}
+{{- if .labels }}
+  labels:
+  {{- with .labels }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}
+{{- if .annotations }}
+  annotations:
+  {{- with .annotations }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}
 spec:
   hard:
 {{ toYaml .spec | indent 4 }}

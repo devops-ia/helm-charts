@@ -4,60 +4,149 @@
 ---
 namespaces:
   create: false
-  name: []
-#  - integration
-#  - monitoring
+  config:
+    - name: my-namespace
+      labels: {}
+      annotations: {}
 
 quotas:
   create: false
-  config: []
-#    - namespace: integration
-#      quota_requests_cpu: "4"
-#      quota_requests_memory: "6Gi"
-#      quota_limits_cpu: "4"
-#      quota_limits_memory: "6Gi"
-#    - namespace: monitoring
-#      quota_requests_cpu: "2"
-#      quota_requests_memory: "2Gi"
-#      quota_limits_cpu: "2"
-#      quota_limits_memory: "2Gi"
+  config:
+    - name: my-quota
+      namespace: my-namespace
+      labels: {}
+      annotations: {}
+      spec:
+        requests.cpu: "1"
+        requests.memory: 1Gi
+        limits.cpu: "2"
+        limits.memory: 2Gi
+        configmaps: "1"
+        persistentvolumeclaims: "2"
+        pods: "0"
+        replicationcontrollers: "6"
+        resourcequotas: "2"
+        services: "2"
+        services.loadbalancers: "4"
+        services.nodeports: "4"
+        secrets: "1"
 
 secrets:
   create: false
-  config: []
-#  - name: my-secret
-#    namespace: my-namespace
-#    type: Opaque
-#    data:
-#      - name: data-name
-#        value: data-value
+  config:
+    - name: my-secret
+      namespace: my-namespace
+      labels: {}
+      annotations: {}
+      type: Opaque
+      data:
+        - name: data-name
+          value: data-value
 
 serviceAccounts:
   create: false
-  config: []
-#  - name: integration
-#    namespace: integration
-#    clusterRoleRules: []
-#      - apiGroups: ["extensions", "app"]
-#        resources: ["deployments"]
-#        verbs: ["get", "list", "watch", "create", "update", "patch"]
-#      - apiGroups: ["extensions", "app"]
-#        resources: ["deployments"]
-#        verbs: ["get", "list", "watch", "create", "update", "patch"]
-#  - name: monitoring
-#    namespace: monitoring
-#    clusterRoleRules: []
-#      - apiGroups: ["*"]
-#        resources: ["*"]
-#        verbs: ["get", "list"]
+  config:
+    - name: my-sa
+      namespace: my-namespace
+      labels: {}
+      annotations: {}
+      automountServiceAccountToken: false
 
-VolumeSnapshotClass:
+volumeSnapshotClass:
   create: false
-  config: []
-#  - name: my-volume-snapshot-class
-#    labels:
-#      key: value
-#    driver: my-driver
-#    deletionPolicy: Retain
-#    parameters:
-#      tags: 'foo=aaa,bar=bbb'
+  config:
+    - name: my-volume-snapshot-class
+      labels: {}
+      annotations: {}
+      driver: my-driver
+      deletionPolicy: Retain
+      parameters:
+        tags: 'foo=aaa,bar=bbb'
+
+storageClass:
+  create: false
+  config:
+    - name: azuredisk-csi-zrs
+      labels: {}
+      annotations: {}
+      provisioner: disk.csi.azure.com
+      parameters:
+        skuname: Premium_ZRS
+      allowVolumeExpansion: true
+      reclaimPolicy: Delete
+      mountOptions:
+        - debug
+      volumeBindingMode: WaitForFirstConsumer
+      allowedTopologies:
+        - matchLabelExpressions:
+          - key: failure-domain.beta.kubernetes.io/zone
+            values:
+            - us-central-1a
+            - us-central-1b
+
+limitRange:
+  create: false
+  config:
+    - name: my-limit-range
+      namespace: my-namespace
+      labels: {}
+      annotations: {}
+      spec: 
+        - type: "Pod"
+          max:
+            cpu: "2"
+            memory: "1Gi"
+          min:
+            cpu: "200m"
+            memory: "6Mi"
+        
+        - type: "Container"
+          max:
+            cpu: "2"
+            memory: "1Gi"
+          min:
+            cpu: "100m"
+            memory: "4Mi"
+          default:
+            cpu: "300m"
+            memory: "200Mi"
+          defaultRequest:
+            cpu: "200m"
+            memory: "100Mi"
+
+networkPolicies:
+  create: false
+  config:
+    - name: my-netpol
+      namespace: my-namespace
+      labels: {}
+      annotations: {}
+      spec:
+        podSelector:
+          matchLabels:
+            role: db
+        policyTypes:
+          - Ingress
+          - Egress
+        ingress:
+          - from:
+              - ipBlock:
+                  cidr: 172.17.0.0/16
+                  except:
+                    - 172.17.1.0/24
+              - namespaceSelector:
+                  matchLabels:
+                    project: myproject
+              - podSelector:
+                  matchLabels:
+                    role: frontend
+            ports:
+              - protocol: TCP
+                port: 6379
+        egress:
+          - to:
+              - ipBlock:
+                  cidr: 10.0.0.0/24
+            ports:
+              - protocol: TCP
+                port: 5978
