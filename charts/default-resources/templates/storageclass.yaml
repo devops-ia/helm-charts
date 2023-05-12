@@ -18,10 +18,12 @@ metadata:
   {{- end }}
 {{- end }}
 provisioner: {{ .provisioner }}
+{{- if .parameters }}
 parameters:
   {{- with .parameters }}
     {{- toYaml . | nindent 2 }}
   {{- end }}
+{{- end }}
 allowVolumeExpansion: {{ .allowVolumeExpansion }}
 reclaimPolicy: {{ .reclaimPolicy }}
 {{- if .mountOptions }}
