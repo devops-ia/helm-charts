@@ -78,12 +78,12 @@ configProbe: {}
 #  periodSeconds: 5
 
 db:
-  enabled: true
+  enabled: false
   port: 9193
   listen: "local"
 
 dashboard:
-  enabled: true
+  enabled: false
   port: 9194
   listen: "network"
 
