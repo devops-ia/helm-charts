@@ -80,12 +80,12 @@ configProbe: {}
 db:
   enabled: true
   port: 9193
-  listen: "local" # local or network
+  listen: "local"
 
 dashboard:
   enabled: true
   port: 9194
-  listen: "network" # local or network
+  listen: "network"
 
 ingress:
   enabled: false
@@ -104,16 +104,16 @@ ingress:
   #      - chart-example.local
 
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  #  We usually recommend not to specify default resources and to leave this as a conscious
+  #  choice for the user. This also increases chances charts run on environments with little
+  #  resources, such as Minikube. If you do want to specify resources, uncomment the following
+  #  lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  #  limits:
+  #    cpu: 100m
+  #    memory: 128Mi
+  #  requests:
+  #    cpu: 100m
+  #    memory: 128Mi
 
 nodeSelector: {}
 
@@ -144,33 +144,33 @@ extraConfig:
   configMaps:
     enabled: false
     data:
-      #conections.spc: |
-      #  connection "azure_all" {
-      #    type        = "aggregator"
-      #    plugin      = "azure"
-      #    connections = ["azure_*"]
-      #  }
-      #  connection "azure_sub_1" {
-      #    plugin          = "azure"
-      #    subscription_id = "azure_01"
-      #  }
-      #  connection "azure_sub_2" {
-      #    plugin          = "azure"
-      #    subscription_id = "azure_02"
-      #  }
+      # conections.spc: |
+      #   connection "azure_all" {
+      #     type        = "aggregator"
+      #     plugin      = "azure"
+      #     connections = ["azure_*"]
+      #   }
+      #   connection "azure_sub_1" {
+      #     plugin          = "azure"
+      #     subscription_id = "azure_01"
+      #   }
+      #   connection "azure_sub_2" {
+      #     plugin          = "azure"
+      #     subscription_id = "azure_02"
+      #   }
 
   secrets:
     enabled: false
     data:
-      #azure.spc: |
-      #  connection "azure" {
-      #    plugin = "azure"
-      #    environment = "AZUREPUBLICCLOUD"
-      #    tenant_id       = "00000000-0000-0000-0000-000000000000"
-      #    subscription_id = "00000000-0000-0000-0000-000000000000"
-      #    client_id       = "00000000-0000-0000-0000-000000000000"
-      #    client_secret   = "~dummy@3password"
-      #  }
+      #  azure.spc: |
+      #    connection "azure" {
+      #      plugin = "azure"
+      #      environment = "AZUREPUBLICCLOUD"
+      #      tenant_id       = "00000000-0000-0000-0000-000000000000"
+      #      subscription_id = "00000000-0000-0000-0000-000000000000"
+      #      client_id       = "00000000-0000-0000-0000-000000000000"
+      #      client_secret   = "~dummy@3password"
+      #    }
 
 initContainer:
   image:
@@ -178,7 +178,7 @@ initContainer:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
-  
+
   securityContext: {}
   #  capabilities:
   #    drop:
@@ -191,7 +191,7 @@ initContainer:
   plugins: []
   # - "azure"
   # - "azuread"
-  
+
   # Ref: https://hub.steampipe.io/mods
   mods: []
   #  - "github.com/turbot/steampipe-mod-azure-insights"
