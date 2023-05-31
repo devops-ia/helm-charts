@@ -1,0 +1,211 @@
+# Default values for steampipe.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+---
+replicaCount: 1
+
+image:
+  repository: ghcr.io/turbot/steampipe
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+#  capabilities:
+#    drop:
+#    - ALL
+#  readOnlyRootFilesystem: true
+#  runAsNonRoot: true
+#  runAsUser: 1000
+
+command: []
+#  - "steampipe"
+#  - "service"
+#  - "start"
+#  - "--foreground"
+#  - "--show-password"
+#  - "--database-password=1234"
+
+args:
+  - "--foreground"
+  - "--show-password"
+
+env:
+  - name: STEAMPIPE_LOG_LEVEL
+    value: "TRACE"
+
+envFrom: []
+
+livenessProbe: {}
+#  httpGet:
+#    path: '/health/live'
+#    port: http
+#  initialDelaySeconds: 0
+#  timeoutSeconds: 5
+
+readinessProbe: {}
+#  httpGet:
+#    path: '/health/ready'
+#    port: http
+#  initialDelaySeconds: 10
+#  timeoutSeconds: 1
+
+configProbe: {}
+#  httpGet:
+#    path: '/health'
+#    port: http
+#  initialDelaySeconds: 15
+#  timeoutSeconds: 1
+#  failureThreshold: 60
+#  periodSeconds: 5
+
+db:
+  enabled: true
+  port: 9193
+  listen: "local" # local or network
+
+dashboard:
+  enabled: true
+  port: 9194
+  listen: "network" # local or network
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+extraVolumes: []
+#  - name: configmap
+#    configMap:
+#      name: steampipe-config
+#  - name: secret
+#    secret:
+#      secretname: steampipe-secret
+
+
+extraVolumeMount:
+#  - name: configmap
+#    mountPath: "/home/steampipe/.steampipe/config/azure.spc"
+#    subPath: azure.spc
+#    readOnly: true
+#  - name: secret
+#    mountPath: "/home/steampipe/.steampipe/config/azure.spc"
+#    readOnly: true
+#    subPath: azure.spc
+
+extraConfig:
+  configMaps:
+    enabled: false
+    data:
+      #conections.spc: |
+      #  connection "azure_all" {
+      #    type        = "aggregator"
+      #    plugin      = "azure"
+      #    connections = ["azure_*"]
+      #  }
+      #  connection "azure_sub_1" {
+      #    plugin          = "azure"
+      #    subscription_id = "azure_01"
+      #  }
+      #  connection "azure_sub_2" {
+      #    plugin          = "azure"
+      #    subscription_id = "azure_02"
+      #  }
+
+  secrets:
+    enabled: false
+    data:
+      #azure.spc: |
+      #  connection "azure" {
+      #    plugin = "azure"
+      #    environment = "AZUREPUBLICCLOUD"
+      #    tenant_id       = "00000000-0000-0000-0000-000000000000"
+      #    subscription_id = "00000000-0000-0000-0000-000000000000"
+      #    client_id       = "00000000-0000-0000-0000-000000000000"
+      #    client_secret   = "~dummy@3password"
+      #  }
+
+initContainer:
+  image:
+    repository: ghcr.io/turbot/steampipe
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+  
+  securityContext: {}
+  #  capabilities:
+  #    drop:
+  #    - ALL
+  #  readOnlyRootFilesystem: true
+  #  runAsNonRoot: true
+  #  runAsUser: 1000
+
+  # Ref: https://hub.steampipe.io/plugins
+  plugins: []
+  # - "azure"
+  # - "azuread"
+  
+  # Ref: https://hub.steampipe.io/mods
+  mods: []
+  #  - "github.com/turbot/steampipe-mod-azure-insights"
+
+  resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+  extraInitVolumeMount: []

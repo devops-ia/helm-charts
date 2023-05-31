@@ -1,0 +1,25 @@
+{{- if or (.Values.db.enabled) (.Values.db.enabled) }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "steampipe.fullname" . }}
+  labels:
+    {{- include "steampipe.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+  {{- if .Values.db.enabled }}
+    - port: {{ .Values.db.port }}
+      targetPort: db
+      protocol: TCP
+      name: db
+  {{- end }}
+  {{- if .Values.dashboard.enabled }}
+    - port: {{ .Values.dashboard.port }}
+      targetPort: dashboard
+      protocol: TCP
+      name: dashboard
+  {{- end }}
+  selector:
+    {{- include "steampipe.selectorLabels" . | nindent 4 }}
+{{- end }}

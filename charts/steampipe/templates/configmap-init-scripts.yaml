@@ -1,0 +1,23 @@
+{{- if or (.Values.initContainer.plugins) (.Values.initContainer.mods) }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "steampipe.fullname" . }}-scripts
+  labels:
+    {{- include "steampipe.labels" . | nindent 4 }}
+data:
+  init.sh: |-
+    set -e
+{{- with .Values.initContainer.plugins }}
+    echo "Steampipe - Install Plugins"
+    {{- range $key, $value := . }}
+    steampipe plugin install {{ $value }}
+    {{- end }}
+{{- end }}
+{{- with .Values.initContainer.mods }}
+    echo "Steampipe - Install Mods"
+    {{- range $key, $value := . }}
+    steampipe mod install {{ $value }}
+    {{- end }}
+{{- end }}
+{{- end }}
