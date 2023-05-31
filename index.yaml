@@ -192,4 +192,18 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/replika-1.0.0/replika-1.0.0.tgz
     version: 1.0.0
-generated: "2023-05-12T13:25:31.897952706Z"
+  steampipe:
+  - apiVersion: v2
+    appVersion: 0.20.2
+    created: "2023-05-31T14:37:31.466401625Z"
+    description: A Helm chart for Kubernetes
+    digest: 4b01d5081c8fd2d13f6c70bbad6509d8516a159aca2c59ff95a11f945749dfe4
+    maintainers:
+    - email: adrianmg231189@gmail.com
+      name: amartingarcia
+    name: steampipe
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
+    version: 0.1.1
+generated: "2023-05-31T14:37:31.466435625Z"
