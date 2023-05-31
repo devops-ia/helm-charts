@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Helm
-        uses: azure/setup-helm@v2.0
+        uses: azure/setup-helm@v3
         with:
           version: v3.8.1
 
@@ -35,7 +35,7 @@ jobs:
         if: steps.list-changed.outputs.changed == 'true'
         run: |
           helm env
-          helm plugin install https://github.com/quintush/helm-unittest.git --version 0.2.8
+          helm plugin install https://github.com/quintush/helm-unittest.git --version 0.3.3
 
       - name: Run chart-testing (lint)
         run: ct lint --config .github/linters/ct.yaml
