@@ -1,8 +1,14 @@
 # steampipe
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.20.2](https://img.shields.io/badge/AppVersion-0.20.2-informational?style=flat-square)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.20.2](https://img.shields.io/badge/AppVersion-0.20.2-informational?style=flat-square)
 
 A Helm chart for Kubernetes
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| amartingarcia | <adrianmg231189@gmail.com> |  |
 
 ## Values
 
@@ -13,10 +19,10 @@ A Helm chart for Kubernetes
 | args[1] | string | `"--show-password"` |  |
 | command | list | `[]` |  |
 | configProbe | object | `{}` |  |
-| dashboard.enabled | bool | `true` |  |
+| dashboard.enabled | bool | `false` |  |
 | dashboard.listen | string | `"network"` |  |
 | dashboard.port | int | `9194` |  |
-| db.enabled | bool | `true` |  |
+| db.enabled | bool | `false` |  |
 | db.listen | string | `"local"` |  |
 | db.port | int | `9193` |  |
 | envFrom | list | `[]` |  |
