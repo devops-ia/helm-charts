@@ -1,0 +1,190 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "steampipe.fullname" . }}
+  labels:
+    {{- include "steampipe.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "steampipe.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "steampipe.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- if or (.Values.initContainer.plugins) (.Values.initContainer.mods) }}
+      initContainers:
+        - name: init
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.initContainer.image.pullPolicy }}
+          securityContext:
+            {{- toYaml .Values.initContainer.securityContext | nindent 12 }}
+          command: [ "sh", "/var/steampipe_scripts/init.sh" ]
+          resources:
+            {{- toYaml .Values.initContainer.resources | nindent 12 }}
+          volumeMounts:
+            - name: scripts
+              mountPath: /var/steampipe_scripts
+            - name: config
+              mountPath: /home/steampipe/.steampipe/config
+            - name: dashboard
+              mountPath: /home/steampipe/.steampipe/dashboard
+            - name: internal
+              mountPath: /home/steampipe/.steampipe/internal
+            - name: logs
+              mountPath: /home/steampipe/.steampipe/logs
+            - name: plugins
+              mountPath: /home/steampipe/.steampipe/plugins
+            - name: workspace
+              mountPath: /workspace
+          {{- with .Values.extraInitVolumeMount }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.command }}
+          command:
+            {{- toYaml .Values.command | nindent 12 }}
+          {{- end }}
+          args:
+            - "steampipe"
+            - "service"
+            - "start"
+          {{- if .Values.args }}
+            {{- toYaml .Values.args | nindent 12 }}
+          {{- if .Values.db.enabled }}
+            - --database-listen={{ .Values.db.listen }}
+            - --database-port={{ .Values.db.port }}
+          {{- end }}
+          {{- if .Values.dashboard.enabled }}
+            - --dashboard
+            - --dashboard-listen={{ .Values.dashboard.listen }}
+            - --dashboard-port={{ .Values.dashboard.port }}
+          {{- end }}
+          {{- end }}
+          {{- if .Values.env }}
+          env:
+            {{- toYaml .Values.env | nindent 12 }}
+          {{- end }}
+          {{- if .Values.envFrom }}
+          envFrom:
+            {{- toYaml .Values.envFrom | nindent 12 }}
+          {{- end }}
+          ports:
+          {{- if .Values.db.enabled }}
+            - name: db
+              containerPort: {{ .Values.db.port }}
+              protocol: TCP
+          {{- end }}
+          {{- if .Values.dashboard.enabled }}
+            - name: dashboard
+              containerPort: {{ .Values.dashboard.port }}
+              protocol: TCP
+          {{- end }}
+          {{- if .Values.livenessProbe }}
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          {{- else if .Values.dashboard.enabled }}
+          livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: '/'
+              port: dashboard
+            initialDelaySeconds: 5
+            timeoutSeconds: 10
+          {{- end }}
+          {{- if .Values.readinessProbe }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          {{- else if .Values.dashboard.enabled }}
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: '/'
+              port: dashboard
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+          {{- end }}
+          {{- if .Values.startupProbe }}
+          startupProbe:
+            {{- toYaml .Values.startupProbe | nindent 12 }}
+          {{- else if .Values.dashboard.enabled }}
+          startupProbe:
+            httpGet:
+              path: '/'
+              port: dashboard
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 12
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          {{- if or (.Values.initContainer.plugins) (.Values.initContainer.mods) }}
+            - name: config
+              mountPath: /home/steampipe/.steampipe/config
+            - name: dashboard
+              mountPath: /home/steampipe/.steampipe/dashboard
+            - name: internal
+              mountPath: /home/steampipe/.steampipe/internal
+            - name: logs
+              mountPath: /home/steampipe/.steampipe/logs
+            - name: plugins
+              mountPath: /home/steampipe/.steampipe/plugins
+            - name: workspace
+              mountPath: /workspace
+          {{- end }}
+          {{- with .Values.extraVolumeMount }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "steampipe.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+      {{- if or (.Values.initContainer.plugins) (.Values.initContainer.mods) }}
+        - name: scripts
+          configMap:
+            name: {{ template "steampipe.fullname" . }}-scripts
+        - name: config
+          emptyDir: {}
+        - name: dashboard
+          emptyDir: {}
+        - name: internal
+          emptyDir: {}
+        - name: logs
+          emptyDir: {}
+        - name: plugins
+          emptyDir: {}
+        - name: workspace
+          emptyDir: {}
+      {{- end }}
+      {{- with .Values.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
