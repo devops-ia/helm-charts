@@ -7,4 +7,4 @@ chart-repos:
   - devops-ia=https://devops-ia.github.io/helm-charts/
 helm-extra-args: --timeout 600s
 additional-commands:
-  - helm unittest --helm3 --strict --file unittests/*.yaml --file 'unittests/**/*.yaml' {{ .Path }}
+  - helm unittest --strict --file unittests/*.yaml --file 'unittests/**/*.yaml' {{ .Path }}
