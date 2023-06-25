@@ -1,5 +1,27 @@
 apiVersion: v1
 entries:
+  bitbucket-bot:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-06-25T18:50:23.311434859Z"
+    description: A Helm chart to deploy Bitbucket Bot for Google Chats (Spaces)
+    digest: e5d2f5ee71f231b624ed98cce88517d9e49ba35c22e0e9815ae9857ca32e2856
+    home: https://github.com/devops-ia/bitbucket-bot
+    keywords:
+    - bitbucket
+    - bitbucket-bot
+    - google-chat
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: bitbucket-bot
+    sources:
+    - https://github.com/devops-ia/bitbucket-bot
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/bitbucket-bot-1.0.0/bitbucket-bot-1.0.0.tgz
+    version: 1.0.0
   default-resources:
   - apiVersion: v2
     appVersion: 1.1.0
@@ -206,4 +228,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2023-05-31T14:37:31.466435625Z"
+generated: "2023-06-25T18:50:23.311552461Z"
