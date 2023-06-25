@@ -1,0 +1,32 @@
+apiVersion: v2
+name: opencti
+description: A Helm chart to deploy open cyber threat intelligence platform
+type: application
+maintainers:
+  - name: ialejandro
+    email: hello@ialejandro.rocks
+    url: https://ialejandro.rocks
+sources:
+  - https://github.com/OpenCTI-Platform/opencti
+version: 1.0.0
+appVersion: "5.8.3"
+home: hhttps://www.filigran.io/en/solutions/products/opencti/
+keywords:
+  - opencti
+dependencies:
+  - name: minio
+    version: 12.6.*
+    repository: https://charts.bitnami.com/bitnami
+    condition: minio.enabled
+  - name: opensearch
+    version: 2.13.*
+    repository: https://opensearch-project.github.io/helm-charts/
+    condition: opensearch.enabled
+  - name: rabbitmq
+    version: 11.13.*
+    repository: https://charts.bitnami.com/bitnami
+    condition: rabbitmq.enabled
+  - name: redis
+    version: 17.11.*
+    repository: https://charts.bitnami.com/bitnami
+    condition: redis.enabled
