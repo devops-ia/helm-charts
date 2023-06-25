@@ -135,6 +135,43 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/helm-release-cleaner-1.0.0/helm-release-cleaner-1.0.0.tgz
     version: 1.0.0
+  opencti:
+  - apiVersion: v2
+    appVersion: 5.8.3
+    created: "2023-06-25T21:32:33.154489946Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.6.*
+    - condition: opensearch.enabled
+      name: opensearch
+      repository: https://opensearch-project.github.io/helm-charts/
+      version: 2.13.*
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.13.*
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.11.*
+    description: A Helm chart to deploy open cyber threat intelligence platform
+    digest: 4b77292e1f6b8229193e1f9ad7658c5147e73d13144cf75f89905e625a621440
+    home: hhttps://www.filigran.io/en/solutions/products/opencti/
+    keywords:
+    - opencti
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: opencti
+    sources:
+    - https://github.com/OpenCTI-Platform/opencti
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/opencti-1.0.0/opencti-1.0.0.tgz
+    version: 1.0.0
   replika:
   - apiVersion: v2
     appVersion: v0.3.0
@@ -266,4 +303,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-25T21:24:41.906267994Z"
+generated: "2023-06-25T21:32:33.154518546Z"
