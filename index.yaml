@@ -234,6 +234,24 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/snapshot-controller-1.0.0/snapshot-controller-1.0.0.tgz
     version: 1.0.0
+  splunk:
+  - apiVersion: v2
+    appVersion: 9.0.0
+    created: "2023-06-25T21:24:41.906249793Z"
+    description: A Helm chart to deploy Splunk standalone
+    digest: 2e5c61de4a5d2c7509cc560079f0966b36b090d3d506d664f236318226619cfe
+    home: https://www.splunk.com/
+    keywords:
+    - splunk
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: splunk
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/splunk-1.0.0/splunk-1.0.0.tgz
+    version: 1.0.0
   steampipe:
   - apiVersion: v2
     appVersion: 0.20.2
@@ -248,4 +266,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-25T21:24:32.497357724Z"
+generated: "2023-06-25T21:24:41.906267994Z"
