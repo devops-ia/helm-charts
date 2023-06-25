@@ -49,6 +49,11 @@ containerArgs: []
   # - -gauge-query=/queries/bigquery.sql
   # - -refresh=5m
 
+# -- Execute query
+sqlFile:
+  query: |-
+    SELECT * FROM dataset.my_table
+
 # -- Kubernetes servide to expose Pod
 service:
   # -- Kubernetes Service type. Allowed values: NodePort, LoadBalancer or ClusterIP

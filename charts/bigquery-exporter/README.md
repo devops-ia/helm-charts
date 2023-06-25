@@ -74,5 +74,6 @@ helm show values devops-ia/bigquery-exporter
 | serviceAccount | object | `{"annotations":{},"create":true,"name":""}` | Enable creation of ServiceAccount |
 | serviceMonitor | object | `{"enabled":false,"interval":"30s","metricRelabelings":[],"relabelings":[],"scrapeTimeout":"10s"}` | Enable ServiceMonitor to get metrics ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#servicemonitor |
 | serviceMonitor.enabled | bool | `false` | Enable or disable |
+| sqlFile | object | `{"query":"SELECT * FROM dataset.my_table"}` | Execute query |
 | testConnection | bool | `false` | Enable livenessProbe and readinessProbe |
 | tolerations | list | `[]` | Tolerations for pod assignment |
