@@ -38,45 +38,6 @@ This removes all the Kubernetes components associated with the chart and deletes
 
 _See [helm uninstall](https://helm.sh/docs/helm/helm_uninstall/) for command documentation._
 
-## Examples
-
-#### Set config
-
-```console
-helm install {{ template "chart.name" . }} devops-ia/{{ template "chart.name" . }} --set schedule="0 */4 * * *" --set elasticContainerRegistry="account.dkr.ecr.region.amazonaws.com" --set env.AWS_ACCESS_KEY_ID="XXXXXXX" --set env.AWS_SECRET_ACCESS_KEY="XXXXXXX"
-```
-
-#### Use chart `secrets` and `envFromSecrets` reference
-
-```console
-# values example
-secrets:
-  AWS_ACCESS_KEY_ID: XXXXXXX
-  AWS_SECRET_ACCESS_KEY: XXXXXXX
-...
-envFromSecrets:
-  AWS_ACCESS_KEY_ID:
-    name: [RELEASE_NAME]-credentials
-    key: AWS_ACCESS_KEY_ID
-  AWS_SECRET_ACCESS_KEY:
-    name: [RELEASE_NAME]-credentials
-    key: AWS_SECRET_ACCESS_KEY
-```
-
-#### Use external `Secret` file and reference with `envFromSecrets`
-
-```console
-# values example
-...
-envFromSecrets:
-  AWS_ACCESS_KEY_ID:
-    name: my-secret-file
-    key: AWS_ACCESS_KEY_ID
-  AWS_SECRET_ACCESS_KEY:
-    name: my-secret-file
-    key: AWS_SECRET_ACCESS_KEY
-```
-
 ## Configuration
 
 See [Customizing the chart before installing](https://helm.sh/docs/intro/using_helm/#customizing-the-chart-before-installing). To see all configurable options with comments:

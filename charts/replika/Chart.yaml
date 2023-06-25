@@ -6,8 +6,7 @@ maintainers:
     email: hello@ialejandro.rocks
     url: https://ialejandro.rocks
 name: replika
-sources:
-  - https://github.com/prosimcorp/replika
+
 version: 1.0.3
 appVersion: "v0.3.0"
 home: https://github.com/prosimcorp/replika
