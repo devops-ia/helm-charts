@@ -77,6 +77,7 @@ helm show values devops-ia/opencti
 | global | object | `{"imagePullSecrets":[],"imageRegistry":""}` | Global configuration |
 | image | object | `{"pullPolicy":"IfNotPresent","repository":"opencti/platform","tag":""}` | Image registry |
 | imagePullSecrets | list | `[]` | Global Docker registry secret names as an array |
+| ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[{"host":"chart-example.local","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}],"tls":[]}` | Ingress configuration to expose app |
 | minio | object | `{"enabled":false}` | MinIO subchart deployment ref: https://github.com/bitnami/charts/blob/main/bitnami/minio/values.yaml  |
 | nameOverride | string | `""` | String to partially override opencti.fullname template (will maintain the release name) |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
@@ -91,6 +92,7 @@ helm show values devops-ia/opencti
 | service.targetPort | int | `4000` | Pod expose port |
 | service.type | string | `"ClusterIP"` | Kubernetes Service type. Allowed values: NodePort, LoadBalancer or ClusterIP |
 | serviceAccount | object | `{"annotations":{},"create":true,"name":""}` | Enable creation of ServiceAccount |
+| testConnection | bool | `false` | Enable livenessProbe and readinessProbe |
 | tolerations | list | `[]` | Tolerations for pod assignment |
 | worker | object | `{"affinity":{},"autoscaling":{"enabled":false,"maxReplicas":100,"minReplicas":1,"targetCPUUtilizationPercentage":80},"enabled":true,"env":{},"envFromSecrets":{},"image":{"pullPolicy":"IfNotPresent","repository":"opencti/worker","tag":""},"nodeSelector":{},"replicaCount":1,"resources":{},"tolerations":[]}` | OpenCTI worker deployment configuration |
 | worker.affinity | object | `{}` | Affinity for pod assignment |
