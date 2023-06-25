@@ -42,4 +42,4 @@ jobs:
 
       - name: Run chart-testing (install)
         if: steps.list-changed.outputs.changed == 'true'
-        run: ct install --target-branch ${{ github.event.repository.default_branch }} --debug
+        run: ct install --chart-repos bitnami=https://charts.bitnami.com/bitnami,opensearch=https://opensearch-project.github.io/helm-charts/ --target-branch ${{ github.event.repository.default_branch }} --debug
