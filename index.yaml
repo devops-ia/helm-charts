@@ -214,6 +214,26 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/replika-1.0.0/replika-1.0.0.tgz
     version: 1.0.0
+  snapshot-controller:
+  - apiVersion: v2
+    appVersion: 6.2.1
+    created: "2023-06-25T21:24:32.299305203Z"
+    description: A Helm chart to deploy snapshot-controller
+    digest: f0e7b706d00daf1274914ca2e9b46c23f86f3c47e879a122fdaf929799694e36
+    home: https://github.com/kubernetes-csi/external-snapshotter/tree/master
+    keywords:
+    - snapshot-controller
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: snapshot-controller
+    sources:
+    - https://github.com/kubernetes-csi/external-snapshotter/tree/master/deploy/kubernetes/snapshot-controller
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/snapshot-controller-1.0.0/snapshot-controller-1.0.0.tgz
+    version: 1.0.0
   steampipe:
   - apiVersion: v2
     appVersion: 0.20.2
@@ -228,4 +248,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-25T18:50:23.311552461Z"
+generated: "2023-06-25T21:24:32.497357724Z"
