@@ -1,0 +1,17 @@
+{{- if .Values.testConnection }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "bitbucket-bot.fullname" . }}-test-connection"
+  labels:
+    {{- include "bitbucket-bot.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "bitbucket-bot.fullname" . }}:{{ .Values.service.targetPort | default .Values.service.port }}']
+  restartPolicy: Never
+{{- end }}
