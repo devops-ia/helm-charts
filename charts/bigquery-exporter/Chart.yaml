@@ -1,0 +1,17 @@
+apiVersion: v2
+description: A Helm chart to deploy Bigquery Exporter
+type: application
+maintainers:
+  - name: ialejandro
+    email: hello@ialejandro.rocks
+    url: https://ialejandro.rocks
+name: bigquery-exporter
+sources:
+  - https://github.com/m-lab/prometheus-bigquery-exporter
+version: 1.0.0
+appVersion: "v1.1.1"
+home: https://github.com/devops-ia/helm-charts/tree/main/charts/bigquery-exporter
+keywords:
+- bigquery-exporter
+- bigquery
+- prometheus
