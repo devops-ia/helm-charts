@@ -22,7 +22,7 @@ helm repo update
 ## Install Helm chart
 
 ```console
-helm install [RELEASE_NAME] devops-ia/ecr-token
+helm install [RELEASE_NAME] devops-ia/ecr-registry
 ```
 
 This install all the Kubernetes components associated with the chart and creates the release.
@@ -45,7 +45,7 @@ _See [helm uninstall](https://helm.sh/docs/helm/helm_uninstall/) for command doc
 #### Set config
 
 ```console
-helm install ecr-token devops-ia/ecr-token --set schedule="0 */4 * * *" --set elasticContainerRegistry="account.dkr.ecr.region.amazonaws.com" --set env.AWS_ACCESS_KEY_ID="XXXXXXX" --set env.AWS_SECRET_ACCESS_KEY="XXXXXXX"
+helm install ecr-registry devops-ia/ecr-registry --set schedule="0 */4 * * *" --set elasticContainerRegistry="account.dkr.ecr.region.amazonaws.com" --set env.AWS_ACCESS_KEY_ID="XXXXXXX" --set env.AWS_SECRET_ACCESS_KEY="XXXXXXX"
 ```
 
 #### Use chart `secrets` and `envFromSecrets` reference
@@ -84,7 +84,7 @@ envFromSecrets:
 See [Customizing the chart before installing](https://helm.sh/docs/intro/using_helm/#customizing-the-chart-before-installing). To see all configurable options with comments:
 
 ```console
-helm show values devops-ia/ecr-token
+helm show values devops-ia/ecr-registry
 ```
 
 ## Values
