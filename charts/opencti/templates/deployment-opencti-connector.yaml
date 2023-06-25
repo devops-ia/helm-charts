@@ -1,0 +1,111 @@
+{{- range .Values.connectors }}
+{{- $connectorName := .name }}
+
+{{- if .enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $connectorName }}-connector-{{ include "opencti.fullname" $ }}
+  labels:
+    opencti.connector: {{ $connectorName }}
+    {{- include "opencti.labels" $ | nindent 4 }}
+spec:
+  {{- if not .autoscaling }}
+  replicas: {{ .replicas }}
+  {{- end }}
+  selector:
+    matchLabels:
+      opencti.connector: {{ $connectorName }}
+      {{- include "opencti.selectorLabels" $ | nindent 6 }}
+  template:
+    metadata:
+      {{- with .podAnnotations }}
+      annotations:
+        {{- toYaml $ | nindent 8 }}
+      {{- end }}
+      labels:
+        opencti.connector: {{ $connectorName }}
+        {{- include "opencti.selectorLabels" $ | nindent 8 }}
+    spec:
+      {{- if .imagePullSecrets }}
+      {{- with .imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- else if $.Values.global.imagePullSecrets }}
+      {{- with $.Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ $connectorName }}-connector
+          securityContext:
+            {{- toYaml .securityContext | nindent 12 }}
+          {{- if .image.repository }}
+          image: "{{ .image.repository }}:{{ .image.tag | default $.Chart.AppVersion }}"
+          {{- else if $.Values.global.imageRegistry }}
+          image: "{{ printf "%s/opencti/%s" $.Values.global.imageRegistry .name }}:{{ .image.tag | default $.Chart.AppVersion }}"
+          {{- else }}
+          image: "{{ printf "opencti/%s" .name }}:{{ .image.tag | default $.Chart.AppVersion }}"
+          {{- end }}
+          imagePullPolicy: {{ .image.pullPolicy | default "IfNotPresent" }}
+          env:
+          # Variables in plain text
+          {{- if eq $.Values.env.APP__BASE_PATH "/" }}
+          - name: OPENCTI_URL
+            value: "http://{{ include "opencti.fullname" $ }}-server:{{ $.Values.service.port }}"
+          {{- else }}
+          - name: OPENCTI_URL
+            value: "http://{{ include "opencti.fullname" $ }}-server:{{ $.Values.service.port }}{{ $.Values.env.APP__BASE_PATH }}"
+          {{- end }}
+
+          {{- if $.Values.env.APP__ADMIN__TOKEN }}
+          - name: OPENCTI_TOKEN
+            value: "{{ $.Values.env.APP__ADMIN__TOKEN }}"
+          {{- end }}
+
+          {{- if $.Values.connectorsGlobalEnv }}
+          {{- range $key, $value := $.Values.connectorsGlobalEnv }}
+          - name: {{ $key | upper }}
+            value: {{ $value | quote }}
+          {{- end }}
+          {{- end }}
+
+          {{- if .env }}
+          {{- range $key, $value := .env }}
+          - name: {{ $key | upper }}
+            value: {{ $value | quote }}
+          {{- end }}
+          {{- end }}
+
+          # Variables from secrets
+          {{- if .envFromSecrets }}
+          {{- range $key, $value := .envFromSecrets }}
+          - name: {{ $key | upper }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ $value.name }}
+                key: {{ $value.key | default $key }}
+          {{- end }}
+          {{- end }}
+          resources:
+            {{- toYaml .resources | nindent 12 }}
+      {{- with .nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+{{- end }}
+{{- end }}

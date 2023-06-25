@@ -1,0 +1,126 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "opencti.fullname" . }}-server
+  labels:
+    opencti.component: server
+    {{- include "opencti.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      opencti.component: server
+      {{- include "opencti.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        opencti.component: server
+        {{- include "opencti.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- if .Values.imagePullSecrets }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- else if .Values.global.imagePullSecrets }}
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+      serviceAccountName: {{ include "opencti.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}-server
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          {{- if $.Values.global.imageRegistry }}
+          image: "{{ $.Values.global.imageRegistry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          {{- else }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          {{- end }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.targetPort | default .Values.service.port }}
+              protocol: TCP
+            {{- range $port := .Values.service.extraPorts }}
+            - name: {{ $port.name }}
+              containerPort: {{ $port.targetPort }}
+              protocol: TCP
+            {{- end }}
+          {{- if .Values.testConnection }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.service.healthPath | default "/dashboard" }}
+              port: {{ .Values.service.targetPort | default .Values.service.port }}
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.service.healthPath | default "/dashboard" }}
+              port: {{ .Values.service.targetPort | default .Values.service.port }}
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          {{- end }}
+          env:
+          - name: NODE_OPTIONS
+            value: --max-old-space-size=8096
+          - name: PROVIDERS__LOCAL__STRATEGY
+            value: LocalStrategy
+
+          # Variables in plain text
+          {{- if .Values.env }}
+          {{- range $key, $value := .Values.env }}
+          - name: {{ $key | upper }}
+            value: {{ $value | quote }}
+          {{- end }}
+          {{- end }}
+
+          # Variables from secrets
+          {{- if .Values.envFromSecrets }}
+          {{- range $key, $value := .Values.envFromSecrets }}
+          - name: {{ $key | upper }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ $value.name }}
+                key: {{ $value.key | default $key }}
+          {{- end }}
+          {{- end }}
+
+          {{- if .Values.envFromSecrets }}
+          {{- range $key, $value := .Values.envFromSecrets }}
+          - name: {{ $key | upper }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ $value.name }}
+                key: {{ $value.key | default $key }}
+          {{- end }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
