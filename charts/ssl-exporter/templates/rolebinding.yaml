@@ -1,0 +1,15 @@
+{{- if .Values.rbac.enabled -}}
+{{- $fullName := include "ssl-exporter.fullname" . -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ $fullName }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ $fullName }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "ssl-exporter.serviceAccountName" . }}
+  namespace: {{ .Release.namespace }}
+{{- end }}
