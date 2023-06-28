@@ -2,7 +2,7 @@ apiVersion: v2
 name: ssl-exporter
 description: A Helm Chart to SSL Certificate Exporter for Prometheus
 type: application
-version: 0.1.1
+version: 1.0.0
 appVersion: "2.4.2"
 home: https://github.com/devops-ia/helm-charts/tree/main/charts/ssl-exporter
 sources:
