@@ -1,0 +1,15 @@
+{{- if .Values.rbac.enabled -}}
+{{- $fullName := include "ssl-exporter.fullname" . -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ $fullName }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - list
+  - get
+{{- end }}
