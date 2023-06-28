@@ -306,6 +306,23 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/splunk-1.0.0/splunk-1.0.0.tgz
     version: 1.0.0
+  ssl-exporter:
+  - apiVersion: v2
+    appVersion: 2.4.2
+    created: "2023-06-28T06:34:28.562172164Z"
+    description: A Helm Chart to SSL Certificate Exporter for Prometheus
+    digest: 0126a4a8b80ec17576abdada44d54ed3f315826c0eea5d4c3b84324c7b792748
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ssl-exporter
+    maintainers:
+    - name: amartingarcia
+      url: https://github.com/devops-ia
+    name: ssl-exporter
+    sources:
+    - https://github.com/ribbybibby/ssl_exporter
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-0.1.0/ssl-exporter-0.1.0.tgz
+    version: 0.1.0
   steampipe:
   - apiVersion: v2
     appVersion: 0.20.2
@@ -320,4 +337,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-28T06:20:16.133013209Z"
+generated: "2023-06-28T06:34:28.562193565Z"
