@@ -36,7 +36,7 @@ amaMetricsPrometheusConfigNodeWindows:
 
 # Ref: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/prometheus-metrics-scrape-configuration#configmaps
 # Ref: https://github.com/Azure/prometheus-collector/blob/main/otelcollector/configmaps/ama-metrics-prometheus-config-node-configmap.yaml
-amaMetricsPrometheusConfigNode: 
+amaMetricsPrometheusConfigNode:
   enabled: false
   config: |
     global:
