@@ -1,0 +1,12 @@
+{{- if .Values.amaMetricsPrometheusConfig.enabled -}}
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: ama-metrics-prometheus-config
+  namespace: kube-system
+  labels:
+    {{- include "azure-prometheus-config.labels" . | nindent 4 }}
+data:
+  prometheus-config: |
+  {{- tpl .Values.amaMetricsPrometheusConfig.config . | nindent 4 }}
+{{- end }}
