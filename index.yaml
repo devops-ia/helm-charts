@@ -3,6 +3,22 @@ entries:
   azure-prometheus-config:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-06-28T06:56:02.547206842Z"
+    description: A Helm chart to configure Azure Managed Prometheus
+    digest: a03d7fb2fcb1c5e150c1afd3b474c4174849537a369517c23c60230430598407
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/azure-prometheus-config
+    maintainers:
+    - name: amartingarcia
+      url: https://github.com/devops-ia
+    name: azure-prometheus-config
+    sources:
+    - https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/prometheus-metrics-scrape-configuration#configmaps
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/azure-prometheus-config-0.1.1/azure-prometheus-config-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-06-28T06:20:16.132987209Z"
     description: A Helm chart to configure Azure Managed Prometheus
     digest: 3108512dd50f774963125b699b81b7fd9f39df3d5a54700763cc4b4091fdded2
@@ -309,6 +325,22 @@ entries:
   ssl-exporter:
   - apiVersion: v2
     appVersion: 2.4.2
+    created: "2023-06-28T06:56:02.688510777Z"
+    description: A Helm Chart to SSL Certificate Exporter for Prometheus
+    digest: e2ded8e7b8123bc01183055a2385828afa8e9eda5e89351bba21e147dfa2e439
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ssl-exporter
+    maintainers:
+    - name: amartingarcia
+      url: https://github.com/devops-ia
+    name: ssl-exporter
+    sources:
+    - https://github.com/ribbybibby/ssl_exporter
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-0.1.1/ssl-exporter-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 2.4.2
     created: "2023-06-28T06:34:28.562172164Z"
     description: A Helm Chart to SSL Certificate Exporter for Prometheus
     digest: 0126a4a8b80ec17576abdada44d54ed3f315826c0eea5d4c3b84324c7b792748
@@ -337,4 +369,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-28T06:34:28.562193565Z"
+generated: "2023-06-28T06:56:02.688531177Z"
