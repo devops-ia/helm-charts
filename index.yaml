@@ -3,6 +3,22 @@ entries:
   azure-prometheus-config:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2023-06-28T08:42:31.069419776Z"
+    description: A Helm chart to configure Azure Managed Prometheus
+    digest: 094f4e89765a53da4f9360f07530c9342974929b9b81b86d927e5cd0f28c097b
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/azure-prometheus-config
+    maintainers:
+    - name: amartingarcia
+      url: https://github.com/devops-ia
+    name: azure-prometheus-config
+    sources:
+    - https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/prometheus-metrics-scrape-configuration#configmaps
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/azure-prometheus-config-1.0.0/azure-prometheus-config-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2023-06-28T06:56:02.547206842Z"
     description: A Helm chart to configure Azure Managed Prometheus
     digest: a03d7fb2fcb1c5e150c1afd3b474c4174849537a369517c23c60230430598407
@@ -325,6 +341,22 @@ entries:
   ssl-exporter:
   - apiVersion: v2
     appVersion: 2.4.2
+    created: "2023-06-28T08:42:31.224718151Z"
+    description: A Helm Chart to SSL Certificate Exporter for Prometheus
+    digest: 8068940241e4eec72868411a88d2e60a462067293b53ece6c12b4c2489342f0c
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ssl-exporter
+    maintainers:
+    - name: amartingarcia
+      url: https://github.com/devops-ia
+    name: ssl-exporter
+    sources:
+    - https://github.com/ribbybibby/ssl_exporter
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-1.0.0/ssl-exporter-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
+    appVersion: 2.4.2
     created: "2023-06-28T06:56:02.688510777Z"
     description: A Helm Chart to SSL Certificate Exporter for Prometheus
     digest: e2ded8e7b8123bc01183055a2385828afa8e9eda5e89351bba21e147dfa2e439
@@ -358,6 +390,22 @@ entries:
   steampipe:
   - apiVersion: v2
     appVersion: 0.20.2
+    created: "2023-06-28T08:42:31.364478209Z"
+    description: A Helm chart for Kubernetes to deploy Steampipe
+    digest: 57f0e600599e3a5775f82606f7741f9e4f89448ff8d9fb157e6d61986dc9c74d
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/steampipe
+    maintainers:
+    - name: amartingarcia
+      url: https://github.com/devops-ia
+    name: steampipe
+    sources:
+    - https://github.com/turbot/steampipe
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/steampipe-1.0.0/steampipe-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
+    appVersion: 0.20.2
     created: "2023-05-31T14:37:31.466401625Z"
     description: A Helm chart for Kubernetes
     digest: 4b01d5081c8fd2d13f6c70bbad6509d8516a159aca2c59ff95a11f945749dfe4
@@ -369,4 +417,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-28T06:56:02.688531177Z"
+generated: "2023-06-28T08:42:31.364593109Z"
