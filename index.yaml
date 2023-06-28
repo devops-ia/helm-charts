@@ -1,5 +1,22 @@
 apiVersion: v1
 entries:
+  azure-prometheus-config:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-06-28T06:20:16.132987209Z"
+    description: A Helm chart to configure Azure Managed Prometheus
+    digest: 3108512dd50f774963125b699b81b7fd9f39df3d5a54700763cc4b4091fdded2
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/azure-prometheus-config
+    maintainers:
+    - name: amartingarcia
+      url: https://github.com/devops-ia
+    name: azure-prometheus-config
+    sources:
+    - https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/prometheus-metrics-scrape-configuration#configmaps
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/azure-prometheus-config-0.1.0/azure-prometheus-config-0.1.0.tgz
+    version: 0.1.0
   bitbucket-bot:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -303,4 +320,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2023-06-25T21:32:33.154518546Z"
+generated: "2023-06-28T06:20:16.133013209Z"
