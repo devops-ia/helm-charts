@@ -1,7 +1,7 @@
 {{- if .Values.replikaSources.sources }}
 {{- range $source := .Values.replikaSources.sources }}
 ---
-apiVersion: replika.prosimcorp.com/v1alpha1
+apiVersion: replika.prosimcorp.com/v1beta1
 kind: Replika
 metadata:
   name: {{ $source.kind | lower }}-{{ $source.name | lower }}
