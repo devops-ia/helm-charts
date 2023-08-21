@@ -13,7 +13,7 @@ rules:
   {{- end }}
   resources:
   {{- range .resources }}
-  - {{ . }}
+  - {{ . | quote }}
   {{- end }}
   verbs:
   - create
