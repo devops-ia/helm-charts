@@ -187,6 +187,24 @@ entries:
   replika:
   - apiVersion: v2
     appVersion: v0.3.0
+    created: "2023-08-21T09:21:44.322269237Z"
+    description: A Kubernetes operator to replicate resources across namespaces
+    digest: 2ff483b1d90ee8733f8d2cabae0ac8d038addb57c22d1a167395f2b32594bb5a
+    home: https://github.com/prosimcorp/replika
+    keywords:
+    - operator
+    - replika
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: replika
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/replika-1.0.5/replika-1.0.5.tgz
+    version: 1.0.5
+  - apiVersion: v2
+    appVersion: v0.3.0
     created: "2023-07-07T10:59:08.583947605Z"
     description: A Kubernetes operator to replicate resources across namespaces
     digest: 98e18dc3e1a5d331ffc66f1ad93542c008263db32acdf423896574e688ddf998
@@ -398,4 +416,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2023-07-07T10:59:08.584083406Z"
+generated: "2023-08-21T09:21:44.322306437Z"
