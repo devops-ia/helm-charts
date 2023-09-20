@@ -184,6 +184,28 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/helm-release-cleaner-1.0.0/helm-release-cleaner-1.0.0.tgz
     version: 1.0.0
+  prometheus-prefect-exporter:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-09-20T12:00:15.900040341Z"
+    description: A Helm chart to deploy Prometheus Prefect Exporter
+    digest: 54fa034bed06a524b77ba09a5628ea17b1a8c14fd5d51e63e79c344091e81cb2
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/prometheus-prefect-exporter
+    keywords:
+    - prometheus-prefect-exporter
+    - prometheus
+    - prefect
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: prometheus-prefect-exporter
+    sources:
+    - https://github.com/devops-ia/prometheus-prefect-exporter
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/prometheus-prefect-exporter-0.1.0/prometheus-prefect-exporter-0.1.0.tgz
+    version: 0.1.0
   replika:
   - apiVersion: v2
     appVersion: v0.3.0
@@ -434,4 +456,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2023-08-21T10:16:56.297504655Z"
+generated: "2023-09-20T12:00:15.900075141Z"
