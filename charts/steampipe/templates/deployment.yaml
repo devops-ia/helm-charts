@@ -145,16 +145,6 @@ spec:
             - name: workspace
               mountPath: /workspace
           {{- end }}
-          {{- if .Values.extraConfig.secrets.enabled }}
-            - name: secrets
-              mountPath: /home/steampipe/.steampipe/config/azure.spc
-              subPath: azure.spc
-          {{- end }}
-          {{- if .Values.extraConfig.configMaps.enabled }}
-            - name: configmaps
-              mountPath: /home/steampipe/.steampipe/config/azure.spc
-              subPath: azure.spc
-          {{- end }}
           {{- with .Values.extraVolumeMount }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -194,16 +184,6 @@ spec:
           emptyDir: {}
         - name: workspace
           emptyDir: {}
-      {{- end }}
-      {{- if .Values.extraConfig.secrets.enabled }}
-        - name: secrets
-          secret:
-            secretName: {{ template "steampipe.fullname" . }}-secrets
-      {{- end }}
-      {{- if .Values.extraConfig.configMaps.enabled }}
-        - name: configmaps
-          configMap:
-            name: {{ template "steampipe.fullname" . }}-config
       {{- end }}
       {{- with .Values.extraVolumes }}
         {{- toYaml . | nindent 8 }}

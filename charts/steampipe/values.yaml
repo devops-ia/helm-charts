@@ -120,20 +120,26 @@ tolerations: []
 affinity: {}
 
 extraVolumes: []
-#  - name: configmap
+#  - name: openshift-connection
 #    configMap:
-#      name: steampipe-config
-#  - name: secret
+#      name: openshift-connection
+#  - name: openshift-kubeconfig
 #    secret:
-#      secretname: steampipe-secret
+#      secretName: openshift-kubeconfig
+#  - name: azure-connection
+#    secret:
+#      secretName: azure-connection
 
-
-extraVolumeMount:
-#  - name: configmap
-#    mountPath: "/home/steampipe/.steampipe/config/azure.spc"
-#    subPath: azure.spc
+extraVolumeMount: []
+#  - name: openshift-connection
+#    mountPath: "/home/steampipe/.steampipe/config/openshift.spc"
+#    subPath: openshift.spc
 #    readOnly: true
-#  - name: secret
+#  - name: openshift-kubeconfig
+#    mountPath: "/home/steampipe/.kube/config"
+#    subPath: config
+#    readOnly: true
+#  - name: azure-connection
 #    mountPath: "/home/steampipe/.steampipe/config/azure.spc"
 #    readOnly: true
 #    subPath: azure.spc
@@ -141,34 +147,51 @@ extraVolumeMount:
 extraConfig:
   configMaps:
     enabled: false
-    data:
-      # conections.spc: |
-      #   connection "azure_all" {
-      #     type        = "aggregator"
-      #     plugin      = "azure"
-      #     connections = ["azure_*"]
-      #   }
-      #   connection "azure_sub_1" {
-      #     plugin          = "azure"
-      #     subscription_id = "azure_01"
-      #   }
-      #   connection "azure_sub_2" {
-      #     plugin          = "azure"
-      #     subscription_id = "azure_02"
-      #   }
+    config:
+    - name: openshift-connection
+      data:
+        openshift.spc: |
+          connection "openshift" {
+            plugin      = "openshift"
+            config_path = "~/.kube/config"
+          }
 
   secrets:
     enabled: false
-    data:
-      #  azure.spc: |
-      #    connection "azure" {
-      #      plugin = "azure"
-      #      environment = "AZUREPUBLICCLOUD"
-      #      tenant_id       = "00000000-0000-0000-0000-000000000000"
-      #      subscription_id = "00000000-0000-0000-0000-000000000000"
-      #      client_id       = "00000000-0000-0000-0000-000000000000"
-      #      client_secret   = "~dummy@3password"
-      #    }
+    config:
+      - name: azure-connection
+        data:
+          azure.spc: |
+            connection "azure" {
+              plugin          = "azure"
+              environment     = "AZUREPUBLICCLOUD"
+              tenant_id       = "00000000-0000-0000-0000-000000000000"
+              subscription_id = "00000000-0000-0000-0000-000000000000"
+              client_id       = "00000000-0000-0000-0000-000000000000"
+              client_secret   = "~dummy@3password"
+            }
+      - name: openshift-kubeconfig
+        data:
+          config: |
+            current-context: federal-context
+            apiVersion: v1
+            clusters:
+            - cluster:
+                certificate-authority: path/to/my/cafile
+                server: https://horse.org:4443
+              name: horse-cluster
+            contexts:
+            - context:
+                cluster: horse-cluster
+                namespace: chisel-ns
+                user: green-user
+              name: federal-context
+            kind: Config
+            users:
+            - name: green-user
+              user:
+                client-certificate: path/to/my/client/cert
+                client-key: path/to/my/client/key
 
 initContainer:
   image:
@@ -181,20 +204,25 @@ initContainer:
     runAsNonRoot: true
     runAsUser: 9193
 
-  # Ref: https://hub.steampipe.io/plugins
   plugins: []
+  ## Ref: https://hub.steampipe.io/plugins
   # - "azure"
   # - "azuread"
+  # - "openshift"
+  # - "terraform"
 
-  # Ref: https://hub.steampipe.io/mods
   mods: []
+  ## Ref: https://hub.steampipe.io/mods
   #  - "github.com/turbot/steampipe-mod-azure-insights"
+  #  - "github.com/turbot/steampipe-mod-azure-compliance"
+  #  - "github.com/turbot/steampipe-mod-azure-tags"
+  #  - "github.com/turbot/steampipe-mod-terraform-azure-compliance"
 
   resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  ## We usually recommend not to specify default resources and to leave this as a conscious
+  ## choice for the user. This also increases chances charts run on environments with little
+  ## resources, such as Minikube. If you do want to specify resources, uncomment the following
+  ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 100m
   #   memory: 128Mi

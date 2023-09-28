@@ -1,14 +1,15 @@
 {{- if .Values.extraConfig.configMaps.enabled }}
+{{ range $secrets := .Values.extraConfig.configMaps.config }}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "steampipe.fullname" . }}-config
-  labels:
-    {{- include "steampipe.labels" . | nindent 4 }}
+  name: {{ .name }}
 data:
-{{- range $key, $value := .Values.extraConfig.configMaps.data }}
+{{- range $key, $value := $secrets.data }}
   {{ $key }}: |-
 {{ tpl $value $| indent 4 }}
+{{- end }}
+
 {{- end }}
 {{- end }}
