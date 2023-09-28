@@ -25,16 +25,14 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext:
+  fsGroup: 9193
+  runAsGroup: 65534
+  runAsUser: 9193
 
-securityContext: {}
-#  capabilities:
-#    drop:
-#    - ALL
-#  readOnlyRootFilesystem: true
-#  runAsNonRoot: true
-#  runAsUser: 1000
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 9193
 
 command: []
 #  - "steampipe"
@@ -80,7 +78,7 @@ configProbe: {}
 db:
   enabled: false
   port: 9193
-  listen: "local"
+  listen: "network"
 
 dashboard:
   enabled: false
@@ -179,13 +177,9 @@ initContainer:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
 
-  securityContext: {}
-  #  capabilities:
-  #    drop:
-  #    - ALL
-  #  readOnlyRootFilesystem: true
-  #  runAsNonRoot: true
-  #  runAsUser: 1000
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 9193
 
   # Ref: https://hub.steampipe.io/plugins
   plugins: []
