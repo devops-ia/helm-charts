@@ -1,4 +1,4 @@
-{{- if or (.Values.db.enabled) (.Values.db.enabled) }}
+{{- if or (.Values.db.enabled) (.Values.dashboard.enabled) }}
 apiVersion: v1
 kind: Service
 metadata:
