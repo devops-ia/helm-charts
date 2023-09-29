@@ -63,9 +63,9 @@ spec:
             - "start"
           {{- if .Values.args }}
             {{- toYaml .Values.args | nindent 12 }}
-          {{- if .Values.db.enabled }}
-            - --database-listen={{ .Values.db.listen }}
-            - --database-port={{ .Values.db.port }}
+          {{- if .Values.bbdd.enabled }}
+            - --database-listen={{ .Values.bbdd.listen }}
+            - --database-port={{ .Values.bbdd.port }}
           {{- end }}
           {{- if .Values.dashboard.enabled }}
             - --dashboard
@@ -82,9 +82,9 @@ spec:
             {{- toYaml .Values.envFrom | nindent 12 }}
           {{- end }}
           ports:
-          {{- if .Values.db.enabled }}
-            - name: db
-              containerPort: {{ .Values.db.port }}
+          {{- if .Values.bbdd.enabled }}
+            - name: bbdd
+              containerPort: {{ .Values.bbdd.port }}
               protocol: TCP
           {{- end }}
           {{- if .Values.dashboard.enabled }}
