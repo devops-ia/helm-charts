@@ -429,6 +429,22 @@ entries:
   steampipe:
   - apiVersion: v2
     appVersion: 0.20.12
+    created: "2023-09-29T10:23:13.8274189Z"
+    description: A Helm chart for Kubernetes to deploy Steampipe
+    digest: 19492040762cc6e33882d09bf4b3e582d2d21566cdcc0d53e5ffa41510627207
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/steampipe
+    maintainers:
+    - name: amartingarcia
+      url: https://github.com/devops-ia
+    name: steampipe
+    sources:
+    - https://github.com/turbot/steampipe
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/steampipe-1.3.0/steampipe-1.3.0.tgz
+    version: 1.3.0
+  - apiVersion: v2
+    appVersion: 0.20.12
     created: "2023-09-28T15:55:21.944199018Z"
     description: A Helm chart for Kubernetes to deploy Steampipe
     digest: fabf48297ebf9b139fdc46458df9ab1f4f09c0c7584e4c6354ab7dc8f4f0bc9f
@@ -504,4 +520,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2023-09-28T15:55:21.944373617Z"
+generated: "2023-09-29T10:23:13.827602415Z"
