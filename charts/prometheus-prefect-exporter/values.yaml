@@ -76,7 +76,6 @@ serviceMonitor:
 prometheusRule:
   enabled: false
   additionalLabels: {}
-  namespace: ""
   rules: []
 
 # -- Enable livenessProbe and readinessProbe

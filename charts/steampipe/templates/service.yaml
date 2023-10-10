@@ -1,25 +1,43 @@
-{{- if or (.Values.db.enabled) (.Values.db.enabled) }}
+{{- if .Values.dashboard.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "steampipe.fullname" . }}
   labels:
     {{- include "steampipe.labels" . | nindent 4 }}
+  {{- with .Values.dashboard.svcAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: ClusterIP
   ports:
-  {{- if .Values.db.enabled }}
-    - port: {{ .Values.db.port }}
-      targetPort: db
-      protocol: TCP
-      name: db
-  {{- end }}
-  {{- if .Values.dashboard.enabled }}
     - port: {{ .Values.dashboard.port }}
       targetPort: dashboard
       protocol: TCP
       name: dashboard
+  selector:
+    {{- include "steampipe.selectorLabels" . | nindent 4 }}
+{{- end }}
+---
+{{- if .Values.bbdd.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "steampipe.fullname" . }}-psql
+  labels:
+    {{- include "steampipe.labels" . | nindent 4 }}
+  {{- with .Values.bbdd.svcAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
   {{- end }}
+spec:
+  type: LoadBalancer
+  ports:
+    - name: bbdd
+      port: {{ .Values.bbdd.port }}
+      targetPort: bbdd
+      protocol: TCP
   selector:
     {{- include "steampipe.selectorLabels" . | nindent 4 }}
 {{- end }}
