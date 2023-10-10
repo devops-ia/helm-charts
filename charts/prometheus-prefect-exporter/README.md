@@ -62,13 +62,17 @@ helm show values devops-ia/prometheus-prefect-exporter
 | nameOverride | string | `""` | String to partially override prometheus-prefect-exporter.fullname template (will maintain the release name) |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Pod annotations |
+| podDisruptionBudget | object | `{}` |  |
 | podSecurityContext | object | `{}` | To specify security settings for a Pod |
+| prometheusRule.additionalLabels | object | `{}` |  |
+| prometheusRule.enabled | bool | `false` |  |
+| prometheusRule.rules | list | `[]` |  |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | The resources limits and requested |
 | securityContext | object | `{}` | Defines privilege and access control settings for a Pod or Container |
-| service | object | `{"port":80,"targetPort":80,"type":"ClusterIP"}` | Kubernetes servide to expose Pod |
+| service | object | `{"port":80,"targetPort":8000,"type":"ClusterIP"}` | Kubernetes servide to expose Pod |
 | service.port | int | `80` | Kubernetes Service port |
-| service.targetPort | int | `80` | Pod expose port |
+| service.targetPort | int | `8000` | Pod expose port |
 | service.type | string | `"ClusterIP"` | Kubernetes Service type. Allowed values: NodePort, LoadBalancer or ClusterIP |
 | serviceAccount | object | `{"annotations":{},"create":true,"name":""}` | Enable creation of ServiceAccount |
 | serviceMonitor | object | `{"enabled":false,"interval":"30s","metricRelabelings":[],"relabelings":[],"scrapeTimeout":"10s"}` | Enable ServiceMonitor to get metrics ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#servicemonitor |

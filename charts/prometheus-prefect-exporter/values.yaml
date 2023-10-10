@@ -33,6 +33,9 @@ env: {}
   # foo: bar
   # my_env: my_value
 
+podDisruptionBudget: {}
+  # maxUnavailable: 0
+
 # -- Pod annotations
 podAnnotations: {}
 
@@ -68,8 +71,16 @@ serviceMonitor:
   metricRelabelings: []
   relabelings: []
 
+## -- Custom PrometheusRules to be defined
+# ref: https://github.com/coreos/prometheus-operator#customresourcedefinitions
+prometheusRule:
+  enabled: false
+  additionalLabels: {}
+  rules: []
+
 # -- Enable livenessProbe and readinessProbe
 testConnection: false
+
 
 # -- Ingress configuration to expose app
 ingress:

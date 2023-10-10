@@ -6,6 +6,7 @@ metadata:
   labels:
     {{- include "prometheus-prefect-exporter.labels" . | nindent 4 }}
 spec:
+  jobLabel: "{{ .Release.Name }}"
   selector:
     matchLabels:
       {{- include "prometheus-prefect-exporter.selectorLabels" . | nindent 8 }}
