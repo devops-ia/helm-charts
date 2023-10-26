@@ -471,6 +471,27 @@ entries:
   steampipe:
   - apiVersion: v2
     appVersion: 0.20.12
+    created: "2023-10-26T12:55:02.113930976Z"
+    dependencies:
+    - condition: oauth2Proxy.enabled
+      name: oauth2-proxy
+      repository: https://oauth2-proxy.github.io/manifests/
+      version: 6.18.0
+    description: A Helm chart for Kubernetes to deploy Steampipe
+    digest: c8d5a9ad0277b03c40b4726dc23024fb7e5197015ca33a7b8b1db316dd7ff65b
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/steampipe
+    maintainers:
+    - name: amartingarcia
+      url: https://github.com/devops-ia
+    name: steampipe
+    sources:
+    - https://github.com/turbot/steampipe
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/steampipe-1.4.0/steampipe-1.4.0.tgz
+    version: 1.4.0
+  - apiVersion: v2
+    appVersion: 0.20.12
     created: "2023-09-29T10:23:13.8274189Z"
     description: A Helm chart for Kubernetes to deploy Steampipe
     digest: 19492040762cc6e33882d09bf4b3e582d2d21566cdcc0d53e5ffa41510627207
@@ -562,4 +583,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2023-10-20T08:11:07.873814917Z"
+generated: "2023-10-26T12:55:02.114105787Z"
