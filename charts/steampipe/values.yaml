@@ -647,4 +647,4 @@ oauth2-proxy:
     #         - key: cookie-secret
     #         objectName: cookie-secret
     #       secretName: oauth2-proxy-secrets-store
-    #       type: Opaque 
+    #       type: Opaque
