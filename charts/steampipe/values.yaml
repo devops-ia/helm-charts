@@ -238,6 +238,199 @@ initContainer:
 
 extraContainers: []
 
+## Configuration for External Secrets
+## Ref: https://external-secrets.io/
+#
+externalSecrets:
+  clusterSecretStore:
+    enabled: false
+    config:
+    - name: openshift-connection
+      labels: {}
+      annotations: {}
+      spec:
+        # Ref: https://external-secrets.io/main/api/clustersecretstore/
+        controller: dev
+        provider:
+          vault:
+            server: "https://vault.acme.org"
+            path: "secret"
+            version: "v2"
+            namespace: "a-team"
+            caBundle: "..."
+            caProvider:
+              type: "Secret"
+              namespace: "my-cert-secret-namespace"
+              name: "my-cert-secret"
+              key: "cert-key"
+            auth:
+              tokenSecretRef:
+                name: "my-secret"
+                namespace: "secret-admin"
+                key: "vault-token"
+
+  clusterExternalSecret:
+    enabled: false
+    config:
+    - name: openshift-connection
+      labels: {}
+      annotations: {}
+      spec:
+        # Ref: https://external-secrets.io/main/api/clusterexternalsecret/
+        externalSecretName: "hello-world-es"
+        namespaceSelector:
+          matchLabels:
+            cool: label
+        refreshTime: "1m"
+        externalSecretSpec:
+          secretStoreRef:
+            name: secret-store-name
+            kind: SecretStore
+          refreshInterval: "1h"
+          target:
+            name: my-secret
+            creationPolicy: 'Merge'
+            template:
+              type: kubernetes.io/dockerconfigjson
+              metadata:
+                annotations: {}
+                labels: {}
+              data:
+                config.yml: |
+                  endpoints:
+                  - https://{{ .data.user }}:{{ .data.password }}@api.exmaple.com
+              templateFrom:
+              - configMap:
+                  name: alertmanager
+                  items:
+                  - key: alertmanager.yaml
+          data:
+            - secretKey: secret-key-to-be-managed
+              remoteRef:
+                key: provider-key
+                version: provider-key-version
+                property: provider-key-property
+          dataFrom:
+          - key: provider-key
+            version: provider-key-version
+            property: provider-key-property
+
+  secretStore:
+    enabled: false
+    config:
+    - name: openshift-connection
+      labels: {}
+      annotations: {}
+      spec:
+        # Ref: https://external-secrets.io/main/api/secretstore/
+        retrySettings:
+          maxRetries: 5
+          retryInterval: "10s"
+        provider:
+          vault:
+            server: "https://vault.acme.org"
+            path: "secret"
+            version: "v2"
+            namespace: "a-team"
+            caBundle: "..."
+            caProvider:
+              type: "Secret"
+              name: "my-cert-secret"
+              key: "cert-key"
+
+  externalSecret:
+    enabled: false
+    config:
+    - name: openshift-connection
+      labels: {}
+      annotations: {}
+      spec:
+        # Ref: https://external-secrets.io/main/api/externalsecret/
+        secretStoreRef:
+          name: aws-store
+          kind: SecretStore
+        refreshInterval: "1h"
+        target:
+          name: application-config
+          creationPolicy: 'Merge'
+          deletionPolicy: "Retain"
+          template:
+            type: kubernetes.io/dockerconfigjson
+            metadata:
+              annotations: {}
+              labels: {}
+            data:
+              config.yml: |
+                database:
+                  connection: postgres://{{ .username }}:{{ .password }}@{{ .database_host }}:5432/payments
+            templateFrom:
+            - configMap:
+                name: application-config-tmpl
+                items:
+                - key: config.yml
+        data:
+          - secretKey: username
+            remoteRef:
+              key: database-credentials
+              version: v1
+              property: username
+              decodingStrategy: None
+            sourceRef:
+              storeRef:
+                name: aws-secretstore
+                kind: ClusterSecretStore
+              generatorRef:
+                apiVersion: generators.external-secrets.io/v1alpha1
+                kind: Password
+                name: db-password
+        dataFrom:
+        - extract:
+            key: database-credentials
+            version: v1
+            property: data
+            conversionStrategy: Default
+            decodingStrategy: Auto
+          rewrite:
+          - regexp:
+              source: "exp-(.*?)-ression"
+              target: "rewriting-${1}-with-groups"
+        - find:
+            path: "path-to-filter"
+            source: "exp-(.*?)-ression"
+            target: "rewriting-${1}-with-groups"
+            name:
+              regexp: ".*foobar.*"
+            tags:
+              foo: bar
+            conversionStrategy: Unicode
+            decodingStrategy: Base64
+          rewrite:
+          - regexp:
+              source: "foo"
+              target: "bar"
+
+  pushSecret:
+    enabled: false
+    config:
+    - name: openshift-connection
+      labels: {}
+      annotations: {}
+      spec:
+        # Ref: https://external-secrets.io/main/api/pushsecret/
+        deletionPolicy: Delete
+        refreshInterval: 10s
+        secretStoreRefs:
+          - name: aws-parameterstore
+            kind: SecretStore
+        selector:
+          secret:
+            name: pokedex-credentials
+        data:
+          - match:
+              secretKey: best-pokemon
+              remoteRef:
+                remoteKey: my-first-parameter
+
 oauth2Proxy:
   ## Deploys oauth2-proxy, a reverse proxy that provides authentication with Google, Github or other providers
   enabled: false
