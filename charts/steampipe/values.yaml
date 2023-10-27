@@ -279,7 +279,7 @@ externalSecrets:
         # Ref: https://external-secrets.io/main/api/clusterexternalsecret/
         externalSecretName: "hello-world-es"
         namespaceSelector:
-          matchLabels: 
+          matchLabels:
             cool: label
         refreshTime: "1m"
         externalSecretSpec:
