@@ -153,6 +153,7 @@ extraConfig:
     enabled: false
     config:
     - name: openshift-connection
+      type: Opaque
       data:
         openshift.spc: |
           connection "openshift" {
@@ -164,6 +165,7 @@ extraConfig:
     enabled: false
     config:
       - name: azure-connection
+        type: Opaque
         data:
           azure.spc: |
             connection "azure" {
@@ -175,6 +177,7 @@ extraConfig:
               client_secret   = "~dummy@3password"
             }
       - name: openshift-kubeconfig
+        type: Opaque
         data:
           config: |
             current-context: federal-context
