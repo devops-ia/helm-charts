@@ -62,7 +62,7 @@ helm show values devops-ia/prometheus-prefect-exporter
 | nameOverride | string | `""` | String to partially override prometheus-prefect-exporter.fullname template (will maintain the release name) |
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | podAnnotations | object | `{}` | Pod annotations |
-| podDisruptionBudget | object | `{}` |  |
+| podDisruptionBudget | object | `{}` | Limits the number of Pods of a replicated application that are down simultaneously from voluntary disruptions |
 | podSecurityContext | object | `{}` | To specify security settings for a Pod |
 | prometheusRule.additionalLabels | object | `{}` |  |
 | prometheusRule.enabled | bool | `false` |  |

@@ -8,7 +8,7 @@ maintainers:
 name: prometheus-prefect-exporter
 sources:
   - https://github.com/devops-ia/prometheus-prefect-exporter
-version: 1.0.0
+version: 1.0.1
 appVersion: "1.2.4"
 home: https://github.com/devops-ia/helm-charts/tree/main/charts/prometheus-prefect-exporter
 keywords:
