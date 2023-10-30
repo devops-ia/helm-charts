@@ -4,6 +4,10 @@ metadata:
   name: {{ include "steampipe.fullname" . }}
   labels:
     {{- include "steampipe.labels" . | nindent 4 }}
+  {{- with .Values.deploymentAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
