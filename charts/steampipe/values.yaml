@@ -25,6 +25,8 @@ serviceAccount:
 
 podAnnotations: {}
 
+deploymentAnnotations: {}
+
 podSecurityContext:
   fsGroup: 9193
   runAsGroup: 65534
