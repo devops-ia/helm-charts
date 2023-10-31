@@ -2,7 +2,7 @@ apiVersion: v2
 name: steampipe
 description: A Helm chart for Kubernetes to deploy Steampipe
 type: application
-version: 1.6.2
+version: 1.6.3
 appVersion: "0.21.1"
 home: https://github.com/devops-ia/helm-charts/tree/main/charts/steampipe
 sources:
