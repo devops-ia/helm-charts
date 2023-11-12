@@ -7,5 +7,5 @@ chart-repos:
   - bitnami=https://charts.bitnami.com/bitnami
   - opensearch=https://opensearch-project.github.io/helm-charts/
   - oauth2-proxy=https://oauth2-proxy.github.io/manifests/
-helm-extra-args: --timeout 600s
+helm-extra-args: --timeout 600s --wait
 debug: true
