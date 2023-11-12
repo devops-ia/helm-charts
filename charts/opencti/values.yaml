@@ -1,10 +1,10 @@
 # -- Global configuration
 global:
   imageRegistry: ""
-  ## E.g.
-  ## imagePullSecrets:
-  ##   - name: myRegistryKeySecretName
-  ##
+  # E.g.
+  # imagePullSecrets:
+  #   - name: myRegistryKeySecretName
+  #
   imagePullSecrets: []
 
 # -- Number of replicas
@@ -37,20 +37,39 @@ serviceAccount:
   name: ""
 
 # -- Environment variables to configure application
-# ref: https://docs.opencti.io/5.8.X/deployment/configuration/#platform
-env: {}
+# ref: https://docs.opencti.io/5.9.X/deployment/configuration/#platform
+env:
   # Plain vars
   # foo: bar
   # my_env: my_value
+  # APP OPENCTI
+  APP__ADMIN__EMAIL: admin@opencti.io
+  APP__ADMIN__PASSWORD: ChangeMe
+  APP__ADMIN__TOKEN: ChangeMe
+  APP__BASE_PATH: "/"
+  # MINIO:
+  MINIO__ENDPOINT: release-name-minio:9000
+  # ELASTICSEARCH
+  ELASTICSEARCH__URL: http://release-name-elasticsearch:9200
+  # RABBITMQ
+  RABBITMQ__HOSTNAME: release-name-rabbitmq
+  RABBITMQ__PORT_MANAGEMENT: 15672
+  RABBITMQ__PORT: 5672
+  RABBITMQ__USERNAME: user
+  RABBITMQ__PASSWORD: ChangeMe
+  # REDIS
+  REDIS__HOSTNAME: release-name-redis-master
+  REDIS__PORT: 6379
+  REDIS__MODE: single
 
-# -- Secrets from variables with SOPS cipher
+# -- Secrets from variables
 envFromSecrets: {}
   # Cipher vars
   # my_env:
   #  name: release-name-credentials
   #  key: secret_key
 
-# -- Secrets values to create credencials (cipher with SOPS) and reference by envFromSecrets
+# -- Secrets values to create credencials and reference by envFromSecrets
 secrets: {}
 
 # -- Kubernetes servide to expose Pod
@@ -69,8 +88,26 @@ service:
   #   port: 9080
   #   targetPort: 9080
 
-# -- Enable livenessProbe and readinessProbe
-testConnection: false
+# -- Enable livenessProbe, readinessProbe and startupProbe
+testConnection: true
+
+# -- Enable or disable ready-checker
+readyChecker:
+  enabled: true
+  # -- Number of retries before giving up
+  retries: 30
+  # -- Timeout for each check
+  timeout: 5
+  # -- List services
+  services:
+  - name: elasticsearch
+    port: 9200
+  - name: minio
+    port: 9000
+  - name: rabbitmq
+    port: 5672
+  - name: redis-master
+    port: 6379
 
 # -- Ingress configuration to expose app
 ingress:
@@ -143,7 +180,7 @@ connectors: []
 #   # my_env: my_value
 #   # -- Pod annotations
 #   podAnnotations: {}
-#   # -- Secrets from variables with SOPS cipher
+#   # -- Secrets from variables
 #   envFromSecrets: {}
 #     # Cipher vars
 #     # my_env:
@@ -176,6 +213,14 @@ worker:
   # -- Number of replicas
   replicaCount: 1
 
+  # -- Enable or disable ready-checker waiting server is ready
+  readyChecker:
+    enabled: true
+    # -- Number of retries before giving up
+    retries: 30
+    # -- Timeout for each check
+    timeout: 5
+
   # -- Image registry
   image:
     repository: opencti/worker
@@ -184,13 +229,14 @@ worker:
     tag: ""
 
   # -- Environment variables to configure application
-  # ref: https://docs.opencti.io/5.8.X/deployment/configuration/#platform
-  env: {}
+  # ref: https://docs.opencti.io/5.11.X/deployment/configuration/#platform
+  env:
     # Plain vars
     # foo: bar
     # my_env: my_value
+    WORKER_LOG_LEVEL: info
 
-  # -- Secrets from variables with SOPS cipher
+  # -- Secrets from variables
   envFromSecrets: {}
     # Cipher vars
     # my_env:
@@ -227,24 +273,160 @@ worker:
   # -- Affinity for pod assignment
   affinity: {}
 
+# -- OpenSearch subchart deployment
+# ref: https://github.com/opensearch-project/helm-charts/blob/opensearch-2.16.1/charts/opensearch/values.yaml
+opensearch:
+  # -- Enable or disable OpenSearch subchart
+  enabled: false
+
+  # -- OpenSearch Java options
+  opensearchJavaOpts: "-Xmx512M -Xms512M"
+
+  # -- If discovery.type in the opensearch configuration is set to "single-node",
+  # this should be set to "true"
+  # If "true", replicas will be forced to 1
+  singleNode: true
+
+  # -- Enable persistence using Persistent Volume Claims
+  # ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
+  persistence:
+    enabled: false
+
+# -- ElasticSearch subchart deployment
+# ref: https://github.com/bitnami/charts/blob/main/bitnami/elasticsearch/values.yaml
+elasticsearch:
+  # -- Enable or disable ElasticSearch subchart
+  enabled: true
+
+  ## Kernel settings modifier image
+  ##
+  sysctlImage:
+    ## @param sysctlImage.enabled Enable kernel settings modifier image
+    ##
+    enabled: false
+
+  # -- Elasticsearch cluster name
+  clusterName: elastic
+
+  extraEnvVars:
+    - name: ES_JAVA_OPTS
+      value: "-Xms512M -Xmx512M"
+
+  ## @section Master-elegible nodes parameters
+  master:
+    # -- Deploy the Elasticsearch master-elegible nodes as master-only nodes. Recommended for high-demand deployments.
+    masterOnly: true
+    # -- Number of master-elegible replicas to deploy
+    replicaCount: 1
+    # -- Enable persistence using Persistent Volume Claims
+    # ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
+    persistence:
+      # -- Enable persistence using a `PersistentVolumeClaim`
+      enabled: false
+
+  # -- Data-only nodes parameters
+  data:
+    # -- Number of data-only replicas to deploy
+    replicaCount: 1
+
+    # -- Enable persistence using Persistent Volume Claims
+    # ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
+    persistence:
+      # -- Enable persistence using a `PersistentVolumeClaim`
+      enabled: false
+
+  # -- Ingest-only nodes parameters
+  ingest:
+    # --  Enable ingest nodes
+    enabled: false
+
+  # -- Coordinating-only nodes parameters
+  coordinating:
+    # -- Number of coordinating-only replicas to deploy
+    replicaCount: 0
 
 # -- MinIO subchart deployment
 # ref: https://github.com/bitnami/charts/blob/main/bitnami/minio/values.yaml
 #
 minio:
-  enabled: false
+  # -- Enable or disable MinIO subchart
+  enabled: true
 
-# -- OpenSearch subchart deployment
-# ref: https://github.com/opensearch-project/helm-charts/blob/opensearch-2.13.0/charts/opensearch/values.yaml
-opensearch:
-  enabled: false
+  # -- mode Minio server mode (`standalone` or `distributed`)
+  # ref: https://docs.minio.io/docs/distributed-minio-quickstart-guide
+  mode: standalone
+  # Minio authentication parameters
+  auth:
+    # -- Minio root username
+    rootUser: ChangeMe
+    # -- Password for Minio root user
+    rootPassword: ChangeMe
+
+  # -- Enable persistence using Persistent Volume Claims
+  # ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
+  persistence:
+    # -- Enable MinIO data persistence using PVC. If false, use emptyDir
+    enabled: false
 
 # -- RabbitMQ subchart deployment
 # ref: https://github.com/bitnami/charts/blob/main/bitnami/rabbitmq/values.yaml
 rabbitmq:
-  enabled: false
+    # -- Enable or disable RabbitMQ subchart
+  enabled: true
+
+  # -- Number of RabbitMQ replicas to deploy
+  replicaCount: 1
+
+  # -- Clustering settings
+  clustering:
+    # -- Enable RabitMQ clustering
+    enabled: false
+
+  # -- RabbitMQ Authentication parameters
+  auth:
+    # -- RabbitMQ application username
+    # ref: https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq#environment-variables
+    username: user
+    # -- RabbitMQ application password
+    # ref: https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq#environment-variables
+    password: ChangeMe
+    erlangCookie: b25c953e-2193-4b8e-9f3b-9a3a5ba76d75
+
+  # -- Persistence parameters
+  persistence:
+    # -- Enable RabbitMQ data persistence using PVC
+    enabled: false
 
 # -- Redis subchart deployment
 # ref: https://github.com/bitnami/charts/blob/main/bitnami/redis/values.yaml
 redis:
-  enabled: false
+  # -- Enable or disable Redis subchart
+  enabled: true
+
+  # -- Redis architecture. Allowed values: `standalone` or `replication`
+  architecture: standalone
+  # -- Redis Authentication parameters
+  # ref: https://github.com/bitnami/containers/tree/main/bitnami/redis#setting-the-server-password-on-first-run
+  auth:
+    # -- Enable password authentication
+    enabled: false
+
+  # -- Redis master configuration parameters
+  master:
+    # -- Number of Redis master instances to deploy (experimental, requires additional configuration)
+    count: 1
+    # -- Persistence parameters
+    # ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
+    persistence:
+      # -- Enable persistence on Redis master nodes using Persistent Volume Claims
+      enabled: false
+
+  # -- Redis replicas configuration parameters
+  replica:
+    # -- Number of Redis replicas to deploy
+    replicaCount: 1
+    # -- Persistence parameters
+    # ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
+    persistence:
+      # -- Enable persistence on Redis master nodes using Persistent Volume Claims
+      enabled: false

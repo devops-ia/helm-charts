@@ -37,12 +37,23 @@ spec:
       serviceAccountName: {{ include "opencti.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.readyChecker.enabled }}
+      initContainers:
+      {{- range $service := .Values.readyChecker.services }}
+      - name: ready-checker-{{ $service.name }}
+        image: busybox:latest
+        command:
+          - 'sh'
+          - '-c'
+          - 'RETRY=0; until [ $RETRY -eq {{ $.Values.readyChecker.retries }} ]; do nc -zv {{ $.Values.fullnameOverride | default $.Release.Name }}-{{ $service.name }} {{ $service.port }} && break; echo "[$RETRY/{{ $.Values.readyChecker.retries }}] waiting service {{ $.Values.fullnameOverride | default $.Release.Name }}-{{ $service.name }}:{{ $service.port }} is ready"; sleep {{ $.Values.readyChecker.timeout }}; RETRY=$(($RETRY + 1)); done'
+      {{- end }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}-server
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          {{- if $.Values.global.imageRegistry }}
-          image: "{{ $.Values.global.imageRegistry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          {{- if .Values.global.imageRegistry }}
+          image: "{{ .Values.global.imageRegistry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           {{- else }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           {{- end }}
@@ -62,8 +73,8 @@ spec:
               path: {{ .Values.service.healthPath | default "/dashboard" }}
               port: {{ .Values.service.targetPort | default .Values.service.port }}
             failureThreshold: 3
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            initialDelaySeconds: 90
+            periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 5
           readinessProbe:
@@ -71,8 +82,17 @@ spec:
               path: {{ .Values.service.healthPath | default "/dashboard" }}
               port: {{ .Values.service.targetPort | default .Values.service.port }}
             failureThreshold: 3
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            initialDelaySeconds: 90
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+          startupProbe:
+            httpGet:
+              path: {{ .Values.service.healthPath | default "/dashboard" }}
+              port: {{ .Values.service.targetPort | default .Values.service.port }}
+            failureThreshold: 3
+            initialDelaySeconds: 90
+            periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 5
           {{- end }}
