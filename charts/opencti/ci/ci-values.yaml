@@ -35,7 +35,7 @@ elasticsearch:
       enabled: false
 
 minio:
-  fullnameOverride: opencti-ci-elasticsearch
+  fullnameOverride: opencti-ci-minio
 
 rabbitmq:
   fullnameOverride: opencti-ci-rabbitmq
