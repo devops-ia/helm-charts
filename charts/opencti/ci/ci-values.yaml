@@ -1,4 +1,4 @@
-# -- Number of replicas
+fullnameOverride: "opencti"
 replicaCount: 1
 
 env:
