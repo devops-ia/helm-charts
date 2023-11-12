@@ -1,23 +1,24 @@
-fullnameOverride: "opencti"
 replicaCount: 1
+fullnameOverride: opencti-ci
 
 env:
   APP__ADMIN__PASSWORD: test
   APP__ADMIN__TOKEN: b1976749-8a53-4f49-bf04-cafa2a3458c1
   APP__BASE_PATH: "/"
   # MINIO:
-  MINIO__ENDPOINT: opencti-minio
+  MINIO__ENDPOINT: opencti-ci-minio
   # ELASTICSEARCH
-  ELASTICSEARCH__URL: http://opencti-elasticsearch:9200
+  ELASTICSEARCH__URL: http://opencti-ci-elasticsearch:9200
   ELASTICSEARCH__ENGINE_SELECTOR: elk
   # RABBITMQ
-  RABBITMQ__HOSTNAME: opencti-rabbitmq
+  RABBITMQ__HOSTNAME: opencti-ci-rabbitmq
   # REDIS
-  REDIS__HOSTNAME: opencti-redis-master
+  REDIS__HOSTNAME: opencti-ci-redis-master
   REDIS__PORT: 6379
   REDIS__MODE: single
 
 elasticsearch:
+  fullnameOverride: opencti-ci-elasticsearch
   master:
     startupProbe:
       enabled: false
@@ -32,3 +33,12 @@ elasticsearch:
       enabled: false
     readinessProbe:
       enabled: false
+
+minio:
+  fullnameOverride: opencti-ci-elasticsearch
+
+rabbitmq:
+  fullnameOverride: opencti-ci-rabbitmq
+
+redis:
+  fullnameOverride: opencti-ci-redis
