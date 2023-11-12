@@ -13,6 +13,8 @@ env:
   REDIS__PORT: 6379
   REDIS__MODE: single
 
+testConnection: false
+
 worker:
   enabled: false
 
