@@ -62,8 +62,8 @@ spec:
               path: {{ .Values.service.healthPath | default "/dashboard" }}
               port: {{ .Values.service.targetPort | default .Values.service.port }}
             failureThreshold: 3
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            initialDelaySeconds: 90
+            periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 5
           readinessProbe:
@@ -71,8 +71,17 @@ spec:
               path: {{ .Values.service.healthPath | default "/dashboard" }}
               port: {{ .Values.service.targetPort | default .Values.service.port }}
             failureThreshold: 3
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            initialDelaySeconds: 90
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+          startupProbe:
+            httpGet:
+              path: {{ .Values.service.healthPath | default "/dashboard" }}
+              port: {{ .Values.service.targetPort | default .Values.service.port }}
+            failureThreshold: 3
+            initialDelaySeconds: 90
+            periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 5
           {{- end }}

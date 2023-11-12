@@ -1,9 +1,0 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: {{ include "opencti.fullname" . }}-restart-services
-rules:
-  - apiGroups: ["apps", "extensions"]
-    resources: ["deployments"]
-    resourceNames: ["{{ include "opencti.fullname" . }}-server", "{{ include "opencti.fullname" . }}-worker"]
-    verbs: ["get", "patch", "list", "watch"]

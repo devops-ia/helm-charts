@@ -1,0 +1,34 @@
+# -- Number of replicas
+replicaCount: 1
+
+env:
+  APP__ADMIN__PASSWORD: test
+  APP__ADMIN__TOKEN: b1976749-8a53-4f49-bf04-cafa2a3458c1
+  APP__BASE_PATH: "/"
+  # MINIO:
+  MINIO__ENDPOINT: opencti-minio
+  # ELASTICSEARCH
+  ELASTICSEARCH__URL: http://opencti-elasticsearch:9200
+  ELASTICSEARCH__ENGINE_SELECTOR: elk
+  # RABBITMQ
+  RABBITMQ__HOSTNAME: opencti-rabbitmq
+  # REDIS
+  REDIS__HOSTNAME: opencti-redis-master
+  REDIS__PORT: 6379
+  REDIS__MODE: single
+
+elasticsearch:
+  master:
+    startupProbe:
+      enabled: false
+    livenessProbe:
+      enabled: false
+    readinessProbe:
+      enabled: false
+  data:
+    startupProbe:
+      enabled: false
+    livenessProbe:
+      enabled: false
+    readinessProbe:
+      enabled: false
