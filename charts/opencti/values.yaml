@@ -91,6 +91,24 @@ service:
 # -- Enable livenessProbe, readinessProbe and startupProbe
 testConnection: true
 
+# -- Enable or disable ready-checker
+readyChecker:
+  enabled: true
+  # -- Number of retries before giving up
+  retries: 30
+  # -- Timeout for each check
+  timeout: 5
+  # -- List services
+  services:
+  - name: elasticsearch
+    port: 9200
+  - name: minio
+    port: 9000
+  - name: rabbitmq
+    port: 5672
+  - name: redis-master
+    port: 6379
+
 # -- Ingress configuration to expose app
 ingress:
   enabled: false
@@ -194,6 +212,14 @@ worker:
 
   # -- Number of replicas
   replicaCount: 1
+
+  # -- Enable or disable ready-checker waiting server is ready
+  readyChecker:
+    enabled: true
+    # -- Number of retries before giving up
+    retries: 30
+    # -- Timeout for each check
+    timeout: 5
 
   # -- Image registry
   image:
@@ -301,7 +327,7 @@ elasticsearch:
   # -- Data-only nodes parameters
   data:
     # -- Number of data-only replicas to deploy
-    replicaCount: 0
+    replicaCount: 1
 
     # -- Enable persistence using Persistent Volume Claims
     # ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
@@ -332,7 +358,7 @@ minio:
   # Minio authentication parameters
   auth:
     # -- Minio root username
-    rootUser: admin
+    rootUser: ChangeMe
     # -- Password for Minio root user
     rootPassword: ChangeMe
 
