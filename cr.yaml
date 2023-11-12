@@ -1,2 +1,1 @@
-sign: true
-key: github-action
+sign: false
