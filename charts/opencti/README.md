@@ -94,6 +94,8 @@ helm show values devops-ia/opencti
 | image | object | `{"pullPolicy":"IfNotPresent","repository":"opencti/platform","tag":""}` | Image registry |
 | imagePullSecrets | list | `[]` | Global Docker registry secret names as an array |
 | ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[{"host":"chart-example.local","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}],"tls":[]}` | Ingress configuration to expose app |
+| livenessProbe | object | `{"enabled":true,"failureThreshold":3,"initialDelaySeconds":180,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Configure liveness checker ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes |
+| livenessProbeCustom | object | `{}` | Custom livenessProbe |
 | minio | object | `{"auth":{"rootPassword":"ChangeMe","rootUser":"ChangeMe"},"enabled":true,"mode":"standalone","persistence":{"enabled":false}}` | MinIO subchart deployment ref: https://github.com/bitnami/charts/blob/main/bitnami/minio/values.yaml  |
 | minio.auth.rootPassword | string | `"ChangeMe"` | Password for Minio root user |
 | minio.auth.rootUser | string | `"ChangeMe"` | Minio root username |
@@ -118,6 +120,8 @@ helm show values devops-ia/opencti
 | rabbitmq.persistence | object | `{"enabled":false}` | Persistence parameters |
 | rabbitmq.persistence.enabled | bool | `false` | Enable RabbitMQ data persistence using PVC |
 | rabbitmq.replicaCount | int | `1` | Number of RabbitMQ replicas to deploy |
+| readinessProbe | object | `{"enabled":true,"failureThreshold":3,"initialDelaySeconds":10,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":1}` | Configure readinessProbe checker ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes |
+| readinessProbeCustom | object | `{}` | Custom readinessProbe |
 | readyChecker | object | `{"enabled":true,"retries":30,"services":[{"name":"elasticsearch","port":9200},{"name":"minio","port":9000},{"name":"rabbitmq","port":5672},{"name":"redis-master","port":6379}],"timeout":5}` | Enable or disable ready-checker |
 | readyChecker.retries | int | `30` | Number of retries before giving up |
 | readyChecker.services | list | `[{"name":"elasticsearch","port":9200},{"name":"minio","port":9000},{"name":"rabbitmq","port":5672},{"name":"redis-master","port":6379}]` | List services |
@@ -143,7 +147,8 @@ helm show values devops-ia/opencti
 | service.targetPort | int | `4000` | Pod expose port |
 | service.type | string | `"ClusterIP"` | Kubernetes Service type. Allowed values: NodePort, LoadBalancer or ClusterIP |
 | serviceAccount | object | `{"annotations":{},"automountServiceAccountToken":false,"create":true,"name":""}` | Enable creation of ServiceAccount |
-| testConnection | bool | `true` | Enable livenessProbe, readinessProbe and startupProbe |
+| startupProbe | object | `{"enabled":true,"failureThreshold":30,"initialDelaySeconds":180,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Configure startupProbe checker ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes |
+| startupProbeCustom | object | `{}` | Custom startupProbe |
 | tolerations | list | `[]` | Tolerations for pod assignment |
 | worker | object | `{"affinity":{},"autoscaling":{"enabled":false,"maxReplicas":100,"minReplicas":1,"targetCPUUtilizationPercentage":80},"enabled":true,"env":{"WORKER_LOG_LEVEL":"info"},"envFromSecrets":{},"image":{"pullPolicy":"IfNotPresent","repository":"opencti/worker","tag":""},"nodeSelector":{},"readyChecker":{"enabled":true,"retries":30,"timeout":5},"replicaCount":1,"resources":{},"tolerations":[]}` | OpenCTI worker deployment configuration |
 | worker.affinity | object | `{}` | Affinity for pod assignment |
