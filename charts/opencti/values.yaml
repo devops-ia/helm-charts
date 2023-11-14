@@ -35,9 +35,12 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
+  # Specifies if you don't want the kubelet to automatically mount
+  # a ServiceAccount's API credentials
+  automountServiceAccountToken: false
 
 # -- Environment variables to configure application
-# ref: https://docs.opencti.io/5.9.X/deployment/configuration/#platform
+# ref: https://docs.opencti.io/5.11.X/deployment/configuration/#platform
 env:
   # Plain vars
   # foo: bar
