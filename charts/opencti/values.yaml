@@ -393,7 +393,7 @@ rabbitmq:
     # -- RabbitMQ application password
     # ref: https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq#environment-variables
     password: ChangeMe
-    erlangCookie: b25c953e-2193-4b8e-9f3b-9a3a5ba76d75
+    erlangCookie: ChangeMe
 
   # -- Persistence parameters
   persistence:

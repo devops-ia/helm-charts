@@ -26,6 +26,8 @@ minio:
 
 rabbitmq:
   fullnameOverride: opencti-ci-rabbitmq
+  auth:
+    erlangCookie: b25c953e-2193-4b8e-9f3b-9a3a5ba76d75
 
 redis:
   fullnameOverride: opencti-ci-redis
