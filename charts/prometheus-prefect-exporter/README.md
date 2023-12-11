@@ -1,3 +1,7 @@
+# ⚠️  DEPRECATED - Prometheus Prefect Exporter
+
+This chart was moved to <https://github.com/PrefectHQ/prefect-helm/tree/main/charts/prometheus-prefect-exporter>.
+
 # prometheus-prefect-exporter
 
 A Helm chart to deploy Prometheus Prefect Exporter
