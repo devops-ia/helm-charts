@@ -91,8 +91,68 @@ service:
   #   port: 9080
   #   targetPort: 9080
 
-# -- Enable livenessProbe, readinessProbe and startupProbe
-testConnection: true
+# -- Configure liveness checker
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes
+livenessProbe:
+  enabled: true
+  failureThreshold: 3
+  initialDelaySeconds: 180
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 5
+
+# -- Custom livenessProbe
+livenessProbeCustom: {}
+  # httpGet:
+  #   path: /dashboard
+  #   port: 4000
+  # failureThreshold: 3
+  # initialDelaySeconds: 200
+  # periodSeconds: 30
+  # successThreshold: 1
+  # timeoutSeconds: 5
+
+# -- Configure readinessProbe checker
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes
+readinessProbe:
+  enabled: true
+  failureThreshold: 3
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 1
+
+# -- Custom readinessProbe
+readinessProbeCustom: {}
+  # httpGet:
+  #   path: /dashboard
+  #   port: 4000
+  # failureThreshold: 3
+  # initialDelaySeconds: 200
+  # periodSeconds: 30
+  # successThreshold: 1
+  # timeoutSeconds: 5
+
+# -- Configure startupProbe checker
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes
+startupProbe:
+  enabled: true
+  failureThreshold: 30
+  initialDelaySeconds: 180
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 5
+
+# -- Custom startupProbe
+startupProbeCustom: {}
+  # httpGet:
+  #   path: /dashboard
+  #   port: 4000
+  # failureThreshold: 3
+  # initialDelaySeconds: 200
+  # periodSeconds: 30
+  # successThreshold: 1
+  # timeoutSeconds: 5
 
 # -- Enable or disable ready-checker
 readyChecker:
