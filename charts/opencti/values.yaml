@@ -40,7 +40,7 @@ serviceAccount:
   automountServiceAccountToken: false
 
 # -- Environment variables to configure application
-# ref: https://docs.opencti.io/5.11.X/deployment/configuration/#platform
+# ref: https://docs.opencti.io/5.12.X/deployment/configuration/#platform
 env:
   # Plain vars
   # foo: bar
@@ -292,7 +292,7 @@ worker:
     tag: ""
 
   # -- Environment variables to configure application
-  # ref: https://docs.opencti.io/5.11.X/deployment/configuration/#platform
+  # ref: https://docs.opencti.io/5.12.X/deployment/configuration/#platform
   env:
     # Plain vars
     # foo: bar
@@ -442,7 +442,7 @@ rabbitmq:
 
   # -- Clustering settings
   clustering:
-    # -- Enable RabitMQ clustering
+    # -- Enable RabbitMQ clustering
     enabled: false
 
   # -- RabbitMQ Authentication parameters
@@ -453,7 +453,7 @@ rabbitmq:
     # -- RabbitMQ application password
     # ref: https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq#environment-variables
     password: ChangeMe
-    erlangCookie: b25c953e-2193-4b8e-9f3b-9a3a5ba76d75
+    erlangCookie: ChangeMe
 
   # -- Persistence parameters
   persistence:

@@ -52,9 +52,13 @@ _See [helm uninstall](https://helm.sh/docs/helm/helm_uninstall/) for command doc
 
 ## OpenCTI
 
-* [Environment configuration](https://docs.opencti.io/5.11.X/deployment/configuration/#platform)
+* [Environment configuration](https://docs.opencti.io/5.12.X/deployment/configuration/#platform)
 * [Connectors](https://github.com/OpenCTI-Platform/connectors/tree/master). Review `docker-compose.yaml` with the properly config
 * Check connectors samples on `examples` folder
+
+## Basic installation and examples
+
+See [basic installation](docs/configuration.md) and [examples](docs/examples.md).
 
 ## Configuration
 
@@ -87,7 +91,7 @@ helm show values devops-ia/opencti
 | elasticsearch.master.persistence | object | `{"enabled":false}` | Enable persistence using Persistent Volume Claims ref: https://kubernetes.io/docs/user-guide/persistent-volumes/ |
 | elasticsearch.master.persistence.enabled | bool | `false` | Enable persistence using a `PersistentVolumeClaim` |
 | elasticsearch.master.replicaCount | int | `1` | Number of master-elegible replicas to deploy |
-| env | object | `{"APP__ADMIN__EMAIL":"admin@opencti.io","APP__ADMIN__PASSWORD":"ChangeMe","APP__ADMIN__TOKEN":"ChangeMe","APP__BASE_PATH":"/","ELASTICSEARCH__URL":"http://release-name-elasticsearch:9200","MINIO__ENDPOINT":"release-name-minio:9000","RABBITMQ__HOSTNAME":"release-name-rabbitmq","RABBITMQ__PASSWORD":"ChangeMe","RABBITMQ__PORT":5672,"RABBITMQ__PORT_MANAGEMENT":15672,"RABBITMQ__USERNAME":"user","REDIS__HOSTNAME":"release-name-redis-master","REDIS__MODE":"single","REDIS__PORT":6379}` | Environment variables to configure application ref: https://docs.opencti.io/5.11.X/deployment/configuration/#platform |
+| env | object | `{"APP__ADMIN__EMAIL":"admin@opencti.io","APP__ADMIN__PASSWORD":"ChangeMe","APP__ADMIN__TOKEN":"ChangeMe","APP__BASE_PATH":"/","ELASTICSEARCH__URL":"http://release-name-elasticsearch:9200","MINIO__ENDPOINT":"release-name-minio:9000","RABBITMQ__HOSTNAME":"release-name-rabbitmq","RABBITMQ__PASSWORD":"ChangeMe","RABBITMQ__PORT":5672,"RABBITMQ__PORT_MANAGEMENT":15672,"RABBITMQ__USERNAME":"user","REDIS__HOSTNAME":"release-name-redis-master","REDIS__MODE":"single","REDIS__PORT":6379}` | Environment variables to configure application ref: https://docs.opencti.io/5.12.X/deployment/configuration/#platform |
 | envFromSecrets | object | `{}` | Secrets from variables |
 | fullnameOverride | string | `""` | String to fully override opencti.fullname template |
 | global | object | `{"imagePullSecrets":[],"imageRegistry":""}` | Global configuration |
@@ -110,12 +114,12 @@ helm show values devops-ia/opencti
 | opensearch.opensearchJavaOpts | string | `"-Xmx512M -Xms512M"` | OpenSearch Java options |
 | opensearch.persistence | object | `{"enabled":false}` | Enable persistence using Persistent Volume Claims ref: https://kubernetes.io/docs/user-guide/persistent-volumes/ |
 | opensearch.singleNode | bool | `true` | If discovery.type in the opensearch configuration is set to "single-node", this should be set to "true" If "true", replicas will be forced to 1 |
-| rabbitmq | object | `{"auth":{"erlangCookie":"b25c953e-2193-4b8e-9f3b-9a3a5ba76d75","password":"ChangeMe","username":"user"},"clustering":{"enabled":false},"enabled":true,"persistence":{"enabled":false},"replicaCount":1}` | RabbitMQ subchart deployment ref: https://github.com/bitnami/charts/blob/main/bitnami/rabbitmq/values.yaml |
-| rabbitmq.auth | object | `{"erlangCookie":"b25c953e-2193-4b8e-9f3b-9a3a5ba76d75","password":"ChangeMe","username":"user"}` | RabbitMQ Authentication parameters |
+| rabbitmq | object | `{"auth":{"erlangCookie":"ChangeMe","password":"ChangeMe","username":"user"},"clustering":{"enabled":false},"enabled":true,"persistence":{"enabled":false},"replicaCount":1}` | RabbitMQ subchart deployment ref: https://github.com/bitnami/charts/blob/main/bitnami/rabbitmq/values.yaml |
+| rabbitmq.auth | object | `{"erlangCookie":"ChangeMe","password":"ChangeMe","username":"user"}` | RabbitMQ Authentication parameters |
 | rabbitmq.auth.password | string | `"ChangeMe"` | RabbitMQ application password ref: https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq#environment-variables |
 | rabbitmq.auth.username | string | `"user"` | RabbitMQ application username ref: https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq#environment-variables |
 | rabbitmq.clustering | object | `{"enabled":false}` | Clustering settings |
-| rabbitmq.clustering.enabled | bool | `false` | Enable RabitMQ clustering |
+| rabbitmq.clustering.enabled | bool | `false` | Enable RabbitMQ clustering |
 | rabbitmq.enabled | bool | `true` | Enable or disable RabbitMQ subchart |
 | rabbitmq.persistence | object | `{"enabled":false}` | Persistence parameters |
 | rabbitmq.persistence.enabled | bool | `false` | Enable RabbitMQ data persistence using PVC |
@@ -153,7 +157,7 @@ helm show values devops-ia/opencti
 | worker | object | `{"affinity":{},"autoscaling":{"enabled":false,"maxReplicas":100,"minReplicas":1,"targetCPUUtilizationPercentage":80},"enabled":true,"env":{"WORKER_LOG_LEVEL":"info"},"envFromSecrets":{},"image":{"pullPolicy":"IfNotPresent","repository":"opencti/worker","tag":""},"nodeSelector":{},"readyChecker":{"enabled":true,"retries":30,"timeout":5},"replicaCount":1,"resources":{},"tolerations":[]}` | OpenCTI worker deployment configuration |
 | worker.affinity | object | `{}` | Affinity for pod assignment |
 | worker.autoscaling | object | `{"enabled":false,"maxReplicas":100,"minReplicas":1,"targetCPUUtilizationPercentage":80}` | Autoscaling with CPU or memory utilization percentage |
-| worker.env | object | `{"WORKER_LOG_LEVEL":"info"}` | Environment variables to configure application ref: https://docs.opencti.io/5.11.X/deployment/configuration/#platform |
+| worker.env | object | `{"WORKER_LOG_LEVEL":"info"}` | Environment variables to configure application ref: https://docs.opencti.io/5.12.X/deployment/configuration/#platform |
 | worker.envFromSecrets | object | `{}` | Secrets from variables |
 | worker.image | object | `{"pullPolicy":"IfNotPresent","repository":"opencti/worker","tag":""}` | Image registry |
 | worker.nodeSelector | object | `{}` | Node labels for pod assignment |
