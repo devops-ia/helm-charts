@@ -1,6 +1,6 @@
 # Examples
 
-## Gloabl: create secrets
+## Global: create secrets
 
 Use `secrets` to create secrets to reference with `envFromSecrets`. By default the secret is created in the same namespace of the release.
 
