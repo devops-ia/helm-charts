@@ -1,6 +1,6 @@
 # helm-charts
 
-DevOps IA Helm charts
+Create custom Helm charts and improve community charts
 
 ## Usage
 
