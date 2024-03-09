@@ -2,14 +2,20 @@ replicaCount: 1
 fullnameOverride: opencti-ci
 
 env:
+  APP__ADMIN__EMAIL: admin@opencti.io
   APP__ADMIN__PASSWORD: test
   APP__ADMIN__TOKEN: b1976749-8a53-4f49-bf04-cafa2a3458c1
   APP__BASE_PATH: "/"
+  APP__HEALTH_ACCESS_KEY: f93747ff-2ea1-4717-900c-9df20b8e4429
   APP__TELEMETRY__METRICS__ENABLED: true
   ELASTICSEARCH__ENGINE_SELECTOR: elk
   ELASTICSEARCH__URL: http://opencti-ci-elasticsearch:9200
   MINIO__ENDPOINT: opencti-ci-minio
   RABBITMQ__HOSTNAME: opencti-ci-rabbitmq
+  RABBITMQ__PASSWORD: ChangeMe
+  RABBITMQ__PORT_MANAGEMENT: 15672
+  RABBITMQ__PORT: 5672
+  RABBITMQ__USERNAME: user
   REDIS__HOSTNAME: opencti-ci-redis-master
   REDIS__MODE: single
   REDIS__PORT: 6379

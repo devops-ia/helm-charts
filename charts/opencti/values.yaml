@@ -64,8 +64,9 @@ env:
   REDIS__HOSTNAME: release-name-redis-master
   REDIS__PORT: 6379
   REDIS__MODE: single
-  # METRICS
+  # METRICS AND HEALTHCHECK
   APP__TELEMETRY__METRICS__ENABLED: true
+  APP__HEALTH_ACCESS_KEY: ChangeMe
 
 # -- Secrets from variables
 envFromSecrets: {}
