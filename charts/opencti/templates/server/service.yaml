@@ -21,6 +21,12 @@ spec:
       targetPort: {{ $port.targetPort }}
       protocol: TCP
     {{- end }}
+    {{- if .Values.env.APP__TELEMETRY__METRICS__ENABLED }}
+    - name: metrics
+      port: {{ .Values.env.APP__TELEMETRY__METRICS__EXPORTER_PROMETHEUS | default 14269 }}
+      targetPort: {{ .Values.env.APP__TELEMETRY__METRICS__EXPORTER_PROMETHEUS | default 14269 }}
+      protocol: TCP
+    {{- end }}
   selector:
     opencti.component: server
     {{- include "opencti.selectorLabels" . | nindent 4 }}
