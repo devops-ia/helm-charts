@@ -16,11 +16,11 @@ A Helm chart to deploy open cyber threat intelligence platform
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.bitnami.com/bitnami | elasticsearch | 19.13.* |
-| https://charts.bitnami.com/bitnami | minio | 12.8.* |
-| https://charts.bitnami.com/bitnami | rabbitmq | 12.3.* |
-| https://charts.bitnami.com/bitnami | redis | 18.2.* |
-| https://opensearch-project.github.io/helm-charts/ | opensearch | 2.16.* |
+| https://charts.bitnami.com/bitnami | elasticsearch | 19.19.* |
+| https://charts.bitnami.com/bitnami | minio | 13.7.* |
+| https://charts.bitnami.com/bitnami | rabbitmq | 12.14.* |
+| https://charts.bitnami.com/bitnami | redis | 18.18.* |
+| https://opensearch-project.github.io/helm-charts/ | opensearch | 2.18.* |
 
 ## Add repository
 
@@ -91,7 +91,7 @@ helm show values devops-ia/opencti
 | elasticsearch.master.persistence | object | `{"enabled":false}` | Enable persistence using Persistent Volume Claims ref: https://kubernetes.io/docs/user-guide/persistent-volumes/ |
 | elasticsearch.master.persistence.enabled | bool | `false` | Enable persistence using a `PersistentVolumeClaim` |
 | elasticsearch.master.replicaCount | int | `1` | Number of master-elegible replicas to deploy |
-| env | object | `{"APP__ADMIN__EMAIL":"admin@opencti.io","APP__ADMIN__PASSWORD":"ChangeMe","APP__ADMIN__TOKEN":"ChangeMe","APP__BASE_PATH":"/","ELASTICSEARCH__URL":"http://release-name-elasticsearch:9200","MINIO__ENDPOINT":"release-name-minio:9000","RABBITMQ__HOSTNAME":"release-name-rabbitmq","RABBITMQ__PASSWORD":"ChangeMe","RABBITMQ__PORT":5672,"RABBITMQ__PORT_MANAGEMENT":15672,"RABBITMQ__USERNAME":"user","REDIS__HOSTNAME":"release-name-redis-master","REDIS__MODE":"single","REDIS__PORT":6379}` | Environment variables to configure application ref: https://docs.opencti.io/5.12.X/deployment/configuration/#platform |
+| env | object | `{"APP__ADMIN__EMAIL":"admin@opencti.io","APP__ADMIN__PASSWORD":"ChangeMe","APP__ADMIN__TOKEN":"ChangeMe","APP__BASE_PATH":"/","APP__TELEMETRY__METRICS__ENABLED":true,"ELASTICSEARCH__URL":"http://release-name-elasticsearch:9200","MINIO__ENDPOINT":"release-name-minio:9000","RABBITMQ__HOSTNAME":"release-name-rabbitmq","RABBITMQ__PASSWORD":"ChangeMe","RABBITMQ__PORT":5672,"RABBITMQ__PORT_MANAGEMENT":15672,"RABBITMQ__USERNAME":"user","REDIS__HOSTNAME":"release-name-redis-master","REDIS__MODE":"single","REDIS__PORT":6379}` | Environment variables to configure application ref: https://docs.opencti.io/5.12.X/deployment/configuration/#platform |
 | envFromSecrets | object | `{}` | Secrets from variables |
 | fullnameOverride | string | `""` | String to fully override opencti.fullname template |
 | global | object | `{"imagePullSecrets":[],"imageRegistry":""}` | Global configuration |
@@ -151,13 +151,15 @@ helm show values devops-ia/opencti
 | service.targetPort | int | `4000` | Pod expose port |
 | service.type | string | `"ClusterIP"` | Kubernetes Service type. Allowed values: NodePort, LoadBalancer or ClusterIP |
 | serviceAccount | object | `{"annotations":{},"automountServiceAccountToken":false,"create":true,"name":""}` | Enable creation of ServiceAccount |
+| serviceMonitor | object | `{"enabled":false,"interval":"30s","metricRelabelings":[],"relabelings":[],"scrapeTimeout":"10s"}` | Enable ServiceMonitor to get metrics ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#servicemonitor |
+| serviceMonitor.enabled | bool | `false` | Enable or disable |
 | startupProbe | object | `{"enabled":true,"failureThreshold":30,"initialDelaySeconds":180,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":5}` | Configure startupProbe checker ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes |
 | startupProbeCustom | object | `{}` | Custom startupProbe |
 | tolerations | list | `[]` | Tolerations for pod assignment |
-| worker | object | `{"affinity":{},"autoscaling":{"enabled":false,"maxReplicas":100,"minReplicas":1,"targetCPUUtilizationPercentage":80},"enabled":true,"env":{"WORKER_LOG_LEVEL":"info"},"envFromSecrets":{},"image":{"pullPolicy":"IfNotPresent","repository":"opencti/worker","tag":""},"nodeSelector":{},"readyChecker":{"enabled":true,"retries":30,"timeout":5},"replicaCount":1,"resources":{},"tolerations":[]}` | OpenCTI worker deployment configuration |
+| worker | object | `{"affinity":{},"autoscaling":{"enabled":false,"maxReplicas":100,"minReplicas":1,"targetCPUUtilizationPercentage":80},"enabled":true,"env":{"WORKER_LOG_LEVEL":"info","WORKER_TELEMETRY_ENABLED":true},"envFromSecrets":{},"image":{"pullPolicy":"IfNotPresent","repository":"opencti/worker","tag":""},"nodeSelector":{},"readyChecker":{"enabled":true,"retries":30,"timeout":5},"replicaCount":1,"resources":{},"serviceMonitor":{"enabled":false,"interval":"30s","metricRelabelings":[],"relabelings":[],"scrapeTimeout":"10s"},"tolerations":[]}` | OpenCTI worker deployment configuration |
 | worker.affinity | object | `{}` | Affinity for pod assignment |
 | worker.autoscaling | object | `{"enabled":false,"maxReplicas":100,"minReplicas":1,"targetCPUUtilizationPercentage":80}` | Autoscaling with CPU or memory utilization percentage |
-| worker.env | object | `{"WORKER_LOG_LEVEL":"info"}` | Environment variables to configure application ref: https://docs.opencti.io/5.12.X/deployment/configuration/#platform |
+| worker.env | object | `{"WORKER_LOG_LEVEL":"info","WORKER_TELEMETRY_ENABLED":true}` | Environment variables to configure application ref: https://docs.opencti.io/5.12.X/deployment/configuration/#platform |
 | worker.envFromSecrets | object | `{}` | Secrets from variables |
 | worker.image | object | `{"pullPolicy":"IfNotPresent","repository":"opencti/worker","tag":""}` | Image registry |
 | worker.nodeSelector | object | `{}` | Node labels for pod assignment |
@@ -166,4 +168,6 @@ helm show values devops-ia/opencti
 | worker.readyChecker.timeout | int | `5` | Timeout for each check |
 | worker.replicaCount | int | `1` | Number of replicas |
 | worker.resources | object | `{}` | The resources limits and requested |
+| worker.serviceMonitor | object | `{"enabled":false,"interval":"30s","metricRelabelings":[],"relabelings":[],"scrapeTimeout":"10s"}` | Enable ServiceMonitor to get metrics ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#servicemonitor |
+| worker.serviceMonitor.enabled | bool | `false` | Enable or disable |
 | worker.tolerations | list | `[]` | Tolerations for pod assignment |

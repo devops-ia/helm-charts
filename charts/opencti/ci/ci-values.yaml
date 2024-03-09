@@ -5,15 +5,19 @@ env:
   APP__ADMIN__PASSWORD: test
   APP__ADMIN__TOKEN: b1976749-8a53-4f49-bf04-cafa2a3458c1
   APP__BASE_PATH: "/"
-  MINIO__ENDPOINT: opencti-ci-minio
-  ELASTICSEARCH__URL: http://opencti-ci-elasticsearch:9200
+  APP__TELEMETRY__METRICS__ENABLED: true
   ELASTICSEARCH__ENGINE_SELECTOR: elk
+  ELASTICSEARCH__URL: http://opencti-ci-elasticsearch:9200
+  MINIO__ENDPOINT: opencti-ci-minio
   RABBITMQ__HOSTNAME: opencti-ci-rabbitmq
   REDIS__HOSTNAME: opencti-ci-redis-master
-  REDIS__PORT: 6379
   REDIS__MODE: single
+  REDIS__PORT: 6379
 
 testConnection: false
+
+serviceMonitor:
+  enabled: true
 
 worker:
   enabled: false
