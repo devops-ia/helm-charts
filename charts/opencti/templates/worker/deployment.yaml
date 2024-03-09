@@ -57,6 +57,12 @@ spec:
           image: "{{ .Values.worker.image.repository }}:{{ .Values.worker.image.tag | default .Chart.AppVersion }}"
           {{- end }}
           imagePullPolicy: {{ .Values.worker.image.pullPolicy }}
+          ports:
+            {{- if .Values.worker.env.WORKER_TELEMETRY_ENABLED }}
+            - name: metrics
+              containerPort: {{ .Values.worker.env.WORKER_PROMETHEUS_TELEMETRY_PORT | default 14269 }}
+              protocol: TCP
+            {{- end }}
           env:
           # Variables in plain text
           {{- if eq .Values.env.APP__BASE_PATH "/" }}

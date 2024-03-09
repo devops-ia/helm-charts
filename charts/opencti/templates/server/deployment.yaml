@@ -67,13 +67,18 @@ spec:
               containerPort: {{ $port.targetPort }}
               protocol: TCP
             {{- end }}
+            {{- if .Values.serviceMonitor.enabled }}
+            - name: metrics
+              containerPort: {{ .Values.env.APP__TELEMETRY__METRICS__EXPORTER_PROMETHEUS | default 14269 }}
+              protocol: TCP
+            {{- end }}
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
             {{- if .Values.livenessProbeCustom }}
             {{- toYaml .Values.livenessProbeCustom | nindent 12 }}
             {{- else }}
             httpGet:
-              path: {{ .Values.service.healthPath | default "/dashboard" }}
+              path: {{ .Values.service.healthPath | default "/health" }}
               port: {{ .Values.service.targetPort | default .Values.service.port }}
             failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
@@ -88,7 +93,7 @@ spec:
             {{- toYaml .Values.readinessProbeCustom | nindent 12 }}
             {{- else }}
             httpGet:
-              path: {{ .Values.service.healthPath | default "/dashboard" }}
+              path: {{ .Values.service.healthPath | default "/health" }}
               port: {{ .Values.service.targetPort | default .Values.service.port }}
             failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
@@ -103,7 +108,7 @@ spec:
             {{- toYaml .Values.startupProbeCustom | nindent 12 }}
             {{- else }}
             httpGet:
-              path: {{ .Values.service.healthPath | default "/dashboard" }}
+              path: {{ .Values.service.healthPath | default "/health" }}
               port: {{ .Values.service.targetPort | default .Values.service.port }}
             failureThreshold: {{ .Values.startupProbe.failureThreshold }}
             initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds }}

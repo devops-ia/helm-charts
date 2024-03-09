@@ -64,6 +64,8 @@ env:
   REDIS__HOSTNAME: release-name-redis-master
   REDIS__PORT: 6379
   REDIS__MODE: single
+  # METRICS
+  APP__TELEMETRY__METRICS__ENABLED: true
 
 # -- Secrets from variables
 envFromSecrets: {}
@@ -90,6 +92,16 @@ service:
   # - name: metrics
   #   port: 9080
   #   targetPort: 9080
+
+# -- Enable ServiceMonitor to get metrics
+# ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#servicemonitor
+serviceMonitor:
+  # -- Enable or disable
+  enabled: false
+  interval: 30s
+  scrapeTimeout: 10s
+  metricRelabelings: []
+  relabelings: []
 
 # -- Configure liveness checker
 # ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes
@@ -298,6 +310,8 @@ worker:
     # foo: bar
     # my_env: my_value
     WORKER_LOG_LEVEL: info
+    # METRICS
+    WORKER_TELEMETRY_ENABLED: true
 
   # -- Secrets from variables
   envFromSecrets: {}
@@ -305,6 +319,16 @@ worker:
     # my_env:
     #  name: release-name-credentials
     #  key: secret_key
+
+  # -- Enable ServiceMonitor to get metrics
+  # ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#servicemonitor
+  serviceMonitor:
+    # -- Enable or disable
+    enabled: false
+    interval: 30s
+    scrapeTimeout: 10s
+    metricRelabelings: []
+    relabelings: []
 
   # -- The resources limits and requested
   resources: {}
