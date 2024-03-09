@@ -17,7 +17,7 @@ env:
 testConnection: false
 
 serviceMonitor:
-  enabled: true
+  enabled: false
 
 worker:
   enabled: false
