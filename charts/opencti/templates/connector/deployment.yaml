@@ -54,35 +54,9 @@ spec:
           {{- end }}
           imagePullPolicy: {{ .image.pullPolicy | default "IfNotPresent" }}
           env:
-          # Variables in plain text
-          {{- if eq $.Values.env.APP__BASE_PATH "/" }}
-          - name: OPENCTI_URL
-            value: "http://{{ include "opencti.fullname" $ }}-server:{{ $.Values.service.port }}"
-          {{- else }}
-          - name: OPENCTI_URL
-            value: "http://{{ include "opencti.fullname" $ }}-server:{{ $.Values.service.port }}{{ $.Values.env.APP__BASE_PATH }}"
-          {{- end }}
+          # Variables from secrets have precedence
+          {{- $envList := dict -}}
 
-          {{- if $.Values.env.APP__ADMIN__TOKEN }}
-          - name: OPENCTI_TOKEN
-            value: "{{ $.Values.env.APP__ADMIN__TOKEN }}"
-          {{- end }}
-
-          {{- if $.Values.connectorsGlobalEnv }}
-          {{- range $key, $value := $.Values.connectorsGlobalEnv }}
-          - name: {{ $key | upper }}
-            value: {{ $value | quote }}
-          {{- end }}
-          {{- end }}
-
-          {{- if .env }}
-          {{- range $key, $value := .env }}
-          - name: {{ $key | upper }}
-            value: {{ $value | quote }}
-          {{- end }}
-          {{- end }}
-
-          # Variables from secrets
           {{- if .envFromSecrets }}
           {{- range $key, $value := .envFromSecrets }}
           - name: {{ $key | upper }}
@@ -90,8 +64,37 @@ spec:
               secretKeyRef:
                 name: {{ $value.name }}
                 key: {{ $value.key | default $key }}
+          {{- $_ := set $envList $key true }}
           {{- end }}
           {{- end }}
+
+          {{- if and (not (hasKey $envList "OPENCTI_TOKEN")) (.env.APP__ADMIN__TOKEN) }}
+          - name: OPENCTI_TOKEN
+            value: "{{ .env.APP__ADMIN__TOKEN }}"
+          {{- end }}
+
+          # Special handling for OPENCTI_URL which is constructed from other values
+          {{- if not (hasKey $.Values.env "OPENCTI_URL") }}
+          {{- if eq $.Values.env.APP__BASE_PATH "/" }}
+          - name: OPENCTI_URL
+            value: "http://{{ include "opencti.fullname" $ }}-server:{{ $.Values.service.port }}"
+          {{- else }}
+          - name: OPENCTI_URL
+            value: "http://{{ include "opencti.fullname" $ }}-server:{{ $.Values.service.port }}{{ $.Values.env.APP__BASE_PATH }}"
+          {{- end }}
+          {{- end }}
+
+          # Add Variables in plain text if they were not already added from secrets
+          {{- if .env }}
+          {{- range $key, $value := .env }}
+          {{- if not (hasKey $envList $key) }}
+          - name: {{ $key | upper }}
+            value: {{ $value | quote }}
+          {{- $_ := set $envList $key true }}
+          {{- end }}
+          {{- end }}
+          {{- end }}
+          
           resources:
             {{- toYaml .resources | nindent 12 }}
       {{- with .nodeSelector }}

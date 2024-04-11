@@ -64,26 +64,10 @@ spec:
               protocol: TCP
             {{- end }}
           env:
-          # Variables in plain text
-          {{- if eq .Values.env.APP__BASE_PATH "/" }}
-          - name: OPENCTI_URL
-            value: "http://{{ include "opencti.fullname" . }}-server:{{ .Values.service.port }}"
-          {{- else }}
-          - name: OPENCTI_URL
-            value: "http://{{ include "opencti.fullname" . }}-server:{{ .Values.service.port }}{{ .Values.env.APP__BASE_PATH }}"
-          {{- end }}
-          {{- if .Values.env.APP__ADMIN__TOKEN }}
-          - name: OPENCTI_TOKEN
-            value: "{{ .Values.env.APP__ADMIN__TOKEN }}"
-          {{- end }}
-          {{- if .Values.worker.env }}
-          {{- range $key, $value := .Values.worker.env }}
-          - name: {{ $key | upper }}
-            value: {{ $value | quote }}
-          {{- end }}
-          {{- end }}
+          # Variables from secrets have precedence
 
-          # Variables from secrets
+          {{- $envList := dict -}}
+
           {{- if .Values.worker.envFromSecrets }}
           {{- range $key, $value := .Values.worker.envFromSecrets }}
           - name: {{ $key | upper }}
@@ -91,8 +75,37 @@ spec:
               secretKeyRef:
                 name: {{ $value.name }}
                 key: {{ $value.key | default $key }}
+          {{- $_ := set $envList $key true }}
           {{- end }}
           {{- end }}
+
+          # Special handling for OPENCTI_URL which is constructed from other values
+          {{- if not (hasKey $envList "OPENCTI_URL") }}
+          {{- if eq .Values.env.APP__BASE_PATH "/" }}
+          - name: OPENCTI_URL
+            value: "http://{{ include "opencti.fullname" . }}-server:{{ .Values.service.port }}"
+          {{- else }}
+          - name: OPENCTI_URL
+            value: "http://{{ include "opencti.fullname" . }}-server:{{ .Values.service.port }}{{ .Values.env.APP__BASE_PATH }}"
+          {{- end }}
+          {{- end }}
+
+          {{- if and (not (hasKey $envList "OPENCTI_TOKEN")) (.Values.env.APP__ADMIN__TOKEN) }}
+          - name: OPENCTI_TOKEN
+            value: "{{ .Values.env.APP__ADMIN__TOKEN }}"
+          {{- end }}
+
+          # Add Variables in plain text from .Values.worker.env if they were not already added from secrets
+          {{- if .Values.worker.env }}
+          {{- range $key, $value := .Values.worker.env }}
+          {{- if not (hasKey $envList $key) }}
+          - name: {{ $key | upper }}
+            value: {{ $value | quote }}
+          {{- $_ := set $envList $key true }}
+          {{- end }}
+          {{- end }}
+          {{- end }}
+
           resources:
             {{- toYaml .Values.worker.resources | nindent 12 }}
       {{- with .Values.worker.nodeSelector }}

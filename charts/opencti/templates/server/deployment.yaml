@@ -123,34 +123,32 @@ spec:
           - name: PROVIDERS__LOCAL__STRATEGY
             value: LocalStrategy
 
-          # Variables in plain text
+          # Variables from secrets have precedence
+          {{- $envList := dict -}}
+          {{- if .Values.envFromSecrets }}
+          {{- range $key, $value := .Values.envFromSecrets }}
+          {{- if not (hasKey $envList $key) }}
+          - name: {{ $key | upper }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ $value.name }}
+                key: {{ $value.key | default $key }}
+          {{- $_ := set $envList $key true }}
+          {{- end }}
+          {{- end }}
+          {{- end }}
+
+          # Add Variables in plain text if they were not already added from secrets
           {{- if .Values.env }}
           {{- range $key, $value := .Values.env }}
+          {{- if not (hasKey $envList $key) }}
           - name: {{ $key | upper }}
             value: {{ $value | quote }}
+          {{- $_ := set $envList $key true }}
           {{- end }}
-          {{- end }}
-
-          # Variables from secrets
-          {{- if .Values.envFromSecrets }}
-          {{- range $key, $value := .Values.envFromSecrets }}
-          - name: {{ $key | upper }}
-            valueFrom:
-              secretKeyRef:
-                name: {{ $value.name }}
-                key: {{ $value.key | default $key }}
           {{- end }}
           {{- end }}
 
-          {{- if .Values.envFromSecrets }}
-          {{- range $key, $value := .Values.envFromSecrets }}
-          - name: {{ $key | upper }}
-            valueFrom:
-              secretKeyRef:
-                name: {{ $value.name }}
-                key: {{ $value.key | default $key }}
-          {{- end }}
-          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
