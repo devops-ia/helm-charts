@@ -75,10 +75,10 @@ envFromSecrets: {}
   #  name: release-name-credentials
   #  key: secret_key
 
-# -- Secrets values to create credencials and reference by envFromSecrets
+# -- Secrets values to create credentials and reference by envFromSecrets
 secrets: {}
 
-# -- Kubernetes servide to expose Pod
+# -- Kubernetes service to expose Pod
 service:
   # -- Kubernetes Service type. Allowed values: NodePort, LoadBalancer or ClusterIP
   type: ClusterIP
@@ -400,11 +400,11 @@ elasticsearch:
     - name: ES_JAVA_OPTS
       value: "-Xms512M -Xmx512M"
 
-  ## @section Master-elegible nodes parameters
+  ## @section Master-eligible nodes parameters
   master:
-    # -- Deploy the Elasticsearch master-elegible nodes as master-only nodes. Recommended for high-demand deployments.
+    # -- Deploy the Elasticsearch master-eligible nodes as master-only nodes. Recommended for high-demand deployments.
     masterOnly: true
-    # -- Number of master-elegible replicas to deploy
+    # -- Number of master-eligible replicas to deploy
     replicaCount: 1
     # -- Enable persistence using Persistent Volume Claims
     # ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
