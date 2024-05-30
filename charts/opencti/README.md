@@ -16,11 +16,11 @@ A Helm chart to deploy open cyber threat intelligence platform
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.bitnami.com/bitnami | elasticsearch | 19.19.* |
-| https://charts.bitnami.com/bitnami | minio | 13.7.* |
-| https://charts.bitnami.com/bitnami | rabbitmq | 12.14.* |
-| https://charts.bitnami.com/bitnami | redis | 18.18.* |
-| https://opensearch-project.github.io/helm-charts/ | opensearch | 2.18.* |
+| https://charts.bitnami.com/bitnami | elasticsearch | 21.1.* |
+| https://charts.bitnami.com/bitnami | minio | 14.6.* |
+| https://charts.bitnami.com/bitnami | rabbitmq | 14.3.* |
+| https://charts.bitnami.com/bitnami | redis | 19.5.* |
+| https://opensearch-project.github.io/helm-charts/ | opensearch | 2.20.* |
 
 ## Add repository
 
@@ -87,11 +87,11 @@ helm show values devops-ia/opencti
 | elasticsearch.enabled | bool | `true` | Enable or disable ElasticSearch subchart |
 | elasticsearch.ingest | object | `{"enabled":false}` | Ingest-only nodes parameters |
 | elasticsearch.ingest.enabled | bool | `false` | Enable ingest nodes |
-| elasticsearch.master.masterOnly | bool | `true` | Deploy the Elasticsearch master-elegible nodes as master-only nodes. Recommended for high-demand deployments. |
+| elasticsearch.master.masterOnly | bool | `true` | Deploy the Elasticsearch master-eligible nodes as master-only nodes. Recommended for high-demand deployments. |
 | elasticsearch.master.persistence | object | `{"enabled":false}` | Enable persistence using Persistent Volume Claims ref: https://kubernetes.io/docs/user-guide/persistent-volumes/ |
 | elasticsearch.master.persistence.enabled | bool | `false` | Enable persistence using a `PersistentVolumeClaim` |
-| elasticsearch.master.replicaCount | int | `1` | Number of master-elegible replicas to deploy |
-| env | object | `{"APP__ADMIN__EMAIL":"admin@opencti.io","APP__ADMIN__PASSWORD":"ChangeMe","APP__ADMIN__TOKEN":"ChangeMe","APP__BASE_PATH":"/","APP__HEALTH_ACCESS_KEY":"ChangeMe","APP__TELEMETRY__METRICS__ENABLED":true,"ELASTICSEARCH__URL":"http://release-name-elasticsearch:9200","MINIO__ENDPOINT":"release-name-minio:9000","RABBITMQ__HOSTNAME":"release-name-rabbitmq","RABBITMQ__PASSWORD":"ChangeMe","RABBITMQ__PORT":5672,"RABBITMQ__PORT_MANAGEMENT":15672,"RABBITMQ__USERNAME":"user","REDIS__HOSTNAME":"release-name-redis-master","REDIS__MODE":"single","REDIS__PORT":6379}` | Environment variables to configure application ref: https://docs.opencti.io/5.12.X/deployment/configuration/#platform |
+| elasticsearch.master.replicaCount | int | `1` | Number of master-eligible replicas to deploy |
+| env | object | `{"APP__ADMIN__EMAIL":"admin@opencti.io","APP__ADMIN__PASSWORD":"ChangeMe","APP__ADMIN__TOKEN":"ChangeMe","APP__BASE_PATH":"/","APP__GRAPHQL__PLAYGROUND__ENABLED":false,"APP__GRAPHQL__PLAYGROUND__FORCE_DISABLED_INTROSPECTION":false,"APP__HEALTH_ACCESS_KEY":"ChangeMe","APP__TELEMETRY__METRICS__ENABLED":true,"ELASTICSEARCH__URL":"http://release-name-elasticsearch:9200","MINIO__ENDPOINT":"release-name-minio:9000","RABBITMQ__HOSTNAME":"release-name-rabbitmq","RABBITMQ__PASSWORD":"ChangeMe","RABBITMQ__PORT":5672,"RABBITMQ__PORT_MANAGEMENT":15672,"RABBITMQ__USERNAME":"user","REDIS__HOSTNAME":"release-name-redis-master","REDIS__MODE":"single","REDIS__PORT":6379}` | Environment variables to configure application ref: https://docs.opencti.io/5.12.X/deployment/configuration/#platform |
 | envFromSecrets | object | `{}` | Secrets from variables |
 | fullnameOverride | string | `""` | String to fully override opencti.fullname template |
 | global | object | `{"imagePullSecrets":[],"imageRegistry":""}` | Global configuration |
@@ -145,8 +145,8 @@ helm show values devops-ia/opencti
 | redis.replica.replicaCount | int | `1` | Number of Redis replicas to deploy |
 | replicaCount | int | `1` | Number of replicas |
 | resources | object | `{}` | The resources limits and requested |
-| secrets | object | `{}` | Secrets values to create credencials and reference by envFromSecrets |
-| service | object | `{"port":80,"targetPort":4000,"type":"ClusterIP"}` | Kubernetes servide to expose Pod |
+| secrets | object | `{}` | Secrets values to create credentials and reference by envFromSecrets |
+| service | object | `{"port":80,"targetPort":4000,"type":"ClusterIP"}` | Kubernetes service to expose Pod |
 | service.port | int | `80` | Kubernetes Service port |
 | service.targetPort | int | `4000` | Pod expose port |
 | service.type | string | `"ClusterIP"` | Kubernetes Service type. Allowed values: NodePort, LoadBalancer or ClusterIP |
