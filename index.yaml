@@ -186,6 +186,46 @@ entries:
     version: 1.0.0
   opencti:
   - apiVersion: v2
+    appVersion: 6.1.6
+    created: "2024-05-31T17:03:26.599669043Z"
+    dependencies:
+    - condition: elasticsearch.enabled
+      name: elasticsearch
+      repository: https://charts.bitnami.com/bitnami
+      version: 21.1.*
+    - condition: minio.enabled
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.6.*
+    - condition: opensearch.enabled
+      name: opensearch
+      repository: https://opensearch-project.github.io/helm-charts/
+      version: 2.20.*
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.3.*
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 19.5.*
+    description: A Helm chart to deploy open cyber threat intelligence platform
+    digest: d98a3fbd433c4d16613f3105131f73ff6b98289f535594a1cd9a5f4147db8b80
+    home: https://www.filigran.io/en/solutions/products/opencti/
+    keywords:
+    - opencti
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: opencti
+    sources:
+    - https://github.com/OpenCTI-Platform/opencti
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/opencti-1.2.4/opencti-1.2.4.tgz
+    version: 1.2.4
+  - apiVersion: v2
     appVersion: 6.0.5
     created: "2024-05-30T16:17:21.834770461Z"
     dependencies:
@@ -1051,4 +1091,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2024-05-30T16:17:21.834876278Z"
+generated: "2024-05-31T17:03:26.599773859Z"
