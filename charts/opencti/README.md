@@ -1,3 +1,7 @@
+# ⚠️  DEPRECATED - Helm Chart OpenCTI
+
+This chart was moved to <https://github.com/devops-ia/helm-opencti>.
+
 # opencti
 
 A Helm chart to deploy open cyber threat intelligence platform
