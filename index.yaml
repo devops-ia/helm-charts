@@ -114,7 +114,7 @@ entries:
     created: "2023-02-26T16:20:32.777870262Z"
     description: CronJob to update Amazon Elastic Container Registry
     digest: d8f46a6cc0d6ecf984b3fb3d011384160a7b7ad43f89207be39838df5c18134e
-    home: https://github.com/prosimcorp/replika
+    home: https://devops-ia.github.io/helm-charts
     keywords:
     - ecr
     - token
@@ -209,7 +209,7 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: 19.5.*
-    description: A Helm chart to deploy open cyber threat intelligence platform
+    description: (depcreated) A Helm chart to deploy open cyber threat intelligence platform
     digest: d98a3fbd433c4d16613f3105131f73ff6b98289f535594a1cd9a5f4147db8b80
     home: https://www.filigran.io/en/solutions/products/opencti/
     keywords:
@@ -634,7 +634,7 @@ entries:
   - apiVersion: v2
     appVersion: v0.3.0
     created: "2023-08-21T10:16:56.297366849Z"
-    description: A Kubernetes operator to replicate resources across namespaces
+    description: (depcreated) A Kubernetes operator to replicate resources across namespaces
     digest: d97b8e60267b63e9d0f27fddf1bfb7699f2e936259abd35a0801ed75a9510224
     home: https://github.com/prosimcorp/replika
     keywords:
