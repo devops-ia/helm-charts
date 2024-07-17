@@ -184,6 +184,28 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/helm-release-cleaner-1.0.0/helm-release-cleaner-1.0.0.tgz
     version: 1.0.0
+  kafka-cruise-control:
+  - apiVersion: v2
+    appVersion: jdk11-cc2.5.138
+    created: "2024-07-17T22:50:44.980855183Z"
+    description: A Helm chart to deploy Kafka Cruise Control
+    digest: 83feab7e55b4e3c6328e513bd349dba3e93439cf03d8181aa8d1b05279ab715e
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/kafka-cruise-control
+    keywords:
+    - kafka
+    - cruise-control
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: kafka-cruise-control
+    sources:
+    - https://github.com/devops-ia/kafka-cruise-control
+    - https://github.com/linkedin/cruise-control
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/kafka-cruise-control-1.0.0/kafka-cruise-control-1.0.0.tgz
+    version: 1.0.0
   opencti:
   - apiVersion: v2
     appVersion: 6.1.6
@@ -209,7 +231,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: 19.5.*
-    description: (depcreated) A Helm chart to deploy open cyber threat intelligence platform
+    description: (depcreated) A Helm chart to deploy open cyber threat intelligence
+      platform
     digest: d98a3fbd433c4d16613f3105131f73ff6b98289f535594a1cd9a5f4147db8b80
     home: https://www.filigran.io/en/solutions/products/opencti/
     keywords:
@@ -634,7 +657,8 @@ entries:
   - apiVersion: v2
     appVersion: v0.3.0
     created: "2023-08-21T10:16:56.297366849Z"
-    description: (depcreated) A Kubernetes operator to replicate resources across namespaces
+    description: (depcreated) A Kubernetes operator to replicate resources across
+      namespaces
     digest: d97b8e60267b63e9d0f27fddf1bfb7699f2e936259abd35a0801ed75a9510224
     home: https://github.com/prosimcorp/replika
     keywords:
@@ -1091,4 +1115,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/steampipe-0.1.1/steampipe-0.1.1.tgz
     version: 0.1.1
-generated: "2024-05-31T17:03:26.599773859Z"
+generated: "2024-07-17T22:50:45.101387562Z"
