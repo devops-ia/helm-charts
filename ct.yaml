@@ -9,3 +9,4 @@ chart-repos:
   - oauth2-proxy=https://oauth2-proxy.github.io/manifests/
 helm-extra-args: --timeout 600s
 debug: true
+excluded-charts: kafka-cruise-control
