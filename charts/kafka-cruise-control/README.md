@@ -1,7 +1,5 @@
 # kafka-cruise-control
 
-# kafka-cruise-control
-
 A Helm chart to deploy Kafka Cruise Control
 
 ## Maintainers
