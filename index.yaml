@@ -184,6 +184,28 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/helm-release-cleaner-1.0.0/helm-release-cleaner-1.0.0.tgz
     version: 1.0.0
+  kafka-cruise-control:
+  - apiVersion: v2
+    appVersion: jdk11-cc2.5.138
+    created: "2024-08-06T17:38:01.414347354Z"
+    description: A Helm chart to deploy Kafka Cruise Control
+    digest: a28d3b136d2da80c9cb24ba562fe7bf744a5c62445d0782d25b48787a744430b
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/kafka-cruise-control
+    keywords:
+    - kafka
+    - cruise-control
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: kafka-cruise-control
+    sources:
+    - https://github.com/devops-ia/kafka-cruise-control
+    - https://github.com/linkedin/cruise-control
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/kafka-cruise-control-1.0.0/kafka-cruise-control-1.0.0.tgz
+    version: 1.0.0
   snapshot-controller:
   - apiVersion: v2
     appVersion: 6.2.1
@@ -271,4 +293,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-0.1.0/ssl-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-05-31T17:03:26.599773859Z"
+generated: "2024-08-06T17:38:01.414400182Z"
