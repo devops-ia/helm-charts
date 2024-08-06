@@ -24,4 +24,3 @@ You can then run `helm search repo devops-ia` to see the charts.
 | [snapshot-controller](./charts/snapshot-controller) | A Helm chart to deploy snapshot-controller |
 | [splunk](./charts/splunk) | A Helm chart to deploy Splunk standalone |
 | [ssl-exporter](./charts/ssl-exporter) | A Helm Chart to SSL Certificate Exporter for Prometheus |
-| [steampipe](./charts/steampipe) | A Helm chart for Kubernetes to deploy Steampipe |
