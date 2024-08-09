@@ -20,7 +20,6 @@ You can then run `helm search repo devops-ia` to see the charts.
 | [default-resources](./charts/default-resources) | A Helm chart for Default Resources |
 | [ecr-registry](./charts/ecr-registry) | CronJob to update Amazon Elastic Container Registry credentials |
 | [helm-release-cleaner](./charts/helm-release-cleaner) | A Helm chart for Helm Charts to clean up the releases installed in the declared namespaces |
-| [kafka-cruise-control](./charts/kafka-cruise-control) | A Helm chart to deploy Kafka Cruise Control |
 | [snapshot-controller](./charts/snapshot-controller) | A Helm chart to deploy snapshot-controller |
 | [splunk](./charts/splunk) | A Helm chart to deploy Splunk standalone |
 | [ssl-exporter](./charts/ssl-exporter) | A Helm Chart to SSL Certificate Exporter for Prometheus |
