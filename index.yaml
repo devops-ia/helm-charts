@@ -110,6 +110,24 @@ entries:
     version: 1.0.0
   ecr-registry:
   - apiVersion: v2
+    appVersion: awscli2.10.3-kubectl1.30.3
+    created: "2024-08-15T16:54:40.467483413Z"
+    description: CronJob to update Amazon Elastic Container Registry
+    digest: c0b2f58ac7064913a9b30740f16d04b9ab90cf910d09853e37b1fc1152783aa4
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-registry
+    keywords:
+    - ecr
+    - token
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: ecr-registry
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/ecr-registry-1.0.1/ecr-registry-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     appVersion: 1.25.6
     created: "2023-02-26T16:20:32.777870262Z"
     description: CronJob to update Amazon Elastic Container Registry
@@ -271,4 +289,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-0.1.0/ssl-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-08-06T17:38:01.414400182Z"
+generated: "2024-08-15T16:54:40.467512438Z"
