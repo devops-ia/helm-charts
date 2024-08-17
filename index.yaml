@@ -130,43 +130,6 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/default-resources-1.0.0/default-resources-1.0.0.tgz
     version: 1.0.0
-  ecr-registry:
-  - apiVersion: v2
-    appVersion: awscli2.10.3-kubectl1.30.3
-    created: "2024-08-15T16:54:40.467483413Z"
-    description: CronJob to update Amazon Elastic Container Registry
-    digest: c0b2f58ac7064913a9b30740f16d04b9ab90cf910d09853e37b1fc1152783aa4
-    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-registry
-    keywords:
-    - ecr
-    - token
-    maintainers:
-    - email: hello@ialejandro.rocks
-      name: ialejandro
-      url: https://ialejandro.rocks
-    name: ecr-registry
-    type: application
-    urls:
-    - https://github.com/devops-ia/helm-charts/releases/download/ecr-registry-1.0.1/ecr-registry-1.0.1.tgz
-    version: 1.0.1
-  - apiVersion: v2
-    appVersion: 1.25.6
-    created: "2023-02-26T16:20:32.777870262Z"
-    description: CronJob to update Amazon Elastic Container Registry
-    digest: d8f46a6cc0d6ecf984b3fb3d011384160a7b7ad43f89207be39838df5c18134e
-    home: https://devops-ia.github.io/helm-charts
-    keywords:
-    - ecr
-    - token
-    maintainers:
-    - email: hello@ialejandro.rocks
-      name: ialejandro
-      url: https://ialejandro.rocks
-    name: ecr-registry
-    type: application
-    urls:
-    - https://github.com/devops-ia/helm-charts/releases/download/ecr-registry-1.0.0/ecr-registry-1.0.0.tgz
-    version: 1.0.0
   ecr-token:
   - apiVersion: v2
     appVersion: awscli2.10.3-kubectl1.30.3
@@ -243,44 +206,6 @@ entries:
     type: application
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/helm-release-cleaner-1.0.0/helm-release-cleaner-1.0.0.tgz
-    version: 1.0.0
-  snapshot-controller:
-  - apiVersion: v2
-    appVersion: 6.2.1
-    created: "2023-06-25T21:24:32.299305203Z"
-    description: A Helm chart to deploy snapshot-controller
-    digest: f0e7b706d00daf1274914ca2e9b46c23f86f3c47e879a122fdaf929799694e36
-    home: https://github.com/kubernetes-csi/external-snapshotter/tree/master
-    keywords:
-    - snapshot-controller
-    maintainers:
-    - email: hello@ialejandro.rocks
-      name: ialejandro
-      url: https://ialejandro.rocks
-    name: snapshot-controller
-    sources:
-    - https://github.com/kubernetes-csi/external-snapshotter/tree/master/deploy/kubernetes/snapshot-controller
-    type: application
-    urls:
-    - https://github.com/devops-ia/helm-charts/releases/download/snapshot-controller-1.0.0/snapshot-controller-1.0.0.tgz
-    version: 1.0.0
-  splunk:
-  - apiVersion: v2
-    appVersion: 9.0.0
-    created: "2023-06-25T21:24:41.906249793Z"
-    description: A Helm chart to deploy Splunk standalone
-    digest: 2e5c61de4a5d2c7509cc560079f0966b36b090d3d506d664f236318226619cfe
-    home: https://www.splunk.com/
-    keywords:
-    - splunk
-    maintainers:
-    - email: hello@ialejandro.rocks
-      name: ialejandro
-      url: https://ialejandro.rocks
-    name: splunk
-    type: application
-    urls:
-    - https://github.com/devops-ia/helm-charts/releases/download/splunk-1.0.0/splunk-1.0.0.tgz
     version: 1.0.0
   ssl-exporter:
   - apiVersion: v2
