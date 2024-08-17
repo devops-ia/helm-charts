@@ -1,8 +1,12 @@
 name: Release charts
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
+    paths:
+      - "charts/**"
+
 jobs:
   release:
     runs-on: ubuntu-latest

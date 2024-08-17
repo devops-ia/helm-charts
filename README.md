@@ -18,8 +18,6 @@ You can then run `helm search repo devops-ia` to see the charts.
 | [bigquery-exporter](./charts/bigquery-exporter) | A Helm chart to deploy Bigquery Exporter |
 | [bitbucket-bot](./charts/bitbucket-bot) | A Helm chart to deploy Bitbucket Bot for Google Chats (Spaces) |
 | [default-resources](./charts/default-resources) | A Helm chart for Default Resources |
-| [ecr-registry](./charts/ecr-registry) | CronJob to update Amazon Elastic Container Registry credentials |
+| [ecr-token](./charts/ecr-token) | A Helm chart to deploy cronjob to update Amazon ECR token |
 | [helm-release-cleaner](./charts/helm-release-cleaner) | A Helm chart for Helm Charts to clean up the releases installed in the declared namespaces |
-| [snapshot-controller](./charts/snapshot-controller) | A Helm chart to deploy snapshot-controller |
-| [splunk](./charts/splunk) | A Helm chart to deploy Splunk standalone |
 | [ssl-exporter](./charts/ssl-exporter) | A Helm Chart to SSL Certificate Exporter for Prometheus |

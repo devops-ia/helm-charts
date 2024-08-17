@@ -1,0 +1,57 @@
+name: Check new releases
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # every day
+
+jobs:
+  check-and-update-charts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install updatecli
+        uses: updatecli/updatecli-action@v2
+
+      - name: Update dependencies
+        run: |
+          updatecli apply --config .github/updatecli/helm-appversion.yaml --commit=false
+
+      - name: Check if release changed
+        id: check_changes
+        run: |
+          git fetch origin
+
+          if [ -n "$(git diff HEAD^ HEAD)" ]; then
+            echo "release_changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Update README.md Helm Chart
+        if: steps.check_changes.outputs.release_changed == 'true'
+        uses: losisin/helm-docs-github-action@v1
+        with:
+          chart-search-root: charts
+
+      - name: Get date
+        id: date
+        run: |
+          echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: Create PR with changes
+        if: steps.check_changes.outputs.release_changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.PAT_GITHUB }}
+          commit-message: "chore: bump version charts (${{ steps.date.outputs.date }})"
+          signoff: false
+          branch: chore/bump-version-charts-${{ steps.date.outputs.date }}
+          delete-branch: true
+          title: '[charts] bump version (${{ steps.date.outputs.date }})'
+          body: |
+            This PR updates the appVersion of the charts to the latest release. We're working on improving the automation to make this process smoother.
+          labels: |
+            auto-pr-bump-version
