@@ -6,7 +6,7 @@ A Helm chart for Helm Charts to clean up the releases installed in the declared 
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| amartingarcia | <adrianmg231189@gmail.com> |  |
+| amartingarcia | <adrianmg231189@gmail.com> | <https://github.com/devops-ia> |
 
 ## Prerequisites
 

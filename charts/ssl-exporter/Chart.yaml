@@ -3,10 +3,11 @@ name: ssl-exporter
 description: A Helm Chart to SSL Certificate Exporter for Prometheus
 type: application
 version: 1.0.0
-appVersion: "2.4.2"
+appVersion: 2.4.2
 home: https://github.com/devops-ia/helm-charts/tree/main/charts/ssl-exporter
 sources:
   - https://github.com/ribbybibby/ssl_exporter
 maintainers:
-  - name: "amartingarcia"
+  - name: amartingarcia
+    email: adrianmg231189@gmail.com
     url: https://github.com/devops-ia

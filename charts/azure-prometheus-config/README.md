@@ -6,7 +6,7 @@ A Helm chart to configure Azure Managed Prometheus
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| amartingarcia |  | <https://github.com/devops-ia> |
+| amartingarcia | <adrianmg231189@gmail.com> | <https://github.com/devops-ia> |
 
 ## Prerequisites
 

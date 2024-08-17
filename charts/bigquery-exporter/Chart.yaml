@@ -9,7 +9,7 @@ name: bigquery-exporter
 sources:
   - https://github.com/m-lab/prometheus-bigquery-exporter
 version: 1.0.0
-appVersion: "v1.1.1"
+appVersion: 1.1.1
 home: https://github.com/devops-ia/helm-charts/tree/main/charts/bigquery-exporter
 keywords:
 - bigquery-exporter

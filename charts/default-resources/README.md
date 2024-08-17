@@ -1,12 +1,12 @@
 # default-resources
 
-A Helm chart for Default Resources
+A Helm chart for default resources
 
 ## Maintainers
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| amartingarcia | <adrianmg231189@gmail.com> |  |
+| amartingarcia | <adrianmg231189@gmail.com> | <https://github.com/devops-ia> |
 
 ## Prerequisites
 

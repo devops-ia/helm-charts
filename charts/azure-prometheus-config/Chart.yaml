@@ -3,10 +3,14 @@ name: azure-prometheus-config
 description: A Helm chart to configure Azure Managed Prometheus
 type: application
 version: 1.0.0
-appVersion: "1.0.0"
+appVersion: 1.0.0
 home: https://github.com/devops-ia/helm-charts/tree/main/charts/azure-prometheus-config
 sources:
   - https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/prometheus-metrics-scrape-configuration#configmaps
 maintainers:
   - name: amartingarcia
+    email: adrianmg231189@gmail.com
     url: https://github.com/devops-ia
+keywords:
+- azure
+- prometheus
