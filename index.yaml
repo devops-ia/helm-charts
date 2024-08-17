@@ -49,6 +49,28 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/azure-prometheus-config-0.1.0/azure-prometheus-config-0.1.0.tgz
     version: 0.1.0
+  bigquery-exporter:
+  - apiVersion: v2
+    appVersion: 1.1.1
+    created: "2024-08-17T16:31:34.104397929Z"
+    description: A Helm chart to deploy Bigquery Exporter
+    digest: 1cceed82cfdd58b54331cf4287d38889d0e698aa1f2ae3ce48f2296921946d10
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/bigquery-exporter
+    keywords:
+    - bigquery-exporter
+    - bigquery
+    - prometheus
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: bigquery-exporter
+    sources:
+    - https://github.com/m-lab/prometheus-bigquery-exporter
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/bigquery-exporter-1.0.0/bigquery-exporter-1.0.0.tgz
+    version: 1.0.0
   bitbucket-bot:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -144,6 +166,26 @@ entries:
     type: application
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/ecr-registry-1.0.0/ecr-registry-1.0.0.tgz
+    version: 1.0.0
+  ecr-token:
+  - apiVersion: v2
+    appVersion: awscli2.10.3-kubectl1.30.3
+    created: "2024-08-17T16:31:34.48857879Z"
+    description: A Helm chart to deploy cronjob to update Amazon ECR token
+    digest: f77032d866e3c8afac9f7560baf8de12bc3c43a607c50f95e232f5a8ea03ddd3
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-token
+    keywords:
+    - aws-ecr
+    - ecr
+    - token
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: ecr-token
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/ecr-token-1.0.0/ecr-token-1.0.0.tgz
     version: 1.0.0
   helm-release-cleaner:
   - apiVersion: v2
@@ -289,4 +331,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-0.1.0/ssl-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-08-15T16:54:40.467512438Z"
+generated: "2024-08-17T16:31:34.767254559Z"
