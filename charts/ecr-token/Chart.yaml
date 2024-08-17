@@ -1,14 +1,15 @@
 apiVersion: v2
-description: CronJob to update Amazon Elastic Container Registry
+description: A Helm chart to deploy cronjob to update Amazon ECR token
 type: application
 maintainers:
   - name: ialejandro
     email: hello@ialejandro.rocks
     url: https://ialejandro.rocks
-name: ecr-registry
-version: 1.0.1
+name: ecr-token
+version: 1.0.0
 appVersion: awscli2.10.3-kubectl1.30.3
-home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-registry
+home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-token
 keywords:
+  - aws-ecr
   - ecr
   - token
