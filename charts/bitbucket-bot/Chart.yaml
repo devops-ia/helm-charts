@@ -8,8 +8,8 @@ maintainers:
 name: bitbucket-bot
 sources:
   - https://github.com/devops-ia/bitbucket-bot
-version: 1.0.0
-appVersion: 1.0.0
+version: 1.0.1
+appVersion: v1.1.0
 home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-registry
 keywords:
 - bitbucket
