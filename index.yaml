@@ -51,6 +51,27 @@ entries:
     version: 0.1.0
   bigquery-exporter:
   - apiVersion: v2
+    appVersion: v1.1.1
+    created: "2024-08-19T10:53:09.067978313Z"
+    description: A Helm chart to deploy Bigquery Exporter
+    digest: 7e6b27e3b3258f14a55c20ac137facc064a6e8c66b071d728cf7d5348e422f73
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/bigquery-exporter
+    keywords:
+    - bigquery-exporter
+    - bigquery
+    - prometheus
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: bigquery-exporter
+    sources:
+    - https://github.com/m-lab/prometheus-bigquery-exporter
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/bigquery-exporter-1.0.1/bigquery-exporter-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     appVersion: 1.1.1
     created: "2024-08-17T16:31:34.104397929Z"
     description: A Helm chart to deploy Bigquery Exporter
@@ -72,6 +93,27 @@ entries:
     - https://github.com/devops-ia/helm-charts/releases/download/bigquery-exporter-1.0.0/bigquery-exporter-1.0.0.tgz
     version: 1.0.0
   bitbucket-bot:
+  - apiVersion: v2
+    appVersion: v1.1.0
+    created: "2024-08-19T10:53:09.251368699Z"
+    description: A Helm chart to deploy Bitbucket Bot for Google Chats (Spaces)
+    digest: 48ac2d34c66fea03ad1b23a1afe55dd7eaf416477a7f4ec9b742e05aa7ab5f51
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-registry
+    keywords:
+    - bitbucket
+    - bitbucket-bot
+    - google-chat
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: bitbucket-bot
+    sources:
+    - https://github.com/devops-ia/bitbucket-bot
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/bitbucket-bot-1.0.1/bitbucket-bot-1.0.1.tgz
+    version: 1.0.1
   - apiVersion: v2
     appVersion: 1.0.0
     created: "2023-06-25T18:50:23.311434859Z"
@@ -131,6 +173,25 @@ entries:
     - https://github.com/devops-ia/helm-charts/releases/download/default-resources-1.0.0/default-resources-1.0.0.tgz
     version: 1.0.0
   ecr-token:
+  - apiVersion: v2
+    appVersion: awscli2.17.32-kubectl1.31.0
+    created: "2024-08-19T10:53:09.414050061Z"
+    description: A Helm chart to deploy cronjob to update Amazon ECR token
+    digest: c4308042ff33097630a0088cda5918f2daccac72745333ce822ba9f2defe8210
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-token
+    keywords:
+    - aws-ecr
+    - ecr
+    - token
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: ecr-token
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/ecr-token-1.0.1/ecr-token-1.0.1.tgz
+    version: 1.0.1
   - apiVersion: v2
     appVersion: awscli2.10.3-kubectl1.30.3
     created: "2024-08-17T16:31:34.48857879Z"
@@ -209,6 +270,23 @@ entries:
     version: 1.0.0
   ssl-exporter:
   - apiVersion: v2
+    appVersion: 2.4.3
+    created: "2024-08-19T10:53:09.531586356Z"
+    description: A Helm Chart to SSL Certificate Exporter for Prometheus
+    digest: 01f8e3190efbf1149628f2ec752052f71a6cdfd5c4a2ac60056a69e4366ab330
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ssl-exporter
+    maintainers:
+    - email: adrianmg231189@gmail.com
+      name: amartingarcia
+      url: https://github.com/devops-ia
+    name: ssl-exporter
+    sources:
+    - https://github.com/ribbybibby/ssl_exporter
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-1.0.1/ssl-exporter-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     appVersion: 2.4.2
     created: "2023-06-28T08:42:31.224718151Z"
     description: A Helm Chart to SSL Certificate Exporter for Prometheus
@@ -256,4 +334,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-0.1.0/ssl-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-08-17T16:31:34.767254559Z"
+generated: "2024-08-19T10:53:09.531632192Z"
