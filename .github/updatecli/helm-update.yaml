@@ -1,0 +1,126 @@
+sources:
+  bigquery-exporter-helm:
+    kind: helmchart
+    spec:
+      url: https://devops-ia.github.io/helm-charts
+      name: bigquery-exporter
+  bigquery-exporter:
+    kind: dockerimage
+    spec:
+      image: measurementlab/prometheus-bigquery-exporter
+      architecture: linux/amd64
+      versionFilter:
+        kind: semver
+  bitbucket-bot-helm:
+    kind: helmchart
+    spec:
+      url: https://devops-ia.github.io/helm-charts
+      name: bitbucket-bot
+  bitbucket-bot:
+    kind: dockerimage
+    spec:
+      image: devopsiaci/bitbucket-bot
+      architecture: linux/amd64
+  ecr-token-helm:
+    kind: helmchart
+    spec:
+      url: https://devops-ia.github.io/helm-charts
+      name: ecr-token
+  ecr-token:
+    kind: dockerimage
+    spec:
+      image: devopsiaci/ecr-token
+      architecture: linux/amd64
+  ssl-exporter-helm:
+    kind: helmchart
+    spec:
+      url: https://devops-ia.github.io/helm-charts
+      name: ssl-exporter
+  ssl-exporter:
+    kind: dockerimage
+    spec:
+      image: ribbybibby/ssl-exporter
+      architecture: linux/amd64
+      versionFilter:
+        kind: semver
+conditions: {}
+targets:
+  bigquery-exporter:
+    name: bump chart dependencies
+    kind: yaml
+    spec:
+      file: charts/bigquery-exporter/Chart.yaml
+      key: $.appVersion
+    sourceid: bigquery-exporter
+
+  bitbucket-bot:
+    name: bump chart dependencies
+    kind: yaml
+    spec:
+      file: charts/bitbucket-bot/Chart.yaml
+      key: $.appVersion
+    sourceid: bitbucket-bot
+
+  ecr-token:
+    name: bump chart dependencies
+    kind: yaml
+    spec:
+      file: charts/ecr-token/Chart.yaml
+      key: $.appVersion
+    sourceid: ecr-token
+
+  ssl-exporter:
+    name: bump chart dependencies
+    kind: yaml
+    spec:
+      file: charts/ssl-exporter/Chart.yaml
+      key: $.appVersion
+    sourceid: ssl-exporter
+
+  bitbucket-bot-helm:
+    name: Update bitbucket-bot helm chart
+    kind: helmchart
+    disablesourceinput: true
+    dependsonchange: true
+    dependson: [bitbucket-bot]
+    spec:
+      name: charts/bitbucket-bot
+      file: Chart.yaml
+      key: $.version
+      versionincrement: patch
+
+  bigquery-exporter-helm:
+    name: Update bigquery-exporter helm chart
+    kind: helmchart
+    disablesourceinput: true
+    dependsonchange: true
+    dependson: [bigquery-exporter]
+    spec:
+      name: charts/bigquery-exporter
+      file: Chart.yaml
+      key: $.version
+      versionincrement: patch
+
+  ecr-token-helm:
+    name: Update ecr-token helm chart
+    kind: helmchart
+    disablesourceinput: true
+    dependsonchange: true
+    dependson: [ecr-token]
+    spec:
+      name: charts/ecr-token
+      file: Chart.yaml
+      key: $.version
+      versionincrement: patch
+
+  ssl-exporter-helm:
+    name: Update ssl-exporter helm chart
+    kind: helmchart
+    disablesourceinput: true
+    dependsonchange: true
+    dependson: [ssl-exporter]
+    spec:
+      name: charts/ssl-exporter
+      file: Chart.yaml
+      key: $.version
+      versionincrement: patch

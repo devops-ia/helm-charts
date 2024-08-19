@@ -19,7 +19,7 @@ jobs:
 
       - name: Update dependencies
         run: |
-          updatecli apply --config .github/updatecli/helm-appversion.yaml --commit=false
+          updatecli apply --config .github/updatecli/helm-update.yaml --commit=false
 
       - name: Check if release changed
         id: check_changes
