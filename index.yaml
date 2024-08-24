@@ -94,6 +94,27 @@ entries:
     version: 1.0.0
   bitbucket-bot:
   - apiVersion: v2
+    appVersion: v1.2.0
+    created: "2024-08-24T09:25:56.521433569Z"
+    description: A Helm chart to deploy Bitbucket Bot for Google Chats (Spaces)
+    digest: 6c5cc2271b0fff6b7c87bcad23b334b2025bcae74168841b06b2ad3dd843ee7e
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-registry
+    keywords:
+    - bitbucket
+    - bitbucket-bot
+    - google-chat
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: bitbucket-bot
+    sources:
+    - https://github.com/devops-ia/bitbucket-bot
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/bitbucket-bot-1.0.2/bitbucket-bot-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
     appVersion: v1.1.0
     created: "2024-08-19T10:53:09.251368699Z"
     description: A Helm chart to deploy Bitbucket Bot for Google Chats (Spaces)
@@ -173,6 +194,25 @@ entries:
     - https://github.com/devops-ia/helm-charts/releases/download/default-resources-1.0.0/default-resources-1.0.0.tgz
     version: 1.0.0
   ecr-token:
+  - apiVersion: v2
+    appVersion: awscli2.17.36-kubectl1.31.0
+    created: "2024-08-24T09:25:56.67481648Z"
+    description: A Helm chart to deploy cronjob to update Amazon ECR token
+    digest: 09c288960d5f551c37ffaaf885a1eab264f31166b7384307e6cd768556e716ad
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-token
+    keywords:
+    - aws-ecr
+    - ecr
+    - token
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: ecr-token
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/ecr-token-1.0.5/ecr-token-1.0.5.tgz
+    version: 1.0.5
   - apiVersion: v2
     appVersion: awscli2.17.35-kubectl1.31.0
     created: "2024-08-23T06:34:42.340257137Z"
@@ -391,4 +431,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-0.1.0/ssl-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-08-23T06:34:42.340303353Z"
+generated: "2024-08-24T09:25:56.674881723Z"
