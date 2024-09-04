@@ -479,6 +479,29 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/helm-release-cleaner-1.0.0/helm-release-cleaner-1.0.0.tgz
     version: 1.0.0
+  release-cleaner:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2024-09-04T19:30:20.876876395Z"
+    description: A Helm chart for Helm Charts to clean up the releases installed in
+      the declared namespaces
+    digest: cbf8e7a66d98d1b4041d83686a02a1de7357ab4fee5a21640e17f6b8cb51709f
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/release-cleaner
+    keywords:
+    - release-cleaner
+    - helm
+    - kubernetes
+    maintainers:
+    - email: adrianmg231189@gmail.com
+      name: amartingarcia
+      url: https://github.com/devops-ia
+    name: release-cleaner
+    sources:
+    - https://devops-ia.github.io/helm-charts
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/release-cleaner-1.0.0/release-cleaner-1.0.0.tgz
+    version: 1.0.0
   ssl-exporter:
   - apiVersion: v2
     appVersion: 2.4.3
@@ -545,4 +568,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-0.1.0/ssl-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-01T07:17:13.849814545Z"
+generated: "2024-09-04T19:30:20.877010997Z"
