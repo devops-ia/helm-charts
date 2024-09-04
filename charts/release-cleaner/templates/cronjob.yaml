@@ -6,9 +6,9 @@ apiVersion: batch/v1beta1
 {{- end }}
 kind: CronJob
 metadata:
-  name: {{ include "helm-release-cleaner.name" . }}
+  name: {{ include "release-cleaner.name" . }}
   labels:
-{{ include "helm-release-cleaner.labels" . | indent 4 }}
+    {{- include "release-cleaner.labels" . | nindent 4 }}
 spec:
   schedule: "{{ .Values.schedule }}"
   concurrencyPolicy: Replace
@@ -19,13 +19,13 @@ spec:
       template:
         metadata:
           labels:
-{{ include "helm-release-cleaner.labels" . | indent 12 }}
+{{ include "release-cleaner.labels" . | indent 12 }}
 {{- if .Values.podAnnotations }}
           annotations:
 {{ toYaml .Values.podAnnotations | indent 8 }}
 {{- end }}
         spec:
-          serviceAccountName: {{ include "helm-release-cleaner.name" . }}
+          serviceAccountName: {{ include "release-cleaner.name" . }}
           restartPolicy: Never
           {{- with .Values.imagePullSecrets }}
           imagePullSecrets:
@@ -35,11 +35,11 @@ spec:
           - name: {{ .Chart.Name }}
             image: "{{ .Values.image.repository }}:latest"
             imagePullPolicy: {{ .Values.image.pullPolicy }}
-            command: ["/bin/bash", "/tmp/helm-release-cleaner.sh"]
+            command: ["/bin/bash", "/tmp/release-cleaner.sh"]
             volumeMounts:
-            - name: {{ include "helm-release-cleaner.name" . }}
-              mountPath: /tmp/helm-release-cleaner.sh
-              subPath: helm-release-cleaner.sh
+            - name: {{ include "release-cleaner.name" . }}
+              mountPath: /tmp/release-cleaner.sh
+              subPath: release-cleaner.sh
             resources:
 {{ toYaml .Values.resources | indent 14 }}
           {{- with .Values.nodeSelector }}
@@ -55,7 +55,7 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           volumes:
-            - name: {{ include "helm-release-cleaner.name" . }}
+            - name: {{ include "release-cleaner.name" . }}
               configMap:
-                name: {{ include "helm-release-cleaner.name" . }}
+                name: {{ include "release-cleaner.name" . }}
                 defaultMode: 0755
