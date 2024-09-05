@@ -156,6 +156,30 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/bitbucket-bot-1.0.0/bitbucket-bot-1.0.0.tgz
     version: 1.0.0
+  cp-schema-registry:
+  - apiVersion: v2
+    appVersion: 7.4.6
+    created: "2024-09-05T13:53:07.567001588Z"
+    description: A Helm chart with cp-schema-registry for Kubernetes
+    digest: ebdf476bbc59245c0ed1276da6d06f530b279fc736e1cb3350ecf2e0901da005
+    home: https://github.com/devops-ia/helm-charts/cp-schema-registry
+    keywords:
+    - cp-schema-registry
+    - confluent
+    - kafka
+    - schema-registry
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: cp-schema-registry
+    sources:
+    - https://github.com/devops-ia/helm-charts/cp-schema-registry
+    - https://github.com/m-lab/prometheus-bigquery-exporter
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/cp-schema-registry-1.0.0/cp-schema-registry-1.0.0.tgz
+    version: 1.0.0
   default-resources:
   - apiVersion: v2
     appVersion: 1.1.0
@@ -568,4 +592,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-0.1.0/ssl-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-05T11:25:46.550526921Z"
+generated: "2024-09-05T13:53:07.567089151Z"
