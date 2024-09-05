@@ -8,7 +8,7 @@ maintainers:
     url: https://ialejandro.rocks
 sources:
   - https://github.com/devops-ia/helm-charts/cp-schema-registry
-version: 1.0.0
+version: 1.0.1
 appVersion: 7.4.6
 home: https://github.com/devops-ia/helm-charts/cp-schema-registry
 keywords:
