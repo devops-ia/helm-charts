@@ -31,8 +31,6 @@ sources:
     spec:
       image: devopsiaci/cp-schema-registry
       architecture: linux/amd64
-      versionFilter:
-        kind: semver
   ecr-token-helm:
     kind: helmchart
     spec:
