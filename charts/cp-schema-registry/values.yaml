@@ -41,10 +41,21 @@ serviceAccount:
 testConnection: false
 
 # -- Environment variables to configure application
-# </br> Ref: https://docs.cp-schema-registry.io/latest/deployment/configuration/#platform
+# </br> Ref: https://docs.confluent.io/platform/current/schema-registry/installation/config.html#schemaregistry-config
 env:
   SCHEMA_REGISTRY_MASTER_ELIGIBILITY: "true"
   SCHEMA_REGISTRY_HEAP_OPTS: "-Xms512M -Xmx512M"
+  #SCHEMA_REGISTRY_SCHEMA_COMPATIBILITY_LEVEL: "full_transitive"
+  #SCHEMA_REGISTRY_KAFKASTORE_SECURITY_PROTOCOL: "SSL"
+  #SCHEMA_REGISTRY_MASTER_ELIGIBILITY: "true"
+  #SCHEMA_REGISTRY_KAFKASTORE_TIMEOUT_MS: 1000
+  #SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: ref+tfstates3://{{ .Values.aws.tfstateBucket }}/{{ .Environment.Name }}/msk/terraform.tfstate/output.bootstrap_brokers_sasl_iam
+  #SCHEMA_REGISTRY_LOG4J_LOGGERS: "org.apache.kafka=ERROR,io.confluent.rest.exceptions=FATAL,io.confluent.admin.utils.ClusterStatus=ERROR"
+  ## IAM
+  #SCHEMA_REGISTRY_KAFKASTORE_SECURITY_PROTOCOL: "SASL_SSL"
+  #SCHEMA_REGISTRY_KAFKASTORE_SASL_CLIENT_CALLBACK_HANDLER_CLASS: "software.amazon.msk.auth.iam.IAMClientCallbackHandler"
+  #SCHEMA_REGISTRY_KAFKASTORE_SASL_JAAS_CONFIG: "software.amazon.msk.auth.iam.IAMLoginModule required;"
+  #SCHEMA_REGISTRY_KAFKASTORE_SASL_MECHANISM: "AWS_MSK_IAM"
 
 # -- Secrets from variables
 envFromSecrets: {}

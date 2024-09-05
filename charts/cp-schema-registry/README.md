@@ -62,7 +62,7 @@ helm show values devops-ia/cp-schema-registry
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity for pod assignment </br> Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity |
 | autoscaling | object | `{"enabled":false,"maxReplicas":100,"minReplicas":1,"targetCPUUtilizationPercentage":80}` | Autoscaling with CPU or memory utilization percentage </br> Ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/ |
-| env | object | `{"SCHEMA_REGISTRY_HEAP_OPTS":"-Xms512M -Xmx512M","SCHEMA_REGISTRY_MASTER_ELIGIBILITY":"true"}` | Environment variables to configure application </br> Ref: https://docs.cp-schema-registry.io/latest/deployment/configuration/#platform |
+| env | object | `{"SCHEMA_REGISTRY_HEAP_OPTS":"-Xms512M -Xmx512M","SCHEMA_REGISTRY_MASTER_ELIGIBILITY":"true"}` | Environment variables to configure application </br> Ref: https://docs.confluent.io/platform/current/schema-registry/installation/config.html#schemaregistry-config |
 | envFromSecrets | object | `{}` | Secrets from variables |
 | fullnameOverride | string | `""` | String to fully override cp-schema-registry.fullname template |
 | image | object | `{"pullPolicy":"IfNotPresent","repository":"confluentinc/cp-schema-registry","tag":""}` | Image registry The image configuration for the base service |
