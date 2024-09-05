@@ -124,7 +124,7 @@ metrics:
 # -- Configure liveness checker
 # </br> Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes
 livenessProbe:
-  enabled: true
+  enabled: false
   failureThreshold: 3
   initialDelaySeconds: 180
   periodSeconds: 10
@@ -145,7 +145,7 @@ livenessProbeCustom: {}
 # -- Configure readinessProbe checker
 # </br> Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes
 readinessProbe:
-  enabled: true
+  enabled: false
   failureThreshold: 3
   initialDelaySeconds: 10
   periodSeconds: 10
@@ -166,7 +166,7 @@ readinessProbeCustom: {}
 # -- Configure startupProbe checker
 # </br> Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes
 startupProbe:
-  enabled: true
+  enabled: false
   failureThreshold: 30
   initialDelaySeconds: 180
   periodSeconds: 10

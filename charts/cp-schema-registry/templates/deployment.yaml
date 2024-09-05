@@ -44,6 +44,11 @@ spec:
             - name: http
               containerPort: {{ .Values.service.targetPort | default .Values.service.port }}
               protocol: TCP
+            {{- if .Values.metrics.exporter.enabled }}
+            - name: jmx
+              containerPort: {{ .Values.metrics.port }}
+              protocol: TCP
+            {{- end }}
             {{- range $port := .Values.service.extraPorts }}
             - name: {{ $port.name }}
               containerPort: {{ $port.targetPort }}
@@ -151,7 +156,7 @@ spec:
           - -XshowSettings:vm
           - -jar
           - jmx_prometheus_httpserver.jar
-          - {{ .Values.metrics.port | quote }}
+          - {{ .Values.metrics.exporter.port | quote }}
           - /etc/jmx-schema-registry/jmx-schema-registry-prometheus.yml
           ports:
           - name: metrics

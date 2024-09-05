@@ -1,5 +1,7 @@
 # {{ template "chart.name" . }}
 
+{{ template "chart.description" . }}
+
 ## Motivation
 
 The original Helm chart for [Confluent Schema Registry](https://github.com/confluentinc/cp-helm-charts/tree/master/charts/cp-schema-registry) has been deprecated, and over time it became too bulky and outdated. That's why I've created a new, lighter, and more up-to-date Helm chart. This new chart is more streamlined and easier to customize.
@@ -8,8 +10,6 @@ Some of the key changes include:
 
 * Configurations that are compatible with the latest Kubernetes features
 * Easier setup, with more modular and flexible options
-
-{{ template "chart.description" . }}
 
 {{ template "chart.maintainersSection" . }}
 
