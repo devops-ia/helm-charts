@@ -21,6 +21,18 @@ sources:
     spec:
       image: devopsiaci/bitbucket-bot
       architecture: linux/amd64
+  cp-schema-registry-helm:
+    kind: helmchart
+    spec:
+      url: https://devops-ia.github.io/helm-charts
+      name: cp-schema-registry
+  cp-schema-registry:
+    kind: dockerimage
+    spec:
+      image: confluentinc/cp-schema-registry
+      architecture: linux/amd64
+      versionFilter:
+        kind: semver
   ecr-token-helm:
     kind: helmchart
     spec:
@@ -61,6 +73,14 @@ targets:
       key: $.appVersion
     sourceid: bitbucket-bot
 
+  cp-schema-registry:
+    name: bump chart dependencies
+    kind: yaml
+    spec:
+      file: charts/cp-schema-registry/Chart.yaml
+      key: $.appVersion
+    sourceid: cp-schema-registry
+
   ecr-token:
     name: bump chart dependencies
     kind: yaml
@@ -97,6 +117,18 @@ targets:
     dependson: [bigquery-exporter]
     spec:
       name: charts/bigquery-exporter
+      file: Chart.yaml
+      key: $.version
+      versionincrement: patch
+
+  cp-schema-registry-helm:
+    name: Update cp-schema-registry helm chart
+    kind: helmchart
+    disablesourceinput: true
+    dependsonchange: true
+    dependson: [cp-schema-registry]
+    spec:
+      name: charts/cp-schema-registry
       file: Chart.yaml
       key: $.version
       versionincrement: patch
