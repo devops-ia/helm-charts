@@ -29,7 +29,7 @@ sources:
   cp-schema-registry:
     kind: dockerimage
     spec:
-      image: confluentinc/cp-schema-registry
+      image: devopsiaci/cp-schema-registry
       architecture: linux/amd64
       versionFilter:
         kind: semver
