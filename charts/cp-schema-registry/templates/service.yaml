@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "cp-schema-registry.fullname" . }}
+  labels:
+    {{- include "cp-schema-registry.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort | default .Values.service.port }}
+      protocol: TCP
+      name: http
+      {{- if and (eq "NodePort" .Values.service.type) .Values.service.nodePort }}
+      nodePort: {{ .Values.service.nodePort }}
+      {{- end }}
+    {{- if .Values.metrics.enabled }}
+    - name: metrics
+      port: {{ .Values.metrics.exporter.port }}
+      targetPort: {{ .Values.metrics.exporter.port }}
+      protocol: TCP
+    {{- end }}
+    {{- range $port := .Values.service.extraPorts }}
+    - name: {{ $port.name }}
+      port: {{ $port.port }}
+      targetPort: {{ $port.targetPort }}
+      protocol: TCP
+    {{- end }}
+  selector:
+    {{- include "cp-schema-registry.selectorLabels" . | nindent 4 }}

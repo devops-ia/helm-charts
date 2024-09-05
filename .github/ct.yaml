@@ -3,8 +3,9 @@ chart-dirs: charts
 check-version-increment: true
 debug: false
 remote: origin
+target-branch: main
 upgrade: true
 validate-chart-schema: true
 validate-maintainers: false
 validate-yaml: true
-excluded-charts: ["bigquery-exporter"]
+excluded-charts: ["bigquery-exporter", "cp-schema-registry"]
