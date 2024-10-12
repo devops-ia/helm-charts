@@ -263,6 +263,25 @@ entries:
     version: 1.0.0
   ecr-token:
   - apiVersion: v2
+    appVersion: awscli2.18.4-kubectl1.31.1
+    created: "2024-10-12T09:47:37.046007869Z"
+    description: A Helm chart to deploy cronjob to update Amazon ECR token
+    digest: 72d988cefef4c8d7e1ecbe71faabdea2c0f62634a4fcc57d0317f50dced2e0ff
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-token
+    keywords:
+    - aws-ecr
+    - ecr
+    - token
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: ecr-token
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/ecr-token-1.0.38/ecr-token-1.0.38.tgz
+    version: 1.0.38
+  - apiVersion: v2
     appVersion: awscli2.18.3-kubectl1.31.1
     created: "2024-10-11T16:08:06.013652787Z"
     description: A Helm chart to deploy cronjob to update Amazon ECR token
@@ -1130,4 +1149,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-0.1.0/ssl-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-11T16:08:06.014030497Z"
+generated: "2024-10-12T09:47:37.046288182Z"
