@@ -158,6 +158,28 @@ entries:
     version: 1.0.0
   cp-schema-registry:
   - apiVersion: v2
+    appVersion: 7.7.2-msk-iam-auth2.2.0
+    created: "2024-11-29T07:45:50.671307961Z"
+    description: A Helm chart with cp-schema-registry for Kubernetes
+    digest: f7cfe524c62ad135421dc29772b59389be9c2964781da75052c73b2faa227df6
+    home: https://github.com/devops-ia/helm-charts/cp-schema-registry
+    keywords:
+    - cp-schema-registry
+    - confluent
+    - kafka
+    - schema-registry
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: cp-schema-registry
+    sources:
+    - https://github.com/devops-ia/helm-charts/cp-schema-registry
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/cp-schema-registry-1.0.3/cp-schema-registry-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
     appVersion: 7.7.1-msk-iam-auth2.2.0
     created: "2024-09-15T07:35:39.041283858Z"
     description: A Helm chart with cp-schema-registry for Kubernetes
@@ -262,6 +284,25 @@ entries:
     - https://github.com/devops-ia/helm-charts/releases/download/default-resources-1.0.0/default-resources-1.0.0.tgz
     version: 1.0.0
   ecr-token:
+  - apiVersion: v2
+    appVersion: awscli2.22.7-kubectl1.31.3
+    created: "2024-11-29T07:45:50.791191529Z"
+    description: A Helm chart to deploy cronjob to update Amazon ECR token
+    digest: 1cfa5445176deab5ddf50c73ed456376f28134f4f63a8254bb94b3662d18131f
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-token
+    keywords:
+    - aws-ecr
+    - ecr
+    - token
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: ecr-token
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/ecr-token-1.0.61/ecr-token-1.0.61.tgz
+    version: 1.0.61
   - apiVersion: v2
     appVersion: awscli2.22.6-kubectl1.31.3
     created: "2024-11-28T07:25:43.631701071Z"
@@ -1567,4 +1608,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-0.1.0/ssl-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2024-11-28T07:25:43.631987335Z"
+generated: "2024-11-29T07:45:50.791495055Z"
