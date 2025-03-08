@@ -1,9 +1,4 @@
 sources:
-  bigquery-exporter-helm:
-    kind: helmchart
-    spec:
-      url: https://devops-ia.github.io/helm-charts
-      name: bigquery-exporter
   bigquery-exporter:
     kind: dockerimage
     spec:
@@ -11,41 +6,21 @@ sources:
       architecture: linux/amd64
       versionFilter:
         kind: semver
-  bitbucket-bot-helm:
-    kind: helmchart
-    spec:
-      url: https://devops-ia.github.io/helm-charts
-      name: bitbucket-bot
   bitbucket-bot:
     kind: dockerimage
     spec:
       image: devopsiaci/bitbucket-bot
       architecture: linux/amd64
-  cp-schema-registry-helm:
-    kind: helmchart
-    spec:
-      url: https://devops-ia.github.io/helm-charts
-      name: cp-schema-registry
   cp-schema-registry:
     kind: dockerimage
     spec:
       image: devopsiaci/cp-schema-registry
       architecture: linux/amd64
-  ecr-token-helm:
-    kind: helmchart
-    spec:
-      url: https://devops-ia.github.io/helm-charts
-      name: ecr-token
   ecr-token:
     kind: dockerimage
     spec:
       image: devopsiaci/ecr-token
       architecture: linux/amd64
-  ssl-exporter-helm:
-    kind: helmchart
-    spec:
-      url: https://devops-ia.github.io/helm-charts
-      name: ssl-exporter
   ssl-exporter:
     kind: dockerimage
     spec:
@@ -98,59 +73,49 @@ targets:
   bitbucket-bot-helm:
     name: Update bitbucket-bot helm chart
     kind: helmchart
-    disablesourceinput: true
-    dependsonchange: true
-    dependson: [bitbucket-bot]
     spec:
       name: charts/bitbucket-bot
       file: Chart.yaml
       key: $.version
       versionincrement: patch
+    sourceid: bitbucket-bot
 
   bigquery-exporter-helm:
     name: Update bigquery-exporter helm chart
     kind: helmchart
-    disablesourceinput: true
-    dependsonchange: true
-    dependson: [bigquery-exporter]
     spec:
       name: charts/bigquery-exporter
       file: Chart.yaml
       key: $.version
       versionincrement: patch
+    sourceid: bigquery-exporter
 
   cp-schema-registry-helm:
     name: Update cp-schema-registry helm chart
     kind: helmchart
-    disablesourceinput: true
-    dependsonchange: true
-    dependson: [cp-schema-registry]
     spec:
       name: charts/cp-schema-registry
       file: Chart.yaml
       key: $.version
       versionincrement: patch
+    sourceid: cp-schema-registry
 
   ecr-token-helm:
     name: Update ecr-token helm chart
     kind: helmchart
-    disablesourceinput: true
-    dependsonchange: true
-    dependson: [ecr-token]
     spec:
       name: charts/ecr-token
       file: Chart.yaml
       key: $.version
       versionincrement: patch
+    sourceid: ecr-token
 
   ssl-exporter-helm:
     name: Update ssl-exporter helm chart
     kind: helmchart
-    disablesourceinput: true
-    dependsonchange: true
-    dependson: [ssl-exporter]
     spec:
       name: charts/ssl-exporter
       file: Chart.yaml
       key: $.version
       versionincrement: patch
+    sourceid: ssl-exporter
