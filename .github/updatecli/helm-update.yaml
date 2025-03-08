@@ -30,92 +30,48 @@ sources:
         kind: semver
 conditions: {}
 targets:
-  bigquery-exporter:
-    name: bump chart dependencies
-    kind: yaml
-    spec:
-      file: charts/bigquery-exporter/Chart.yaml
-      key: $.appVersion
-    sourceid: bigquery-exporter
-
-  bitbucket-bot:
-    name: bump chart dependencies
-    kind: yaml
-    spec:
-      file: charts/bitbucket-bot/Chart.yaml
-      key: $.appVersion
-    sourceid: bitbucket-bot
-
-  cp-schema-registry:
-    name: bump chart dependencies
-    kind: yaml
-    spec:
-      file: charts/cp-schema-registry/Chart.yaml
-      key: $.appVersion
-    sourceid: cp-schema-registry
-
-  ecr-token:
-    name: bump chart dependencies
-    kind: yaml
-    spec:
-      file: charts/ecr-token/Chart.yaml
-      key: $.appVersion
-    sourceid: ecr-token
-
-  ssl-exporter:
-    name: bump chart dependencies
-    kind: yaml
-    spec:
-      file: charts/ssl-exporter/Chart.yaml
-      key: $.appVersion
-    sourceid: ssl-exporter
-
   bitbucket-bot-helm:
     name: Update bitbucket-bot helm chart
     kind: helmchart
     spec:
       name: charts/bitbucket-bot
       file: Chart.yaml
-      key: $.version
+      key: $.appVersion
       versionincrement: patch
     sourceid: bitbucket-bot
-
   bigquery-exporter-helm:
     name: Update bigquery-exporter helm chart
     kind: helmchart
     spec:
       name: charts/bigquery-exporter
       file: Chart.yaml
-      key: $.version
+      key: $.appVersion
       versionincrement: patch
     sourceid: bigquery-exporter
-
   cp-schema-registry-helm:
     name: Update cp-schema-registry helm chart
     kind: helmchart
     spec:
       name: charts/cp-schema-registry
       file: Chart.yaml
-      key: $.version
+      key: $.appVersion
       versionincrement: patch
     sourceid: cp-schema-registry
-
   ecr-token-helm:
     name: Update ecr-token helm chart
     kind: helmchart
     spec:
       name: charts/ecr-token
       file: Chart.yaml
-      key: $.version
+      key: $.appVersion
       versionincrement: patch
     sourceid: ecr-token
-
   ssl-exporter-helm:
     name: Update ssl-exporter helm chart
     kind: helmchart
     spec:
       name: charts/ssl-exporter
       file: Chart.yaml
-      key: $.version
+      key: $.appVersion
       versionincrement: patch
     sourceid: ssl-exporter
