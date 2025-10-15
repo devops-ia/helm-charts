@@ -179,6 +179,28 @@ entries:
     version: 1.0.0
   cp-schema-registry:
   - apiVersion: v2
+    appVersion: 8.0.2-msk-iam-auth2.3.4
+    created: "2025-10-15T10:42:52.840423525Z"
+    description: A Helm chart with cp-schema-registry for Kubernetes
+    digest: 8fe1d534f426646f4d6de1e23772b2ed601fbe15a19db9d3829d2e4dbfbc4f39
+    home: https://github.com/devops-ia/helm-charts/cp-schema-registry
+    keywords:
+    - cp-schema-registry
+    - confluent
+    - kafka
+    - schema-registry
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: cp-schema-registry
+    sources:
+    - https://github.com/devops-ia/helm-charts/cp-schema-registry
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/cp-schema-registry-1.0.8/cp-schema-registry-1.0.8.tgz
+    version: 1.0.8
+  - apiVersion: v2
     appVersion: 8.0.1-msk-iam-auth2.3.2
     created: "2025-09-29T08:43:20.150608068Z"
     description: A Helm chart with cp-schema-registry for Kubernetes
@@ -2686,4 +2708,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-0.1.0/ssl-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-08T09:20:25.964675796Z"
+generated: "2025-10-15T10:42:52.840682157Z"
