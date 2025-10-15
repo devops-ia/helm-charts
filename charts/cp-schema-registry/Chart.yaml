@@ -8,8 +8,8 @@ maintainers:
     url: https://ialejandro.rocks
 sources:
   - https://github.com/devops-ia/helm-charts/cp-schema-registry
-version: 1.0.7
-appVersion: 8.0.1-msk-iam-auth2.3.2
+version: 1.0.8
+appVersion: 8.0.2-msk-iam-auth2.3.4
 home: https://github.com/devops-ia/helm-charts/cp-schema-registry
 keywords:
 - cp-schema-registry
