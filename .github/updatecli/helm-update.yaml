@@ -11,11 +11,6 @@ sources:
     spec:
       image: devopsiaci/bitbucket-bot
       architecture: linux/amd64
-  cp-schema-registry:
-    kind: dockerimage
-    spec:
-      image: devopsiaci/cp-schema-registry
-      architecture: linux/amd64
   ecr-token:
     kind: dockerimage
     spec:
@@ -48,15 +43,6 @@ targets:
       key: $.appVersion
       versionincrement: patch
     sourceid: bigquery-exporter
-  cp-schema-registry-helm:
-    name: Update cp-schema-registry helm chart
-    kind: helmchart
-    spec:
-      name: charts/cp-schema-registry
-      file: Chart.yaml
-      key: $.appVersion
-      versionincrement: patch
-    sourceid: cp-schema-registry
   ecr-token-helm:
     name: Update ecr-token helm chart
     kind: helmchart

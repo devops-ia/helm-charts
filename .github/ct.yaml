@@ -8,4 +8,4 @@ upgrade: true
 validate-chart-schema: true
 validate-maintainers: false
 validate-yaml: true
-excluded-charts: ["bigquery-exporter", "cp-schema-registry"]
+excluded-charts: ["bigquery-exporter"]
