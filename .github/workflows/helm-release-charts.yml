@@ -1,0 +1,17 @@
+name: Release Helm Charts (monorepo)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "charts/**"
+
+jobs:
+  release:
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+    uses: devops-ia/.github/.github/workflows/helm-release-charts.yml@main
