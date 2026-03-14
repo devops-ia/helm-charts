@@ -6,8 +6,8 @@ maintainers:
     email: hello@ialejandro.rocks
     url: https://ialejandro.rocks
 name: ecr-token
-version: 1.0.139
-appVersion: awscli2.34.7-kubectl1.35.2
+version: 1.0.140
+appVersion: awscli2.34.8-kubectl1.35.2
 home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-token
 keywords:
   - aws-ecr
