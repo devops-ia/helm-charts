@@ -14,4 +14,5 @@ jobs:
       contents: write
       packages: write
       id-token: write
+    secrets: inherit
     uses: devops-ia/.github/.github/workflows/helm-release-charts.yml@main
