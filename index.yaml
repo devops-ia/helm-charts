@@ -115,6 +115,27 @@ entries:
     version: 1.0.0
   bitbucket-bot:
   - apiVersion: v2
+    appVersion: v2.1.1
+    created: "2026-10-27T02:38:17.44275433Z"
+    description: A Helm chart to deploy Bitbucket Bot for Google Chats (Spaces)
+    digest: 61ce0767d99176be25d37704ed56c5b031af4c707e4961c81b2042184d661acf
+    home: https://github.com/devops-ia/helm-charts/tree/main/charts/ecr-registry
+    keywords:
+    - bitbucket
+    - bitbucket-bot
+    - google-chat
+    maintainers:
+    - email: hello@ialejandro.rocks
+      name: ialejandro
+      url: https://ialejandro.rocks
+    name: bitbucket-bot
+    sources:
+    - https://github.com/devops-ia/bitbucket-bot
+    type: application
+    urls:
+    - https://github.com/devops-ia/helm-charts/releases/download/bitbucket-bot-1.0.5/bitbucket-bot-1.0.5.tgz
+    version: 1.0.5
+  - apiVersion: v2
     appVersion: v2.1.0
     created: "2026-10-23T02:13:47.796486125Z"
     description: A Helm chart to deploy Bitbucket Bot for Google Chats (Spaces)
@@ -3687,4 +3708,4 @@ entries:
     urls:
     - https://github.com/devops-ia/helm-charts/releases/download/ssl-exporter-0.1.0/ssl-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-24T02:12:30.532056392Z"
+generated: "2026-10-27T02:38:17.443145292Z"
